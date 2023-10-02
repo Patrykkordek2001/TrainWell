@@ -1,0 +1,7 @@
+D:\Praca inżynierska\Backend\TrainWell - BACKEND\TrainWell - BACKEND\obj\Debug\net6.0\TrainWell - BACKEND.csproj.AssemblyReference.cache
+D:\Praca inżynierska\Backend\TrainWell - BACKEND\TrainWell - BACKEND\obj\Debug\net6.0\TrainWell - BACKEND.GeneratedMSBuildEditorConfig.editorconfig
+D:\Praca inżynierska\Backend\TrainWell - BACKEND\TrainWell - BACKEND\obj\Debug\net6.0\TrainWell - BACKEND.AssemblyInfoInputs.cache
+D:\Praca inżynierska\Backend\TrainWell - BACKEND\TrainWell - BACKEND\obj\Debug\net6.0\TrainWell - BACKEND.AssemblyInfo.cs
+D:\Praca inżynierska\Backend\TrainWell - BACKEND\TrainWell - BACKEND\obj\Debug\net6.0\TrainWell - BACKEND.csproj.CoreCompileInputs.cache
+D:\Praca inżynierska\Backend\TrainWell - BACKEND\TrainWell - BACKEND\obj\Debug\net6.0\TrainWell - BACKEND.MvcApplicationPartsAssemblyInfo.cs
+D:\Praca inżynierska\Backend\TrainWell - BACKEND\TrainWell - BACKEND\obj\Debug\net6.0\TrainWell - BACKEND.MvcApplicationPartsAssemblyInfo.cache
