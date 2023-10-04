@@ -15,6 +15,7 @@
         public int NumberOfSeries { get; set; }
         public double Weight { get; set; }
         public virtual Workout Workout { get; set; }
+        public int WorkoutId { get; set; }
 
     }
 }

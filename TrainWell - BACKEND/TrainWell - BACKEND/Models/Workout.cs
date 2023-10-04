@@ -15,4 +15,4 @@
             public DateTime Date { get; set; }
             public ICollection<Exercise> Exercises { get; set; }
         }
-    }
+}

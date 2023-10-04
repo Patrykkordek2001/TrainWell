@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "j5Has+XLPYxOh/mH+8MC5Pts5NjCnFJjE3uoEF+a7KXu3dFDVfEJFC0vg3+6D9PskkAjkt2OU9kIkNSwuZAqNg==",
+  "dgSpecHash": "GF0RAWuIc4vugl4hPRzLIlLUgESp8MbSgCHXzlMfWJq0/Z48NG7/+Gq6gQdJPsd5uVeZEF161SSnxy8+JgyVsg==",
   "success": true,
-  "projectFilePath": "D:\\Praca inżynierska\\TrainWell\\Backend\\TrainWell - BACKEND\\TrainWell - BACKEND\\TrainWell - BACKEND.csproj",
+  "projectFilePath": "D:\\Praca inżynierska\\TrainWell\\TrainWell - BACKEND\\TrainWell - BACKEND\\TrainWell - BACKEND.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\kodzo\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\kodzo\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Praca inżynierska\\TrainWell\\Backend\\TrainWell - BACKEND\\TrainWell - BACKEND\\TrainWell - BACKEND.csproj": {}
+    "D:\\Praca inżynierska\\TrainWell\\TrainWell - BACKEND\\TrainWell - BACKEND\\TrainWell - BACKEND.csproj": {}
   },
   "projects": {
-    "D:\\Praca inżynierska\\TrainWell\\Backend\\TrainWell - BACKEND\\TrainWell - BACKEND\\TrainWell - BACKEND.csproj": {
+    "D:\\Praca inżynierska\\TrainWell\\TrainWell - BACKEND\\TrainWell - BACKEND\\TrainWell - BACKEND.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Praca inżynierska\\TrainWell\\Backend\\TrainWell - BACKEND\\TrainWell - BACKEND\\TrainWell - BACKEND.csproj",
+        "projectUniqueName": "D:\\Praca inżynierska\\TrainWell\\TrainWell - BACKEND\\TrainWell - BACKEND\\TrainWell - BACKEND.csproj",
         "projectName": "TrainWell - BACKEND",
-        "projectPath": "D:\\Praca inżynierska\\TrainWell\\Backend\\TrainWell - BACKEND\\TrainWell - BACKEND\\TrainWell - BACKEND.csproj",
+        "projectPath": "D:\\Praca inżynierska\\TrainWell\\TrainWell - BACKEND\\TrainWell - BACKEND\\TrainWell - BACKEND.csproj",
         "packagesPath": "C:\\Users\\kodzo\\.nuget\\packages\\",
-        "outputPath": "D:\\Praca inżynierska\\TrainWell\\Backend\\TrainWell - BACKEND\\TrainWell - BACKEND\\obj\\",
+        "outputPath": "D:\\Praca inżynierska\\TrainWell\\TrainWell - BACKEND\\TrainWell - BACKEND\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\DevExpress 23.1\\Components\\Offline Packages",
