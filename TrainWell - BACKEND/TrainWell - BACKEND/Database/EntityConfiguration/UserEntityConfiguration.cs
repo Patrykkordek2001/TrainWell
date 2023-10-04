@@ -10,6 +10,8 @@ namespace TrainWell___BACKEND.Database.EntityConfiguration
         {
             builder.ToTable("Users");
             builder.HasKey(e => e.Id);
+            builder.Property(c => c.Id)
+                .ValueGeneratedOnAdd();
             builder.Property(c => c.Username).IsRequired(true);
             builder.Property(c => c.Password).IsRequired(true);
             builder.Property(c => c.Email).IsRequired(true);
