@@ -1,4 +1,5 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.AspNetCore.Mvc; 
+using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Cryptography;
 using System.Text;
@@ -6,6 +7,8 @@ using TrainWell___BACKEND.Dtos;
 using TrainWell___BACKEND.Models;
 using TrainWell___BACKEND.Services.Interfaces;
 using TrainWell___BACKEND.SqlRepository;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace TrainWell___BACKEND.Services
 {

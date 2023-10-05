@@ -27,7 +27,8 @@ namespace TrainWell___BACKEND.Controllers
         [HttpPost("Register")]
         public async Task<ActionResult> Register(User user)
         {
-            await _authService.RegisterUser(user);
+            var newUser = await _authService.RegisterUser(user);
+            if (newUser == null) return BadRequest("Taka nazwa użytkownika jest już zajęta");
             return Ok(new { message = "User registered" });
         }
 
@@ -36,10 +37,11 @@ namespace TrainWell___BACKEND.Controllers
         {
 
             var user = await _authService.AuthenticateUser(userDTO);
-            if (user == null) return Unauthorized("Wrong login or password!");
+            if (user == null) return Unauthorized("Błędna nazwa użytkownika lub login");
             var jwtToken = _authService.GenerateToken();
 
-            return Ok(new { token = jwtToken });
+            return Ok(new { token = jwtToken, user = user });
+                            
         }
         [HttpGet("Test")]
         public async Task<ActionResult> Test()

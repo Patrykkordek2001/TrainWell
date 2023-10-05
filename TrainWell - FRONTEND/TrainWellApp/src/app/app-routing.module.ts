@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Router, RouterModule, Routes, RoutesRecognized } from '@angular/router';
-import { RegistrationComponent } from './components/registration/registration.component';
+import { AuthComponent } from './components/auth/auth.component';
 
 const routes: Routes = [
-  { path: 'register', component: RegistrationComponent }
+  { path: 'auth', component: AuthComponent }
 ];
 
 @NgModule({
@@ -14,7 +14,7 @@ export class AppRoutingModule {
   constructor(private router: Router) {
     this.router.events.subscribe((event) => {
       if (event instanceof RoutesRecognized && event.url === '/') {
-        this.router.navigate(['/register']);
+        this.router.navigate(['/auth']);
       }
     });
   }
