@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { RegisterService } from 'src/app/services/register.service';
+import { RegistrationService } from 'src/app/services/registration.service';
 
 @Component({
   selector: 'app-registration',
@@ -12,7 +12,7 @@ export class RegistrationComponent {
   registrationForm: FormGroup;
 
 
-  constructor(private formBuilder: FormBuilder, private registerService: RegisterService) {
+  constructor(private formBuilder: FormBuilder, private registerService: RegistrationService) {
     this.registrationForm = this.formBuilder.group({
       username: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
@@ -25,11 +25,16 @@ export class RegistrationComponent {
   }
 
   onSubmit() {
+    console.log(2);
     if (this.registrationForm.valid) {
 
       const userData = this.registrationForm.value;
       if(userData.password.value == userData.confirmPassword.value){
-          
+        this.registerService.register(userData).subscribe(
+          res => console.log(res),
+          error => console.error(error)
+        );
+        
       }
       console.log('Dane formularza zostały wysłane:', this.registrationForm.value);
     }

@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { RegistrationModule } from './modules/registration/registration.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,8 @@ import { RegistrationModule } from './modules/registration/registration.module';
     BrowserModule,
     AppRoutingModule,
     RegistrationModule,
+    HttpClientModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

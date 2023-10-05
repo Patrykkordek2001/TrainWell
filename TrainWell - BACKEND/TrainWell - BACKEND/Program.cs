@@ -32,6 +32,16 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 
 builder.Services.AddControllers();
 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.WithOrigins("http://localhost:4200")
+               .AllowAnyHeader()
+               .AllowAnyMethod();
+    });
+});
+
 
 builder.Services.AddDbContext<TrainWellDbContext>(options =>
 {
@@ -59,6 +69,15 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
+app.UseCors(options =>
+{
+    options.WithOrigins("http://localhost:4200")
+           .AllowAnyHeader()
+           .AllowAnyMethod();
+});
+
 app.MapControllers();
+
+app.UseCors();
 
 app.Run();
