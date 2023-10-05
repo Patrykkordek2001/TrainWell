@@ -3,34 +3,37 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RegisterService } from 'src/app/services/register.service';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  selector: 'app-registration',
+  templateUrl: './registration.component.html',
+  styleUrls: ['./registration.component.css']
 })
-export class RegisterComponent {
+export class RegistrationComponent {
 
-  registerForm: FormGroup;
+  registrationForm: FormGroup;
 
 
   constructor(private formBuilder: FormBuilder, private registerService: RegisterService) {
-    this.registerForm = this.formBuilder.group({
-      firstName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
+    this.registrationForm = this.formBuilder.group({
+      username: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
+      phoneNumber: ['', [Validators.required]],
+
+
     });
   }
 
   onSubmit() {
-    if (this.registerForm.valid) {
+    if (this.registrationForm.valid) {
 
-      const userData = this.registerForm.value;
+      const userData = this.registrationForm.value;
       if(userData.password.value == userData.confirmPassword.value){
           
       }
-      console.log('Dane formularza zostały wysłane:', this.registerForm.value);
+      console.log('Dane formularza zostały wysłane:', this.registrationForm.value);
     }
   }
+  backToLoginPage(){}
 
 }
