@@ -93,3 +93,5 @@ D:\Praca inżynierska\TrainWell\TrainWell - BACKEND\TrainWell - BACKEND\obj\Debu
 D:\Praca inżynierska\TrainWell\TrainWell - BACKEND\TrainWell - BACKEND\obj\Debug\net6.0\TrainWell - BACKEND.pdb
 D:\Praca inżynierska\TrainWell\TrainWell - BACKEND\TrainWell - BACKEND\obj\Debug\net6.0\TrainWell - BACKEND.genruntimeconfig.cache
 D:\Praca inżynierska\TrainWell\TrainWell - BACKEND\TrainWell - BACKEND\obj\Debug\net6.0\ref\TrainWell - BACKEND.dll
+D:\Praca inżynierska\TrainWell\TrainWell - BACKEND\TrainWell - BACKEND\bin\Debug\net6.0\AutoMapper.dll
+D:\Praca inżynierska\TrainWell\TrainWell - BACKEND\TrainWell - BACKEND\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

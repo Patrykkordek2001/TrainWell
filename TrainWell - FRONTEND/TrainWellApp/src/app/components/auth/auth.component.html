@@ -2,47 +2,52 @@
 <div class="main-container">
   <ng-container *ngIf="registerMode; else loginTemplate">
   <form class="login-form" [formGroup]="registrationForm" (ngSubmit)="register()">
+    <img src="../../../assets/TrainWell LOGO.png" alt="Logo">
     <div class="wrapper">
       <div class="container">
         <div class="inputs">
-          <label>Nazwa użytkownika:</label>
+          <label class="auth-labels">Nazwa użytkownika:</label>
           <input type="text" placeholder="Imię" formControlName="username"><br>
         </div>
         <div class="inputs">
-          <label>E-mail:</label>
+          <label class="auth-labels">E-mail:</label>
           <input type="email" placeholder="E-mail" formControlName="email"><br>
         </div>
         <div class="inputs">
-          <label>Hasło:</label>
+          <label class="auth-labels">Hasło:</label>
           <input type="password" placeholder="Hasło" formControlName="password"><br>
         </div>
         <div class="inputs">
-          <label>Potwierdź hasło:</label>
+          <label class="auth-labels">Potwierdź hasło:</label>
           <input type="password" placeholder="Potwierdź hasło" formControlName="confirmPassword"><br>
         </div>
         <div class="inputs">
-          <label>Numer telefonu:</label>
+          <label class="auth-labels">Numer telefonu:</label>
           <input type="number" placeholder="Numer telefonu" formControlName="phoneNumber"><br>
         </div>
       </div>
     </div>
+    <div class="buttons">
     <button  type="submit">Zarejestruj</button>
     <button (click)="changeMode()" type="reset">Anuluj</button>
+  </div>
   </form>
 </ng-container>
 
 <ng-template #loginTemplate>
   <form class="login-form" [formGroup]="loginForm" (ngSubmit)="login()">
+    <img src="../../../assets/TrainWell LOGO.png" alt="Logo">
     <div class="inputs">
-      <label>Nazwa użytkownika:</label>
+      <label class="auth-labels">Nazwa użytkownika:</label>
       <input type="text" placeholder="Nazwa użytkownika" formControlName="username"><br>
-    </div>
-    <div class="inputs">
-      <label>Hasło:</label>
+      <label class="auth-labels">Hasło:</label>
       <input type="password" placeholder="Hasło" formControlName="password"><br>
-    </div>
+    <div class="buttons">
     <button type="submit">Zaloguj</button>
-    <button type="reset" (click)="changeMode()">Zarejestruj się</button>
+    <button class="byn btn-success" type="button" (click)="changeMode()">Zarejestruj się</button>
+    <button type="button" class="btn btn-primary">Primary</button>
+  </div>
+</div>
   </form>
 </ng-template>
 </div>

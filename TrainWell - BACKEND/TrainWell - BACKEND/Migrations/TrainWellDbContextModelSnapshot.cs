@@ -28,14 +28,9 @@ namespace TrainWell___BACKEND.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("NumberOfRepeats")
-                        .HasColumnType("int");
-
-                    b.Property<int>("NumberOfSeries")
-                        .HasColumnType("int");
-
-                    b.Property<double>("Weight")
-                        .HasColumnType("float");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("WorkoutId")
                         .HasColumnType("int");
@@ -48,6 +43,31 @@ namespace TrainWell___BACKEND.Migrations
                     b.HasIndex("WorkoutId1");
 
                     b.ToTable("Exercises");
+                });
+
+            modelBuilder.Entity("TrainWell___BACKEND.Models.ExerciseSet", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("ExerciseId")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("ExerciseId1")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Repetitions")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Weight")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExerciseId1");
+
+                    b.ToTable("ExerciseSet");
                 });
 
             modelBuilder.Entity("TrainWell___BACKEND.Models.User", b =>
@@ -103,6 +123,22 @@ namespace TrainWell___BACKEND.Migrations
                         .IsRequired();
 
                     b.Navigation("Workout");
+                });
+
+            modelBuilder.Entity("TrainWell___BACKEND.Models.ExerciseSet", b =>
+                {
+                    b.HasOne("TrainWell___BACKEND.Models.Exercise", "Exercise")
+                        .WithMany("ExerciseSets")
+                        .HasForeignKey("ExerciseId1")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Exercise");
+                });
+
+            modelBuilder.Entity("TrainWell___BACKEND.Models.Exercise", b =>
+                {
+                    b.Navigation("ExerciseSets");
                 });
 
             modelBuilder.Entity("TrainWell___BACKEND.Models.Workout", b =>

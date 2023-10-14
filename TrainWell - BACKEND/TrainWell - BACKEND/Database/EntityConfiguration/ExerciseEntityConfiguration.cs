@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using TrainWell___BACKEND.Models;
 
 namespace TrainWell___BACKEND.Database.EntityConfiguration
@@ -14,18 +14,14 @@ namespace TrainWell___BACKEND.Database.EntityConfiguration
             builder.Property(c => c.Id)
                 .ValueGeneratedOnAdd();
 
-            builder.Property(c => c.NumberOfRepeats)
-                .IsRequired();
-
-            builder.Property(c => c.NumberOfSeries)
-                .IsRequired();
-
-            builder.Property(c => c.Weight)
-                .IsRequired();
-
             builder.HasOne(e => e.Workout)
                 .WithMany(w => w.Exercises)
                 .HasForeignKey(e => e.WorkoutId)
+                .IsRequired();
+
+            builder.HasMany(e => e.ExerciseSets)
+                .WithOne(es => es.Exercise) 
+                .HasForeignKey(e => e.ExerciseId)
                 .IsRequired();
         }
     }

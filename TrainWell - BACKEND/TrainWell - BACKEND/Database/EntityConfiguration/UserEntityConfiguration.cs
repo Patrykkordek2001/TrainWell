@@ -15,7 +15,7 @@ namespace TrainWell___BACKEND.Database.EntityConfiguration
             builder.Property(c => c.Username).IsRequired(true);
             builder.Property(c => c.Password).IsRequired(true);
             builder.Property(c => c.Email).IsRequired(true);
-            builder.Property(c => c.Phone).IsRequired(true);
+            builder.Property(c => c.Phone).IsRequired(false);
         }
     }
 }

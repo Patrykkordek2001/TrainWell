@@ -2,18 +2,15 @@
 {
     public class Exercise
     {
-        public Exercise(Guid id, int numberOfRepeats, int numberOfSeries, double weight)
+        public Exercise(int id, string name)
         {
             Id = id;
-            NumberOfRepeats = numberOfRepeats;
-            NumberOfSeries = numberOfSeries;
-            Weight = weight;
+            Name = name;
         }
 
-        public Guid Id { get; set; }
-        public int NumberOfRepeats { get; set; }
-        public int NumberOfSeries { get; set; }
-        public double Weight { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public ICollection<ExerciseSet> ExerciseSets { get; set; }
         public virtual Workout Workout { get; set; }
         public int WorkoutId { get; set; }
 

@@ -2,16 +2,16 @@
 {
     public class User
     {
-        public User(string username, string password, string email, string? phone)
+        public User(int id,string username, string password, string email, string? phone)
         {
-            Id = Guid.NewGuid(); ;
+            Id = id;
             Username = username;
             Password = password;
             Email = email;
             Phone = phone;
         }
 
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
