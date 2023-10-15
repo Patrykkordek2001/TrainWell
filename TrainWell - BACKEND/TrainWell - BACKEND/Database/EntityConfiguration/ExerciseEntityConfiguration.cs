@@ -11,8 +11,7 @@ namespace TrainWell___BACKEND.Database.EntityConfiguration
             builder.ToTable("Exercises");
             builder.HasKey(e => e.Id);
 
-            builder.Property(c => c.Id)
-                .ValueGeneratedOnAdd();
+
 
             builder.HasOne(e => e.Workout)
                 .WithMany(w => w.Exercises)

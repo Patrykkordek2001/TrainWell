@@ -8,7 +8,7 @@
             Weight = weight;
         }
 
-        public int Id { get; set; }
+        //public int Id { get; set; }
         public int Repetitions { get; set; }
         public double Weight { get; set; }
     }

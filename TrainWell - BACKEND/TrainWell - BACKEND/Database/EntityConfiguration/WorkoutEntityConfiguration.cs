@@ -11,8 +11,6 @@ namespace TrainWell___BACKEND.Database.EntityConfiguration
             builder.ToTable("Workouts");
             builder.HasKey(e => e.Id);
 
-            builder.Property(c => c.Id)
-                .ValueGeneratedOnAdd();
 
             builder.Property(c => c.Title)
                 .IsRequired(true);

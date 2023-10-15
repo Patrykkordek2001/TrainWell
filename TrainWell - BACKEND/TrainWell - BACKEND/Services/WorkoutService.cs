@@ -7,7 +7,7 @@ using TrainWell___BACKEND.SqlRepository;
 
 namespace TrainWell___BACKEND.Services
 {
-    public class WorkoutService : IWorkoutService
+    public class WorkoutService //: IWorkoutService
     {
 
         private readonly ISqlRepository<Workout> _workoutRepository;
@@ -22,27 +22,27 @@ namespace TrainWell___BACKEND.Services
             _mapper = mapper;
         }
 
-        public async Task<int> AddWorkoutAsync(WorkoutDto workout)
-        {
-            var workoutModel = _mapper.Map<Workout>(workout);
-
-            await _workoutRepository.AddAsync(workoutModel);
-
-            foreach (var exercise in workoutModel.Exercises)
-            {
-                exercise.WorkoutId = workoutModel.Id;
-                await _exerciseRepository.AddAsync(exercise);
-
-                foreach (var set in exercise.ExerciseSets)
-                {
-                    set.ExerciseId = exercise.Id;
-                    await _exerciseSetRepository.AddAsync(set);
-                }
-            }
-
-            return workoutModel.Id;
-
-        }
+        //public async Task<int> AddWorkoutAsync(WorkoutDto workout)
+        //{
+        //    var workoutModel = _mapper.Map<Workout>(workout);
+        //
+        //    await _workoutRepository.AddAsync(workoutModel);
+        //
+        //    foreach (var exercise in workoutModel.Exercises)
+        //    {
+        //       // exercise.WorkoutId = workoutModel.Id;
+        //        await _exerciseRepository.AddAsync(exercise);
+        //
+        //        foreach (var set in exercise.ExerciseSets)
+        //        {
+        //           // set.ExerciseId = exercise.Id;
+        //            await _exerciseSetRepository.AddAsync(set);
+        //        }
+        //    }
+        //
+        //    return workoutModel.Id;
+        //
+        //}
 
         public async Task DeleteWorkoutAsync(Guid id)
         {
