@@ -10,9 +10,8 @@ namespace TrainWell___BACKEND.Models
         {
         }
 
-        public Workout(int id, string title, DateTime date)
+        public Workout( string title, DateTime date)
         {
-            Id = id;
             Title = title;
             Date = date;
         }

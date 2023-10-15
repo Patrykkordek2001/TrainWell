@@ -5,9 +5,8 @@ namespace TrainWell___BACKEND.Models
 {
     public class User
     {
-        public User(int id, string username, string password, string email, string? phone)
+        public User(string username, string password, string email, string? phone)
         {
-            Id = id;
             Username = username;
             Password = password;
             Email = email;

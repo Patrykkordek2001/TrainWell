@@ -9,9 +9,8 @@ namespace TrainWell___BACKEND.Models
         {
         }
 
-        public Exercise(int id, string name)
+        public Exercise(string name)
         {
-            Id = id;
             Name = name;
         }
 

@@ -29,5 +29,22 @@ namespace TrainWell___BACKEND.Controllers
             if (newWorkout == null) return BadRequest("Błąd podczas dodawania treningu");
             return Ok(new { message = "Trening został dodany" });
         }
+
+        [HttpDelete("{workoutId}")]
+        public async Task<ActionResult> DeleteWorkout(int workoutId)
+        {
+            // Tutaj wywołaj metodę do usuwania treningu z serwisu lub repozytorium
+            var result = await _workoutService.DeleteWorkoutAsync(workoutId);
+
+            if (result)
+            {
+                return Ok(new { message = "Trening został usunięty" });
+            }
+            else
+            {
+                return BadRequest("Błąd podczas usuwania treningu");
+            }
+        }
+
     }
 }

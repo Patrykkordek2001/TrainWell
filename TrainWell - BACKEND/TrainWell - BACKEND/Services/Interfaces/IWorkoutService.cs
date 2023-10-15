@@ -6,9 +6,9 @@ namespace TrainWell___BACKEND.Services.Interfaces
     public interface IWorkoutService
     {
         Task<int> AddWorkoutAsync(WorkoutDto workout);
-        Task DeleteWorkoutAsync(Guid id);
+        Task DeleteWorkoutAsync(int id);
         Task<IEnumerable<Workout>> GetAllWorkoutsAsync();
-        Task<Workout> GetWorkoutByIdAsync(Guid id);
+        Task<Workout> GetWorkoutByIdAsync(int id);
         Task UpdateWorkoutAsync(Workout workout);
     }
 }

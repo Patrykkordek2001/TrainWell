@@ -9,9 +9,8 @@ namespace TrainWell___BACKEND.Models
         {
         }
 
-        public ExerciseSet(int id, int repetitions, double weight, int exerciseId)
+        public ExerciseSet(int repetitions, double weight, int exerciseId)
         {
-            Id = id;
             Repetitions = repetitions;
             Weight = weight;
             ExerciseId = exerciseId;
