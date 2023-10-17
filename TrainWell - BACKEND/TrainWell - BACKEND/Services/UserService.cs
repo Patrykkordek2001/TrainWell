@@ -13,7 +13,7 @@ namespace TrainWell___BACKEND.Services
             _userRepository = userRepository;
         }
 
-        public async Task DeleteUserAsync(Guid id)
+        public async Task DeleteUserAsync(int id)
         {
             await _userRepository.DeleteAsync(id);
         }
@@ -23,7 +23,7 @@ namespace TrainWell___BACKEND.Services
             return await _userRepository.GetAllAsync();
         }
 
-        public async Task<User> GetUserByIdAsync(Guid id)
+        public async Task<User> GetUserByIdAsync(int  id)
         {
             return await _userRepository.GetByIdAsync(id);
         }

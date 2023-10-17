@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using TrainWell___BACKEND.Dtos;
 using TrainWell___BACKEND.Models;
 using TrainWell___BACKEND.Services.Interfaces;
@@ -33,18 +34,38 @@ namespace TrainWell___BACKEND.Controllers
         [HttpDelete("{workoutId}")]
         public async Task<ActionResult> DeleteWorkout(int workoutId)
         {
-            // Tutaj wywołaj metodę do usuwania treningu z serwisu lub repozytorium
-            var result = await _workoutService.DeleteWorkoutAsync(workoutId);
-
-            if (result)
-            {
-                return Ok(new { message = "Trening został usunięty" });
-            }
-            else
-            {
-                return BadRequest("Błąd podczas usuwania treningu");
-            }
+             await _workoutService.DeleteWorkoutAsync(workoutId);
+             return Ok(new { message = "Trening został usunięty" });
+              
         }
 
+        [HttpGet("GetWorkoutByID/{workoutId}")]
+        public async Task<ActionResult<Workout>> GetWorkoutByID(int workoutId)
+        {
+            var workout = await _workoutService.GetWorkoutByIdAsync(workoutId);
+            if (workout == null)
+                return NotFound("Trening o podanym ID nie istnieje");
+
+            return Ok(workout);
+        }
+
+        [HttpGet("GetWorkoutByDate/{date}")]
+        public async Task<ActionResult<List<Workout>>> GetWorkoutByDate(DateTime date)
+        {
+            var workouts = await _workoutService.GetWorkoutByDateAsync(date);
+            if (workouts.IsNullOrEmpty() ) return NotFound("Brak treningów w podanej dacie");
+
+            return Ok(workouts.ToList());
+        }
     }
 }
+
+
+
+
+
+
+        
+
+    
+

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using TrainWell___BACKEND.Database;
 using TrainWell___BACKEND.Dtos;
 using TrainWell___BACKEND.Models;
 using TrainWell___BACKEND.Services.Interfaces;
@@ -14,8 +15,11 @@ namespace TrainWell___BACKEND.Services
         private readonly ISqlRepository<Exercise> _exerciseRepository;
         private readonly ISqlRepository<ExerciseSet> _exerciseSetRepository;
         private readonly IMapper _mapper;
-        public WorkoutService(ISqlRepository<Workout> workoutRepository, ISqlRepository<Exercise> exerciseRepository, ISqlRepository<ExerciseSet> exerciseSetRepository, IMapper mapper)
+        private readonly TrainWellDbContext _context;
+
+        public WorkoutService(ISqlRepository<Workout> workoutRepository, ISqlRepository<Exercise> exerciseRepository, ISqlRepository<ExerciseSet> exerciseSetRepository, IMapper mapper, TrainWellDbContext context)
         {
+            _context = context;
             _workoutRepository = workoutRepository;
             _exerciseRepository = exerciseRepository;
             _exerciseSetRepository = exerciseSetRepository;
@@ -45,6 +49,16 @@ namespace TrainWell___BACKEND.Services
         public async Task<Workout> GetWorkoutByIdAsync(int id)
         {
             return await _workoutRepository.GetByIdAsync(id);
+        }
+
+        public async Task<IEnumerable<Workout>> GetWorkoutByDateAsync(DateTime date)
+        {
+            var workouts = _context.Workouts
+                    .Include(w => w.Exercises) 
+                        .ThenInclude(e => e.ExerciseSets)
+                    .Where(w => w.Date.Date == date.Date);
+
+            return  workouts;
         }
 
         public async Task UpdateWorkoutAsync(Workout workout)

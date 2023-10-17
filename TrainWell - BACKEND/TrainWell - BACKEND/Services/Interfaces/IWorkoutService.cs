@@ -10,5 +10,7 @@ namespace TrainWell___BACKEND.Services.Interfaces
         Task<IEnumerable<Workout>> GetAllWorkoutsAsync();
         Task<Workout> GetWorkoutByIdAsync(int id);
         Task UpdateWorkoutAsync(Workout workout);
+        Task<IEnumerable<Workout>> GetWorkoutByDateAsync(DateTime date);
+
     }
 }

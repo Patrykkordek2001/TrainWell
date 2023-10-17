@@ -43,12 +43,7 @@ namespace TrainWell___BACKEND.Controllers
             return Ok(new { token = jwtToken, user = user });
                             
         }
-        [HttpGet("Test")]
-        public async Task<ActionResult> Test()
-        {
-            return Ok(new { message = "TESST" });
-        }
-
+        
 
     }
 }

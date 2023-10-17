@@ -4,9 +4,9 @@ namespace TrainWell___BACKEND.Services.Interfaces
 {
     public interface IUserService
     {
-        Task DeleteUserAsync(Guid id);
+        Task DeleteUserAsync(int id);
         Task<IEnumerable<User>> GetAllUsersAsync();
-        Task<User> GetUserByIdAsync(Guid id);
+        Task<User> GetUserByIdAsync(int id);
         Task UpdateUserAsync(User user);
     }
 }

@@ -19,7 +19,7 @@ namespace TrainWell___BACKEND.SqlRepository
             return await _dbSet.ToListAsync();
         }
 
-        public async Task<T> GetByIdAsync(Guid id)
+        public async Task<T> GetByIdAsync(int id)
         {
             return await _dbSet.FindAsync(id);
         }
@@ -36,11 +36,14 @@ namespace TrainWell___BACKEND.SqlRepository
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(Guid id)
+        public async Task DeleteAsync(int id)
         {
             var entity = await GetByIdAsync(id);
             _dbSet.Remove(entity);
             await _context.SaveChangesAsync();
         }
+
+        
+
     }
 }
