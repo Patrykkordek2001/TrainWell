@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using TrainWell___BACKEND.Models;
+using TrainWell___BACKEND.Models.Diet;
+using TrainWell___BACKEND.Models.Training;
 
 namespace TrainWell___BACKEND.Database
 {
@@ -13,6 +15,12 @@ namespace TrainWell___BACKEND.Database
         public DbSet<Workout> Workouts { get; set; }
         public DbSet<ExerciseSet> ExerciseSets { get; set; }
         public DbSet<Measurement> Measurements { get; set; }
+        public DbSet<Breakfast> Breakfasts { get; set; }
+        public DbSet<Dinner> Dinners { get; set; }
+        public DbSet<Lunch> Lunches { get; set; }
+        public DbSet<Snack> Snacks { get; set; }
+        public DbSet<Product> Products { get; set; }
+
 
 
     }

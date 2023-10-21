@@ -1,4 +1,4 @@
-﻿using TrainWell___BACKEND.Models;
+﻿using TrainWell___BACKEND.Models.Training;
 
 namespace TrainWell___BACKEND.Dtos
 {

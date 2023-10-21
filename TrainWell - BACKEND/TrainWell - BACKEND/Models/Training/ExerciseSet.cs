@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace TrainWell___BACKEND.Models
+namespace TrainWell___BACKEND.Models.Training
 {
     public class ExerciseSet
     {
@@ -21,6 +21,6 @@ namespace TrainWell___BACKEND.Models
         public int Repetitions { get; set; }
         public double Weight { get; set; }
         public int ExerciseId { get; set; }
-        public virtual Exercise? Exercise { get; set;}
+        public virtual Exercise? Exercise { get; set; }
     }
 }
