@@ -1,8 +1,8 @@
 ﻿namespace TrainWell___BACKEND.Dtos
 {
-    public class ExerciseSetDTO
+    public class ExerciseSetDto
     {
-        public ExerciseSetDTO(int repetitions, double weight)
+        public ExerciseSetDto(int repetitions, double weight)
         {
             Repetitions = repetitions;
             Weight = weight;

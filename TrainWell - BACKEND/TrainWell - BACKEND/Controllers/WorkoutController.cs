@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using TrainWell___BACKEND.Dtos;
@@ -9,18 +10,16 @@ namespace TrainWell___BACKEND.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
+
     public class WorkoutController : ControllerBase
     {
         private readonly IWorkoutService _workoutService;
-        private readonly IAuthService _authService;
-        private readonly IConfiguration _configuration;
 
-        public WorkoutController(IAuthService authService, IConfiguration configuration, IWorkoutService workoutService)
+
+        public WorkoutController(IWorkoutService workoutService)
         {
             _workoutService = workoutService;
-            _configuration = configuration;
-            _authService = authService;
-
         }
         [HttpPost("AddWorkout")]
         public async Task<ActionResult> AddWorkout(WorkoutDto workoutDto)

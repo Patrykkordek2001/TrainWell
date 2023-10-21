@@ -20,6 +20,8 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 
 builder.Services.AddScoped<IWorkoutService, WorkoutService>();
 
+builder.Services.AddScoped<IMeasurementService, MeasurementService>();
+
 
 
 
