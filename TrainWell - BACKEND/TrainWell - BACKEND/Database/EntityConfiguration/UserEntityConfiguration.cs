@@ -17,3 +17,4 @@ namespace TrainWell___BACKEND.Database.EntityConfiguration
         }
     }
 }
+

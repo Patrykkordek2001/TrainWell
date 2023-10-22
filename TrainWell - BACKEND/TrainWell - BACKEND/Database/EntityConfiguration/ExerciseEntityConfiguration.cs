@@ -19,7 +19,7 @@ namespace TrainWell___BACKEND.Database.EntityConfiguration
             builder.HasMany(e => e.ExerciseSets)
                 .WithOne(es => es.Exercise) 
                 .HasForeignKey(e => e.ExerciseId)
-                .IsRequired();
+                .IsRequired(false);
         }
     }
 }

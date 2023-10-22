@@ -16,7 +16,7 @@ namespace TrainWell___BACKEND.Models.Diet
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public DateTime Date { get; set; }
-        ICollection<Product> Products { get; set; }
+        public ICollection<Product> Products { get; set; }
 
 
     }
