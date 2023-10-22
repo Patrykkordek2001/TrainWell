@@ -6,8 +6,7 @@ namespace TrainWell___BACKEND.Models.Diet
     public class Product
     {
         public Product(string name, string? description, double calories, double? fat, double? staruratedFat, 
-            double? carbohydrates, double? sugars, double? fiber, double? proteins, double? salt, int? dinnerId,
-            int? lunchId, int? breakfastId, int? snackId, int? secondBreakfastId)
+            double? carbohydrates, double? sugars, double? fiber, double? proteins, double? salt)
         {
             Name = name;
             Description = description;
@@ -19,11 +18,7 @@ namespace TrainWell___BACKEND.Models.Diet
             Fiber = fiber;
             Proteins = proteins;
             Salt = salt;
-            DinnerId = dinnerId;
-            LunchId = lunchId;
-            BreakfastId = breakfastId;
-            SnackId = snackId;
-            SecondBreakfastId = secondBreakfastId;
+
         }
 
         [Key]
@@ -41,15 +36,8 @@ namespace TrainWell___BACKEND.Models.Diet
         public double? Proteins { get; set; }
         public double? Salt { get; set; }
 
-        public virtual Dinner? Dinner { get; set; }
-        public int? DinnerId { get; set; }
-        public virtual Lunch? Lunch { get; set; }
-        public int? LunchId { get; set; }
-        public virtual Breakfast? Breakfast { get; set; }
-        public int? BreakfastId { get; set; }
-        public virtual Snack? Snack { get; set; }
-        public int? SnackId { get; set; }
-        public virtual SecondBreakfast? SecondBreakfast { get; set; }
-        public int? SecondBreakfastId { get;set; }
+        public virtual Meal? Meal { get; set; }
+        public int? MealId { get; set; }
+
     }
 }

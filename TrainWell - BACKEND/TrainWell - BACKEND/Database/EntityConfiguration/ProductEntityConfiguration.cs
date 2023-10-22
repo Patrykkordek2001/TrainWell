@@ -21,30 +21,11 @@ namespace TrainWell___BACKEND.Models.Diet
             builder.Property(e => e.Proteins);
             builder.Property(e => e.Salt);
 
-            builder.HasOne(e => e.Dinner)
+            builder.HasOne(e => e.Meal)
                 .WithMany(d => d.Products)
-                .HasForeignKey(e => e.DinnerId)
-                .IsRequired(false);
+                .HasForeignKey(e => e.MealId)
+                .IsRequired(true);
 
-            builder.HasOne(e => e.Lunch)
-                .WithMany(l => l.Products)
-                .HasForeignKey(e => e.LunchId)
-                .IsRequired(false);
-
-            builder.HasOne(e => e.Breakfast)
-                .WithMany(b => b.Products)
-                .HasForeignKey(e => e.BreakfastId)
-                .IsRequired(false);
-
-            builder.HasOne(e => e.Snack)
-                .WithMany(s => s.Products)
-                .HasForeignKey(e => e.SnackId)
-                .IsRequired(false);
-
-            builder.HasOne(e => e.SecondBreakfast)
-                .WithMany(sb => sb.Products)
-                .HasForeignKey(e => e.SecondBreakfastId)
-                .IsRequired(false);
         }
     }
 }

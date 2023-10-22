@@ -3,17 +3,19 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TrainWell___BACKEND.Models.Diet
 {
-    public class Breakfast
+    public class Meal
     {
-        public Breakfast(int id, DateTime date)
+        public Meal(DateTime date, MealNameEnum mealName)
         {
-            Id = id;
             Date = date;
+            MealName = mealName;
         }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public DateTime Date { get; set; }
-        public ICollection<Product> Products { get; set; }
+        public DateTime Date { get; set; } 
+        public MealNameEnum MealName { get; set; }
+        public ICollection<Product>? Products { get; set; }
     }
 }

@@ -22,124 +22,29 @@ namespace TrainWell___BACKEND.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("TrainWell___BACKEND.Models.Diet.Breakfast", b =>
+            modelBuilder.Entity("TrainWell___BACKEND.Models.Exercise", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Breakfasts");
-                });
-
-            modelBuilder.Entity("TrainWell___BACKEND.Models.Diet.Dinner", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Dinners");
-                });
-
-            modelBuilder.Entity("TrainWell___BACKEND.Models.Diet.Lunch", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Lunches");
-                });
-
-            modelBuilder.Entity("TrainWell___BACKEND.Models.Diet.Product", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("BreakfastId")
-                        .HasColumnType("int");
-
-                    b.Property<double>("Calories")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("Carbohydrates")
-                        .HasColumnType("float");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("DinnerId")
-                        .HasColumnType("int");
-
-                    b.Property<double?>("Fat")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("Fiber")
-                        .HasColumnType("float");
-
-                    b.Property<int?>("LunchId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double?>("Proteins")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("Salt")
-                        .HasColumnType("float");
-
-                    b.Property<int?>("SecondBreakfastId")
+                    b.Property<int>("WorkoutId")
                         .HasColumnType("int");
-
-                    b.Property<int?>("SnackId")
-                        .HasColumnType("int");
-
-                    b.Property<double?>("StaruratedFat")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("Sugars")
-                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BreakfastId");
+                    b.HasIndex("WorkoutId");
 
-                    b.HasIndex("DinnerId");
-
-                    b.HasIndex("LunchId");
-
-                    b.HasIndex("SecondBreakfastId");
-
-                    b.HasIndex("SnackId");
-
-                    b.ToTable("Products");
+                    b.ToTable("Exercises", (string)null);
                 });
 
-            modelBuilder.Entity("TrainWell___BACKEND.Models.Diet.SecondBreakfast", b =>
+            modelBuilder.Entity("TrainWell___BACKEND.Models.ExerciseSet", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -147,28 +52,20 @@ namespace TrainWell___BACKEND.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("SecondBreakfast");
-                });
-
-            modelBuilder.Entity("TrainWell___BACKEND.Models.Diet.Snack", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("ExerciseId")
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<int>("Repetitions")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
+                    b.Property<double>("Weight")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Snacks");
+                    b.HasIndex("ExerciseId");
+
+                    b.ToTable("ExerciseSets", (string)null);
                 });
 
             modelBuilder.Entity("TrainWell___BACKEND.Models.Measurement", b =>
@@ -205,73 +102,7 @@ namespace TrainWell___BACKEND.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Measurements");
-                });
-
-            modelBuilder.Entity("TrainWell___BACKEND.Models.Training.Exercise", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("WorkoutId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("WorkoutId");
-
-                    b.ToTable("Exercises");
-                });
-
-            modelBuilder.Entity("TrainWell___BACKEND.Models.Training.ExerciseSet", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ExerciseId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Repetitions")
-                        .HasColumnType("int");
-
-                    b.Property<double>("Weight")
-                        .HasColumnType("float");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ExerciseId");
-
-                    b.ToTable("ExerciseSets");
-                });
-
-            modelBuilder.Entity("TrainWell___BACKEND.Models.Training.Workout", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Workouts");
+                    b.ToTable("Measurements", (string)null);
                 });
 
             modelBuilder.Entity("TrainWell___BACKEND.Models.User", b =>
@@ -299,45 +130,32 @@ namespace TrainWell___BACKEND.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
-            modelBuilder.Entity("TrainWell___BACKEND.Models.Diet.Product", b =>
+            modelBuilder.Entity("TrainWell___BACKEND.Models.Workout", b =>
                 {
-                    b.HasOne("TrainWell___BACKEND.Models.Diet.Breakfast", "Breakfast")
-                        .WithMany("Products")
-                        .HasForeignKey("BreakfastId");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.HasOne("TrainWell___BACKEND.Models.Diet.Dinner", "Dinner")
-                        .WithMany("Products")
-                        .HasForeignKey("DinnerId");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.HasOne("TrainWell___BACKEND.Models.Diet.Lunch", "Lunch")
-                        .WithMany("Products")
-                        .HasForeignKey("LunchId");
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
 
-                    b.HasOne("TrainWell___BACKEND.Models.Diet.SecondBreakfast", "SecondBreakfast")
-                        .WithMany("Products")
-                        .HasForeignKey("SecondBreakfastId");
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasOne("TrainWell___BACKEND.Models.Diet.Snack", "Snack")
-                        .WithMany("Products")
-                        .HasForeignKey("SnackId");
+                    b.HasKey("Id");
 
-                    b.Navigation("Breakfast");
-
-                    b.Navigation("Dinner");
-
-                    b.Navigation("Lunch");
-
-                    b.Navigation("SecondBreakfast");
-
-                    b.Navigation("Snack");
+                    b.ToTable("Workouts", (string)null);
                 });
 
-            modelBuilder.Entity("TrainWell___BACKEND.Models.Training.Exercise", b =>
+            modelBuilder.Entity("TrainWell___BACKEND.Models.Exercise", b =>
                 {
-                    b.HasOne("TrainWell___BACKEND.Models.Training.Workout", "Workout")
+                    b.HasOne("TrainWell___BACKEND.Models.Workout", "Workout")
                         .WithMany("Exercises")
                         .HasForeignKey("WorkoutId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -346,9 +164,9 @@ namespace TrainWell___BACKEND.Migrations
                     b.Navigation("Workout");
                 });
 
-            modelBuilder.Entity("TrainWell___BACKEND.Models.Training.ExerciseSet", b =>
+            modelBuilder.Entity("TrainWell___BACKEND.Models.ExerciseSet", b =>
                 {
-                    b.HasOne("TrainWell___BACKEND.Models.Training.Exercise", "Exercise")
+                    b.HasOne("TrainWell___BACKEND.Models.Exercise", "Exercise")
                         .WithMany("ExerciseSets")
                         .HasForeignKey("ExerciseId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -357,37 +175,12 @@ namespace TrainWell___BACKEND.Migrations
                     b.Navigation("Exercise");
                 });
 
-            modelBuilder.Entity("TrainWell___BACKEND.Models.Diet.Breakfast", b =>
-                {
-                    b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("TrainWell___BACKEND.Models.Diet.Dinner", b =>
-                {
-                    b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("TrainWell___BACKEND.Models.Diet.Lunch", b =>
-                {
-                    b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("TrainWell___BACKEND.Models.Diet.SecondBreakfast", b =>
-                {
-                    b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("TrainWell___BACKEND.Models.Diet.Snack", b =>
-                {
-                    b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("TrainWell___BACKEND.Models.Training.Exercise", b =>
+            modelBuilder.Entity("TrainWell___BACKEND.Models.Exercise", b =>
                 {
                     b.Navigation("ExerciseSets");
                 });
 
-            modelBuilder.Entity("TrainWell___BACKEND.Models.Training.Workout", b =>
+            modelBuilder.Entity("TrainWell___BACKEND.Models.Workout", b =>
                 {
                     b.Navigation("Exercises");
                 });

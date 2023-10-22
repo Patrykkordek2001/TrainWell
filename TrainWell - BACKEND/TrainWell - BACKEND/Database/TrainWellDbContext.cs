@@ -15,11 +15,9 @@ namespace TrainWell___BACKEND.Database
         public DbSet<Workout> Workouts { get; set; }
         public DbSet<ExerciseSet> ExerciseSets { get; set; }
         public DbSet<Measurement> Measurements { get; set; }
-        public DbSet<Breakfast> Breakfasts { get; set; }
-        public DbSet<Dinner> Dinners { get; set; }
-        public DbSet<Lunch> Lunches { get; set; }
-        public DbSet<Snack> Snacks { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Meal> Meals { get; set; }
+
 
 
 
