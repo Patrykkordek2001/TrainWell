@@ -22,6 +22,11 @@ builder.Services.AddScoped<IWorkoutService, WorkoutService>();
 
 builder.Services.AddScoped<IMeasurementService, MeasurementService>();
 
+builder.Services.AddScoped<IMealService, MealService>();
+
+
+builder.Services.AddScoped<IProductService, ProductService>();
+
 
 
 

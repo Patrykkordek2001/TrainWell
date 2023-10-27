@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TrainWell___BACKEND.Database;
 
@@ -11,9 +12,11 @@ using TrainWell___BACKEND.Database;
 namespace TrainWell___BACKEND.Migrations
 {
     [DbContext(typeof(TrainWellDbContext))]
-    partial class TrainWellDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231027104603_ProductsInMealsAdded")]
+    partial class ProductsInMealsAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -61,6 +64,9 @@ namespace TrainWell___BACKEND.Migrations
                     b.Property<double?>("Fiber")
                         .HasColumnType("float");
 
+                    b.Property<int?>("MealId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -77,7 +83,12 @@ namespace TrainWell___BACKEND.Migrations
                     b.Property<double?>("Sugars")
                         .HasColumnType("float");
 
+                    b.Property<double?>("Weight")
+                        .HasColumnType("float");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("MealId");
 
                     b.ToTable("Products");
                 });
@@ -240,6 +251,15 @@ namespace TrainWell___BACKEND.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("TrainWell___BACKEND.Models.Diet.Product", b =>
+                {
+                    b.HasOne("TrainWell___BACKEND.Models.Diet.Meal", "Meal")
+                        .WithMany("Products")
+                        .HasForeignKey("MealId");
+
+                    b.Navigation("Meal");
+                });
+
             modelBuilder.Entity("TrainWell___BACKEND.Models.Diet.ProductInMeal", b =>
                 {
                     b.HasOne("TrainWell___BACKEND.Models.Diet.Meal", "Meal")
@@ -283,6 +303,8 @@ namespace TrainWell___BACKEND.Migrations
 
             modelBuilder.Entity("TrainWell___BACKEND.Models.Diet.Meal", b =>
                 {
+                    b.Navigation("Products");
+
                     b.Navigation("ProductsInMeal");
                 });
 

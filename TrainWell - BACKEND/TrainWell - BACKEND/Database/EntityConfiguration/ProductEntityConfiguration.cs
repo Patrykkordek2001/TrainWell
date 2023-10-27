@@ -10,7 +10,6 @@ namespace TrainWell___BACKEND.Models.Diet
             builder.ToTable("Products"); 
 
             builder.HasKey(e => e.Id); 
-
             builder.Property(e => e.Name).IsRequired();
             builder.Property(e => e.Calories).IsRequired();
             builder.Property(e => e.Fat);
@@ -20,10 +19,8 @@ namespace TrainWell___BACKEND.Models.Diet
             builder.Property(e => e.Fiber);
             builder.Property(e => e.Proteins);
             builder.Property(e => e.Salt);
-
-            builder.HasOne(e => e.Meal)
-                .WithMany(d => d.Products)
-                .HasForeignKey(e => e.MealId)
+            builder.HasOne(e => e.ProductInMeal)
+                .WithOne(d => d.Product)
                 .IsRequired(true);
 
         }
