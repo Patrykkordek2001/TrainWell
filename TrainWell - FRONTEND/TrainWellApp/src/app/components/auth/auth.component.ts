@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { AppComponent } from 'src/app/app.component';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -12,12 +13,16 @@ export class AuthComponent implements OnInit {
   registrationForm!: FormGroup;
   loginForm!: FormGroup;
   loginMode: boolean = false;
+  showHeader = false;
 
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private toastrService: ToastrService
-  ) {}
+    private toastrService: ToastrService,
+    private appComponent: AppComponent
+  ) {
+    this.appComponent.showHeader = false;
+  }
 
   ngOnInit(): void {
     this.registrationForm = this.formBuilder.group({

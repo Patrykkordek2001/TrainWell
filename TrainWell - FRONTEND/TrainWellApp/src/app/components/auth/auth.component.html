@@ -62,7 +62,7 @@
               </form>
             </ng-template>
             <div class="signin">
-              <span>{{ loginMode ? 'Posiadasz już konto?' : 'Nie masz jeszcze konta?' }} <a (click)="changeMode()">{{ !loginMode ? 'Zaloguj się tutaj' : 'Zarejestruj się tutaj' }}</a></span>
+              <span>{{ !loginMode ? 'Posiadasz już konto?' : 'Nie masz jeszcze konta?' }} <a (click)="changeMode()">{{ !loginMode ? 'Zaloguj się tutaj' : 'Zarejestruj się tutaj' }}</a></span>
             </div>
           </div>
         </div>

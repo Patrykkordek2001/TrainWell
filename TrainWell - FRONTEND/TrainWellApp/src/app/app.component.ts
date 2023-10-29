@@ -10,6 +10,7 @@ import { AuthService } from './services/auth.service';
 
 export class AppComponent implements OnInit {
   title = 'TrainWellApp';
+  showHeader = true;
 
   ngOnInit(): void {
     this.checkToken();
