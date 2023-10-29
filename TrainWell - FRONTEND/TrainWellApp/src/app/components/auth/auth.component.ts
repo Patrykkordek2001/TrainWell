@@ -11,7 +11,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class AuthComponent implements OnInit {
   registrationForm!: FormGroup;
   loginForm!: FormGroup;
-  registerMode: boolean = false;
+  loginMode: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -20,15 +20,19 @@ export class AuthComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-      this.loginForm = this.formBuilder.group({
+    this.registrationForm = this.formBuilder.group({
       username: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
+      phoneNumber: ['', [Validators.required]],
     });
   }
 
   register() {
+    const register = this.registrationForm.value;
+    console.log(register);
     if (this.registrationForm.valid) {
-      console.log(1);
       const userData = this.registrationForm.value;
       if (userData.password.value == userData.confirmPassword.value) {
         this.authService
@@ -63,21 +67,21 @@ export class AuthComponent implements OnInit {
     }
   }
   changeMode() {
-    this.registerMode = !this.registerMode;
-    if(this.registerMode){
+    this.loginMode = !this.loginMode;
+    if(this.loginMode){
+      this.loginForm = this.formBuilder.group({
+        username: ['', [Validators.required]],
+        password: ['', [Validators.required, Validators.minLength(6)]],
+      });
+    }
+    else if(!this.loginMode){
       this.registrationForm = this.formBuilder.group({
         username: ['', [Validators.required]],
         email: ['', [Validators.required, Validators.email]],
         password: ['', [Validators.required, Validators.minLength(6)]],
         confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
         phoneNumber: ['', [Validators.required]],
-      });
-    }
-    else if(!this.registerMode){
-      this.loginForm = this.formBuilder.group({
-        username: ['', [Validators.required]],
-        password: ['', [Validators.required, Validators.minLength(6)]],
-      });
+      });     
     }
   }
 }

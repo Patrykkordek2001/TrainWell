@@ -1,53 +1,73 @@
-<title>Strona logowania</title>
-<div class="main-container">
-  <ng-container *ngIf="registerMode; else loginTemplate">
-  <form class="login-form" [formGroup]="registrationForm" (ngSubmit)="register()">
-    <img src="../../../assets/TrainWell LOGO.png" alt="Logo">
-    <div class="wrapper">
-      <div class="container">
-        <div class="inputs">
-          <label class="auth-labels">Nazwa użytkownika:</label>
-          <input type="text" placeholder="Imię" formControlName="username"><br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TrainWell</title>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="container main">
+      <div class="row">
+        <div class="col-md-6 side-image">
+          <div class="text">
+            <p>Dołącz do <i>TrainWell</i> aby zmienić swoje nawyki!</p>
+          </div>
         </div>
-        <div class="inputs">
-          <label class="auth-labels">E-mail:</label>
-          <input type="email" placeholder="E-mail" formControlName="email"><br>
-        </div>
-        <div class="inputs">
-          <label class="auth-labels">Hasło:</label>
-          <input type="password" placeholder="Hasło" formControlName="password"><br>
-        </div>
-        <div class="inputs">
-          <label class="auth-labels">Potwierdź hasło:</label>
-          <input type="password" placeholder="Potwierdź hasło" formControlName="confirmPassword"><br>
-        </div>
-        <div class="inputs">
-          <label class="auth-labels">Numer telefonu:</label>
-          <input type="number" placeholder="Numer telefonu" formControlName="phoneNumber"><br>
+        <div class="col-md-6 right">
+          <div class="input-box">
+            <img src="../../../assets//TrainWell LOGO.png" class="logo" alt="">
+            <ng-template [ngIf]="!loginMode">
+              <header>Rejestracja</header>
+              <form [formGroup]="registrationForm" (ngSubmit)="register()">
+                <div class="input-field">
+                  <input type="email" class="input" id="email" formControlName="email" required autocomplete="off">
+                  <label for="email">Email</label>
+                </div>
+                <div class="input-field">
+                  <input type="text" class ="input" id="username" formControlName="username" required autocomplete="off">
+                  <label for="username">Nazwa użytkownika</label>
+                </div>
+                <div class="input-field">
+                  <input type="password" class="input" id="password" formControlName="password" required>
+                  <label for="password">Hasło</label>
+                </div>
+                <div class="input-field">
+                  <input type="password" class="input" id="confirmPassword" formControlName="confirmPassword" required>
+                  <label for="confirmPassword">Potwierdź Hasło</label>
+                </div>
+                <div class="input-field">
+                  <input type="text" class="input" id="phoneNumber" formControlName="phoneNumber" required>
+                  <label for="phoneNumber">Numer telefonu</label>
+                </div>
+                <div class="input-field">
+                  <input type="submit" class="submit" value="Zarejestruj się" (click)="register()">
+                </div>
+              </form>
+            </ng-template>
+            <ng-template [ngIf]="loginMode">
+              <header>Logowanie</header>
+              <form [formGroup]="loginForm" (ngSubmit)="login()">
+                <div class="input-field">
+                  <input type="text" class="input" id="username" formControlName="username" required autocomplete="off">
+                  <label for="username">Email</label>
+                </div>
+                <div class="input-field">
+                  <input type="password" class="input" id="password" formControlName="password" required>
+                  <label for="password">Hasło</label>
+                </div>
+                <div class="input-field">
+                  <input type="submit" class="submit" value="Zaloguj się" (click)="login()">
+                </div>
+              </form>
+            </ng-template>
+            <div class="signin">
+              <span>{{ loginMode ? 'Posiadasz już konto?' : 'Nie masz jeszcze konta?' }} <a (click)="changeMode()">{{ !loginMode ? 'Zaloguj się tutaj' : 'Zarejestruj się tutaj' }}</a></span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <div class="buttons">
-    <button  type="submit">Zarejestruj</button>
-    <button (click)="changeMode()" type="reset">Anuluj</button>
   </div>
-  </form>
-</ng-container>
-
-<ng-template #loginTemplate>
-  <form class="login-form" [formGroup]="loginForm" (ngSubmit)="login()">
-    <img src="../../../assets/TrainWell LOGO.png" alt="Logo">
-    <div class="inputs">
-      <label class="auth-labels">Nazwa użytkownika:</label>
-      <input type="text" placeholder="Nazwa użytkownika" formControlName="username"><br>
-      <label class="auth-labels">Hasło:</label>
-      <input type="password" placeholder="Hasło" formControlName="password"><br>
-    <div class="buttons">
-    <button type="submit">Zaloguj</button>
-    <button class="byn btn-success" type="button" (click)="changeMode()">Zarejestruj się</button>
-    <button type="button" class="btn btn-primary">Primary</button>
-  </div>
-</div>
-  </form>
-</ng-template>
-</div>
+</body>
+</html>

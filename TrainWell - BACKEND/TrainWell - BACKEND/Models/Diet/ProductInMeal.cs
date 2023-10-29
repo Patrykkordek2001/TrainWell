@@ -67,7 +67,7 @@ namespace TrainWell___BACKEND.Models.Diet
             {
                 return (Product.Fiber ?? 0) * Grams / 100;
             }
-        }
+        }  
 
         [NotMapped]
         public double GramsProteins
