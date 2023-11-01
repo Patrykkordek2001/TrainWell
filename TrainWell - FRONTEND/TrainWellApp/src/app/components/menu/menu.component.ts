@@ -4,6 +4,9 @@ import { FullCalendarComponent } from '@fullcalendar/angular';
 import { Calendar, CalendarOptions } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin, { DateClickArg } from '@fullcalendar/interaction'
+// import 'bootstrap/dist/css/bootstrap.css';
+// import 'bootstrap-icons/font/bootstrap-icons.css'; 
+// import bootstrap5Plugin from '@fullcalendar/bootstrap5';
 
 
 
@@ -26,27 +29,29 @@ export class MenuComponent implements OnInit{
     this.calendarOptions = {
       plugins: [dayGridPlugin, interactionPlugin],
       editable: true,
-      customButtons: {
-        myCustomButton: {
-          text: 'custom!',
-          click: function () {
-            alert('clicked the custom button!');
-          }
-        }
-      },
-      headerToolbar: {
-        left: 'prev,next today myCustomButton',
-        center: 'title',
-        right: 'dayGridMonth'
-      },
+      themeSystem: 'bootstrap5',
+
+      // customButtons: {
+      //   myCustomButton: {
+      //     text: 'custom!',
+      //     click: function () {
+      //       alert('clicked the custom button!');
+      //     }
+      //   }
+      // },
+      // headerToolbar: {
+      //   left: 'prev,next today myCustomButton',
+      //   center: 'title',
+      //   right: 'dayGridMonth'
+      // },
       dateClick: this.handleDateClick.bind(this),
+
 
     };
   }
 
   handleDateClick(arg: DateClickArg) {
     console.log(arg);
-    console.log(" ");
   }
 
 }
