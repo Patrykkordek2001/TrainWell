@@ -1,24 +1,27 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AuthModule } from './modules/auth/auth.module';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AuthModule } from './modules/auth.module';
 import { TokenInterceptor } from './interceptors/token.interceptor';
-import { ToastrModule } from 'ngx-toastr';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MenuComponent } from './components/menu/menu.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { MenuModule } from './modules/menu.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MenuComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AuthModule,
+    MenuModule,
     HttpClientModule,
+    FormsModule,
+    
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
