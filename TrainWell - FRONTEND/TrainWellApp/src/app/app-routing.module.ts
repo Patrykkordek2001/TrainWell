@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Router, RouterModule, Routes, RoutesRecognized } from '@angular/router';
 import { AuthComponent } from './components/auth/auth.component';
-import { MenuComponent } from './components/menu/menu.component';
+import { WorkoutsComponent } from './components/workouts/workouts.component';
 
 const routes: Routes = [
   { path: 'auth', component: AuthComponent },
-  { path: 'menu', component: MenuComponent }
+  { path: 'workouts', component: WorkoutsComponent },
+  { path: 'diet', component: WorkoutsComponent },
+  
 ];
 
 @NgModule({

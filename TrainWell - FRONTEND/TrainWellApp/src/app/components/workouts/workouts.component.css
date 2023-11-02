@@ -1,0 +1,21 @@
+
+.my-custom-calendar{
+    height: 100%;
+}
+
+.my-custom-event{
+    height: 80%;
+    width: 85%;
+    margin: 50px;
+    
+}
+
+:host ::ng-deep .fc-col-header-cell-cushion ,:host ::ng-deep .fc-daygrid-day-number{
+    color: #000000;
+    text-decoration: none;
+}
+
+
+:host ::ng-deep .fc-daygrid-day-number{
+    cursor: pointer;
+}

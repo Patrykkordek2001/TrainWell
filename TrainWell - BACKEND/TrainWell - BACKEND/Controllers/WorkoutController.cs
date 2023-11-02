@@ -10,7 +10,7 @@ namespace TrainWell___BACKEND.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
 
     public class WorkoutController : ControllerBase
     {
@@ -53,6 +53,16 @@ namespace TrainWell___BACKEND.Controllers
         {
             var workouts = await _workoutService.GetWorkoutByDateAsync(date);
             if (workouts.IsNullOrEmpty() ) return NotFound("Brak treningów w podanej dacie");
+
+            return Ok(workouts.ToList());
+        }
+
+
+        [HttpGet("GetAllWorkouts")]
+        public async Task<ActionResult<List<Workout>>> GetAllWorkouts()
+        {
+            var workouts = await _workoutService.GetAllWorkoutsAsync();
+           
 
             return Ok(workouts.ToList());
         }

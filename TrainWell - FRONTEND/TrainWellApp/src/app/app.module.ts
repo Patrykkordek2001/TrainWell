@@ -3,7 +3,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './modules/auth.module';
 import { TokenInterceptor } from './interceptors/token.interceptor';
-import { MenuComponent } from './components/menu/menu.component';
+import { WorkoutsComponent } from './components/workouts/workouts.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
