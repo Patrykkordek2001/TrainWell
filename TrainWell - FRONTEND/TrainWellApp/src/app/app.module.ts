@@ -8,19 +8,23 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { MenuModule } from './modules/menu.module';
+import { WorkoutsModule } from './modules/workouts.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DateClickComponentComponent } from './components/date-click-component/date-click-component.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    DateClickComponentComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AuthModule,
-    MenuModule,
+    WorkoutsModule,
     HttpClientModule,
     FormsModule,
+    BrowserAnimationsModule,
     
   ],
   providers: [{

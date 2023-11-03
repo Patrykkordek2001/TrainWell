@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, forwardRef } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild, forwardRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { FullCalendarComponent } from '@fullcalendar/angular';
 import { Calendar, CalendarOptions, EventInput } from '@fullcalendar/core';
@@ -7,6 +7,9 @@ import interactionPlugin, { DateClickArg } from '@fullcalendar/interaction';
 import bootstrap5Plugin from '@fullcalendar/bootstrap5';
 import { WorkoutPreview } from 'src/app/Models/workouts/WorkoutPreview';
 import { WorkoutsService } from 'src/app/services/workouts.service';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { DateClickComponentComponent } from '../date-click-component/date-click-component.component';
+
 
 @Component({
   selector: 'app-menu',
@@ -35,9 +38,9 @@ export class WorkoutsComponent implements OnInit {
     color: 'yellow',   // an option!
     textColor: 'black' // an option!
   }
-constructor(private workoutsService:WorkoutsService) {
+constructor(private workoutsService:WorkoutsService,private dialog: MatDialog) {
 
-}
+} 
   ngOnInit() {
     this.getAllWorkouts();
     console.log(this.workouts);
@@ -56,9 +59,7 @@ constructor(private workoutsService:WorkoutsService) {
 
   }
 
-  handleDateClick(arg: DateClickArg) {
-    console.log(arg);
-  }
+
 
   getAllWorkouts() {
     this.workoutsService.getAllWorkouts().subscribe(response => {
@@ -73,6 +74,28 @@ constructor(private workoutsService:WorkoutsService) {
         this.fullcalendar.getApi().addEventSource(this.workouts);   
       }
     });
+  }
+
+  handleDateClick(arg: DateClickArg) {
+    const dialogRef = this.dialog.open(DateClickComponentComponent, {
+      width: '30%',
+      height:'30%',
+      position: {
+        top: '20%',
+        bottom: '',
+        left: '35%',
+        right: ''
+    }
+    });
+  }
+
+  eventClick(event: EventInput) {
+    // const dialogRef = this.dialog.open(EventDetailsComponent, {
+    //   width: '400px', // Dostosuj rozmiar dialogu do Twoich potrzeb
+    //   data: event // Przekaż dane wydarzenia do komponentu dialogowego
+    // });
+  
+
   }
   
 }
