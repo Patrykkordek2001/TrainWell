@@ -6,5 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./date-click-component.component.css']
 })
 export class DateClickComponentComponent {
+/**
+ *
+ */
+constructor() {
+  console.log("1");
+
+}
 
 }

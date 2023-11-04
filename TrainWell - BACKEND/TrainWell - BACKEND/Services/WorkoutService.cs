@@ -43,7 +43,7 @@ namespace TrainWell___BACKEND.Services
 
         public async Task<IEnumerable<Workout>> GetAllWorkoutsAsync()
         {
-            return await _workoutRepository.GetAllAsync();
+                return await _workoutRepository.GetAllAsync();
         }
 
         public async Task<Workout> GetWorkoutByIdAsync(int id)

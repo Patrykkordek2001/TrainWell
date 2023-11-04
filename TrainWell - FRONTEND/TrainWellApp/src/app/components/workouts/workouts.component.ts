@@ -7,8 +7,8 @@ import interactionPlugin, { DateClickArg } from '@fullcalendar/interaction';
 import bootstrap5Plugin from '@fullcalendar/bootstrap5';
 import { WorkoutPreview } from 'src/app/Models/workouts/WorkoutPreview';
 import { WorkoutsService } from 'src/app/services/workouts.service';
-import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { DateClickComponentComponent } from '../date-click-component/date-click-component.component';
+import { MatDialog } from '@angular/material/dialog';
 
 
 @Component({
@@ -76,16 +76,17 @@ constructor(private workoutsService:WorkoutsService,private dialog: MatDialog) {
     });
   }
 
-  handleDateClick(arg: DateClickArg) {
-    const dialogRef = this.dialog.open(DateClickComponentComponent, {
+  handleDateClick() {
+    this.dialog.open(DateClickComponentComponent, {
       width: '30%',
-      height:'30%',
+      height: '30%',
       position: {
         top: '20%',
         bottom: '',
         left: '35%',
         right: ''
-    }
+      },
+      data: { exampleData: 'Przykładowe dane' } // Przekaż dane do dialogu
     });
   }
 
