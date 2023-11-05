@@ -10,7 +10,7 @@ namespace TrainWell___BACKEND.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class MeasurementController : ControllerBase
     {
         private readonly IMeasurementService _measurementService;
@@ -26,7 +26,7 @@ namespace TrainWell___BACKEND.Controllers
             var newMeasurement = await _measurementService.AddMeasurementAsync(measurementDto);
 
             if (newMeasurement == null) return BadRequest("Błąd podczas dodawania pomiaru");
-            return Ok(new { message = "Pommiar został dodany" });
+            return Ok(new { message = "Pomiar został dodany" });
         }
 
         [HttpDelete("{measurementId}")]
@@ -52,6 +52,15 @@ namespace TrainWell___BACKEND.Controllers
         {
             var measurements = await _measurementService.GetMeasurementByDateAsync(date);
             if (measurements.IsNullOrEmpty()) return NotFound("Brak pomiarów w podanej dacie");
+
+            return Ok(measurements.ToList());
+        }
+
+        [HttpGet("GetAllMeasurements")]
+        public async Task<ActionResult<List<Measurement>>> GetAllMeasurements()
+        {
+            var measurements = await _measurementService.GetAllMeasurementsAsync();
+            if (measurements.IsNullOrEmpty()) return NotFound("Brak pomiarów w systemie!");
 
             return Ok(measurements.ToList());
         }

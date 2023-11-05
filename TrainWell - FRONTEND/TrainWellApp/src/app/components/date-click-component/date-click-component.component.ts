@@ -1,4 +1,7 @@
+import { Dialog } from '@angular/cdk/dialog';
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-date-click-component',
@@ -9,9 +12,16 @@ export class DateClickComponentComponent {
 /**
  *
  */
-constructor() {
-  console.log("1");
+constructor(private router: Router,private dialog: MatDialog) {}
 
+goToMeasurement(){
+  this.router.navigate(['/pomiar']);
+  this.dialog.closeAll();
 }
+
+goToWorkout(){
+  this.router.navigate(['/dodaj-trening']);
+}
+
 
 }

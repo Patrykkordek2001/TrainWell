@@ -9,49 +9,36 @@ import { WorkoutPreview } from 'src/app/Models/workouts/WorkoutPreview';
 import { WorkoutsService } from 'src/app/services/workouts.service';
 import { DateClickComponentComponent } from '../date-click-component/date-click-component.component';
 import { MatDialog } from '@angular/material/dialog';
+import { MeasurementsService } from 'src/app/services/measurements.service';
 
 
 @Component({
   selector: 'app-menu',
-  templateUrl: './workouts.component.html',
-  styleUrls: ['./workouts.component.css'],
+  templateUrl: './workouts-and-measurements.component.html',
+  styleUrls: ['./workouts-and-measurements.component.css'],
 })
 
 
-export class WorkoutsComponent implements OnInit {
+export class WorkoutsAndMeasurementsComponent implements OnInit {
   calendarOptions?: CalendarOptions;
   @ViewChild('fullcalendar') fullcalendar?: FullCalendarComponent;
   trainingMode: boolean = false;
   workouts: EventInput[] = [];
-  events = {
-    events: [
-      {
-        title: 'Event1',
-        start: '2023-11-02'
-      },
-      {
-        title: 'Event2',
-        start: '2011-05-05'
-      }
-      // etc...
-    ],
-    color: 'yellow',   // an option!
-    textColor: 'black' // an option!
-  }
-constructor(private workoutsService:WorkoutsService,private dialog: MatDialog) {
+  measurements: EventInput[] = [];
+  events: EventInput[]=[];
+constructor(private workoutsService:WorkoutsService,private dialog: MatDialog, private measurementsService: MeasurementsService) {
 
 } 
   ngOnInit() {
     this.getAllWorkouts();
-    console.log(this.workouts);
-    console.log(this.events);
+    this.getAllMeasurements()
 
     this.calendarOptions = {
       plugins: [dayGridPlugin, interactionPlugin, bootstrap5Plugin],
       editable: true,
       timeZone: "local",
       locale:"pl",
-      events:this.workouts  ,
+      events:this.events  ,
       eventBackgroundColor: "#ff0000",
       dateClick: this.handleDateClick.bind(this),
     };
@@ -62,6 +49,7 @@ constructor(private workoutsService:WorkoutsService,private dialog: MatDialog) {
 
 
   getAllWorkouts() {
+    console.log(1);
     this.workoutsService.getAllWorkouts().subscribe(response => {
       this.workouts = response.map(workout => ({
         title: workout.title,
@@ -72,11 +60,29 @@ constructor(private workoutsService:WorkoutsService,private dialog: MatDialog) {
       console.log(this.workouts);
       if (this.fullcalendar) {
         this.fullcalendar.getApi().addEventSource(this.workouts);   
+
       }
     });
   }
 
-  handleDateClick() {
+  getAllMeasurements() {
+    console.log(1);
+    this.measurementsService.getAllMeasurements().subscribe(response => {
+      console.log(this.measurements);
+      this.measurements = response.map(measurement => ({
+        title: "Pomiar ciała",
+        start: new Date(measurement.date).toISOString().split('T')[0], 
+        color: 'blue',
+        textColor: 'white'
+      }));
+      if (this.fullcalendar) {
+        this.fullcalendar.getApi().addEventSource(this.measurements);   
+
+      }
+    });
+  }
+
+  handleDateClick(date: DateClickArg) {
     this.dialog.open(DateClickComponentComponent, {
       width: '30%',
       height: '30%',
@@ -86,7 +92,7 @@ constructor(private workoutsService:WorkoutsService,private dialog: MatDialog) {
         left: '35%',
         right: ''
       },
-      data: { exampleData: 'Przykładowe dane' } // Przekaż dane do dialogu
+      data: { date: date }
     });
   }
 

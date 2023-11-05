@@ -1,0 +1,64 @@
+<div class="container">
+    <div class="headers">
+        <h3>Dodawanie pomiaru:</h3>
+        <h6>Wpisz odpowiednie wartości w centymetrach.</h6>
+    </div>
+    <form [formGroup]="measurementForm" (ngSubmit)="submit()">
+    <div class="inputs">
+        <div class="left-side-inputs">
+            <mat-form-field>
+                <mat-label>Wybierz datę:</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="date">
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Barki [cm]</mat-label>
+                <input matInput type="number" placeholder="Barki" formControlName="shoulders">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Klatka piersiowa [cm]</mat-label>
+                <input matInput type="number" placeholder="Klatka piersiowa" formControlName="chest">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Ramię [cm]</mat-label>
+                <input matInput type="number" placeholder="Ramię" formControlName="waist">
+            </mat-form-field>
+        </div>
+        <div class="right-side-inputs">
+            <mat-form-field>
+                <mat-label>Talia [cm]</mat-label>
+                <input matInput type="number" placeholder="Talia" formControlName="arm">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Biodra [cm]</mat-label>
+                <input matInput type="number" placeholder="Biodra" formControlName="hips">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Udo [cm]</mat-label>
+                <input matInput type="number" placeholder="Udo" formControlName="thigh">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Waga [kg]</mat-label>
+                <input matInput type="number" placeholder="Waga" formControlName="weight">
+            </mat-form-field>
+
+            <div class="buttons">
+                <button mat-raised-button color="warn" calss = "cancel-btn">Anuluj</button>
+                <button mat-raised-button color="primary">Zapisz</button>
+            </div>
+
+
+        </div>
+
+    </div>
+    </form>
+
+
+</div>
