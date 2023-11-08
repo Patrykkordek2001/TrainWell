@@ -1,14 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Router, RouterModule, Routes, RoutesRecognized } from '@angular/router';
 import { AuthComponent } from './components/auth/auth.component';
-import { WorkoutsAndMeasurementsComponent } from './components/workouts/workouts-and-measurements.component';
+import { CalendarWorkoutsAndMeasurementsComponent } from './components/calendars/calendar-workouts-and-measurements/calendar-workouts-and-measurements.component';
 import { AddMeasurementComponent } from './components/measurements/add-measurement/add-measurement.component';
+import { EditMeasurementComponent } from './components/measurements/edit-measurement/edit-measurement.component';
+import { AddWorkoutComponent } from './components/workouts/add-workout/add-workout.component';
 
 const routes: Routes = [
   { path: 'autoryzjacja', component: AuthComponent },
-  { path: 'treningi', component: WorkoutsAndMeasurementsComponent },
-  { path: 'dieta', component: WorkoutsAndMeasurementsComponent },
+  { path: 'kalendarz-treningi-pomiary', component: CalendarWorkoutsAndMeasurementsComponent },
+  { path: 'dieta', component: CalendarWorkoutsAndMeasurementsComponent },
   { path: 'pomiar', component: AddMeasurementComponent },
+  { path: 'edytuj-pomiar/:id', component: EditMeasurementComponent},
+  { path: 'dodaj-trening', component: AddWorkoutComponent },
   
 ];
 

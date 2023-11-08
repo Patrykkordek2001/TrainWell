@@ -14,6 +14,7 @@ namespace TrainWell___BACKEND.Database
         public DbSet<User> Users { get; set; }
         public DbSet<Workout> Workouts { get; set; }
         public DbSet<ExerciseSet> ExerciseSets { get; set; }
+        public DbSet<ExerciseWorkout> ExerciseWorkouts { get; set; }
         public DbSet<Measurement> Measurements { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Meal> Meals { get; set; }

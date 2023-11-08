@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { WorkoutPreview } from '../Models/workouts/WorkoutPreview';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +10,8 @@ export class WorkoutsService {
   constructor(private httpClient: HttpClient) { }
 
 
-  getAllWorkouts(): Observable<WorkoutPreview[]> {
-    return this.httpClient.get<WorkoutPreview[]>('https://localhost:7004/api/Workout/GetAllWorkouts');
-  }
+  // addMeasurement():  {
+  //   //return this.httpClient.post<number>('https://localhost:7004/api/Measurement/AddMeasurement');
+  // }
+
 }

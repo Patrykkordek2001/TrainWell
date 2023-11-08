@@ -16,8 +16,7 @@ namespace TrainWell___BACKEND.Database.EntityConfiguration
 
             builder.HasMany(e => e.ProductsInMeal)
                 .WithOne(es => es.Meal)
-                .HasForeignKey(e => e.MealId)
-                .IsRequired(false);
+                .HasForeignKey(e => e.MealId);
         }
     }
 }

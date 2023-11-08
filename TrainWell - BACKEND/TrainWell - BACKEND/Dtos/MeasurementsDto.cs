@@ -4,7 +4,7 @@
     {
         public MeasurementsDto(DateTime date, double shoulders, double chest, double waist, double arm, double thigh, double hips, double weight)
         {
-            Date = date;
+            Date = date.ToLocalTime();
             Shoulders = shoulders;
             Chest = chest;
             Waist = waist;

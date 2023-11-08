@@ -9,18 +9,18 @@ namespace TrainWell___BACKEND.Models.Training
         {
         }
 
-        public ExerciseSet(int repetitions, double weight, int exerciseId)
+        public ExerciseSet(int repetitions, double weight, int exerciseWorkoutId)
         {
             Repetitions = repetitions;
             Weight = weight;
-            ExerciseId = exerciseId;
+            ExerciseWorkoutId = exerciseWorkoutId;
         }
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public int Repetitions { get; set; }
         public double Weight { get; set; }
-        public int ExerciseId { get; set; }
-        public virtual Exercise? Exercise { get; set; }
+        public int? ExerciseWorkoutId { get; set; }
+        public virtual ExerciseWorkout? ExerciseWorkout { get; set; }
     }
 }

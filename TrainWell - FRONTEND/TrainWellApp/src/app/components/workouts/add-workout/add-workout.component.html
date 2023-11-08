@@ -1,0 +1,31 @@
+<div class="container">
+  <h3>Dodawanie treningu:</h3>
+  <div class="headers">
+    <mat-form-field>
+      <mat-label>Tytuł</mat-label>
+      <input matInput type="text" placeholder="Tytuł">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Wybierz datę:</mat-label>
+      <input matInput [matDatepicker]="picker" class="input-date">
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <button mat-raised-button color="primary"(click)="addExercise">Dodaj ćwiczenie</button>
+  </div>
+  <div class="addEvent">
+    <mat-form-field>
+      <mat-label>Favorite food</mat-label>
+      <mat-select placeholder="Ekspedycja" id="expeditionID">
+        <mat-option *ngFor="let exercise of exercisesFromDatabase" [value]="exercise.id">{{ exercise.name}}</mat-option>
+                    </mat-select>
+    </mat-form-field>
+  </div>
+  <!-- <div class="exercises-table">
+    <table mat-table [dataSource]="myDataArray">
+      ...
+    </table>
+  </div> -->
+
+
+</div>

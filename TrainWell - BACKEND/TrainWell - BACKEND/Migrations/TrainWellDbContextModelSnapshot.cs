@@ -155,15 +155,9 @@ namespace TrainWell___BACKEND.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("WorkoutId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("WorkoutId");
 
                     b.ToTable("Exercises");
                 });
@@ -176,7 +170,7 @@ namespace TrainWell___BACKEND.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ExerciseId")
+                    b.Property<int?>("ExerciseWorkoutId")
                         .HasColumnType("int");
 
                     b.Property<int>("Repetitions")
@@ -187,9 +181,34 @@ namespace TrainWell___BACKEND.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ExerciseId");
+                    b.HasIndex("ExerciseWorkoutId");
 
                     b.ToTable("ExerciseSets");
+                });
+
+            modelBuilder.Entity("TrainWell___BACKEND.Models.Training.ExerciseWorkout", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("ExerciseId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("WorkoutId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExerciseId")
+                        .IsUnique()
+                        .HasFilter("[ExerciseId] IS NOT NULL");
+
+                    b.HasIndex("WorkoutId");
+
+                    b.ToTable("ExerciseWorkouts");
                 });
 
             modelBuilder.Entity("TrainWell___BACKEND.Models.Training.Workout", b =>
@@ -259,26 +278,28 @@ namespace TrainWell___BACKEND.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("TrainWell___BACKEND.Models.Training.Exercise", b =>
-                {
-                    b.HasOne("TrainWell___BACKEND.Models.Training.Workout", "Workout")
-                        .WithMany("Exercises")
-                        .HasForeignKey("WorkoutId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Workout");
-                });
-
             modelBuilder.Entity("TrainWell___BACKEND.Models.Training.ExerciseSet", b =>
                 {
-                    b.HasOne("TrainWell___BACKEND.Models.Training.Exercise", "Exercise")
+                    b.HasOne("TrainWell___BACKEND.Models.Training.ExerciseWorkout", "ExerciseWorkout")
                         .WithMany("ExerciseSets")
-                        .HasForeignKey("ExerciseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ExerciseWorkoutId");
+
+                    b.Navigation("ExerciseWorkout");
+                });
+
+            modelBuilder.Entity("TrainWell___BACKEND.Models.Training.ExerciseWorkout", b =>
+                {
+                    b.HasOne("TrainWell___BACKEND.Models.Training.Exercise", "Exercise")
+                        .WithOne("ExerciseWorkout")
+                        .HasForeignKey("TrainWell___BACKEND.Models.Training.ExerciseWorkout", "ExerciseId");
+
+                    b.HasOne("TrainWell___BACKEND.Models.Training.Workout", "Workout")
+                        .WithMany("ExerciseWorkouts")
+                        .HasForeignKey("WorkoutId");
 
                     b.Navigation("Exercise");
+
+                    b.Navigation("Workout");
                 });
 
             modelBuilder.Entity("TrainWell___BACKEND.Models.Diet.Meal", b =>
@@ -293,12 +314,17 @@ namespace TrainWell___BACKEND.Migrations
 
             modelBuilder.Entity("TrainWell___BACKEND.Models.Training.Exercise", b =>
                 {
+                    b.Navigation("ExerciseWorkout");
+                });
+
+            modelBuilder.Entity("TrainWell___BACKEND.Models.Training.ExerciseWorkout", b =>
+                {
                     b.Navigation("ExerciseSets");
                 });
 
             modelBuilder.Entity("TrainWell___BACKEND.Models.Training.Workout", b =>
                 {
-                    b.Navigation("Exercises");
+                    b.Navigation("ExerciseWorkouts");
                 });
 #pragma warning restore 612, 618
         }

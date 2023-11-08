@@ -19,9 +19,7 @@ namespace TrainWell___BACKEND.Models.Diet
             builder.Property(e => e.Fiber);
             builder.Property(e => e.Proteins);
             builder.Property(e => e.Salt);
-            builder.HasOne(e => e.ProductInMeal)
-                .WithOne(d => d.Product)
-                .IsRequired(true);
+            builder.HasOne(e => e.ProductInMeal).WithOne(d => d.Product);
 
         }
     }

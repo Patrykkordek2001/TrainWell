@@ -1,0 +1,16 @@
+h3{
+    margin: 2%;
+    margin-left: 0;
+}
+
+.input-date{
+    margin-right: 2%;
+}
+.headers{
+    display: flex;
+    flex-direction: row;
+
+}
+.mat-mdc-form-field{
+    margin-right: 5%;
+}

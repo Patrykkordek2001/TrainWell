@@ -17,4 +17,7 @@ export class MeasurementsService {
   getAllMeasurements(): Observable<MeasurementPreview[]> {
     return this.httpClient.get<MeasurementPreview[]>('https://localhost:7004/api/Measurement/GetAllMeasurements');
   }
+  getMeasurementById(id: number): Observable<MeasurementPreview> {
+    return this.httpClient.get<MeasurementPreview>(`https://localhost:7004/api/Measurement/GetMeasurementById/${id}`);
+  }
 }

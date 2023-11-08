@@ -18,10 +18,9 @@ namespace TrainWell___BACKEND.Database.EntityConfiguration
             builder.Property(c => c.Date)
                 .IsRequired(true);
 
-            builder.HasMany(w => w.Exercises)
+            builder.HasMany(w => w.ExerciseWorkouts)
                 .WithOne(e => e.Workout)
-                .HasForeignKey(e => e.WorkoutId).
-                IsRequired(false);
+                .HasForeignKey(e => e.WorkoutId);
         }
     }
 

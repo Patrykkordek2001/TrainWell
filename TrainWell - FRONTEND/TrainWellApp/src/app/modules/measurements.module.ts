@@ -10,9 +10,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { DateAdapter, MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateAdapter } from '@angular/material-moment-adapter';
 import { MatButtonModule } from '@angular/material/button';
+import { EditMeasurementComponent } from '../components/measurements/edit-measurement/edit-measurement.component';
 
 @NgModule({
-  declarations: [AddMeasurementComponent],
+  declarations: [AddMeasurementComponent,EditMeasurementComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -24,7 +25,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatNativeDateModule,
     MatButtonModule
   ],
-  exports: [AddMeasurementComponent],
+  exports: [AddMeasurementComponent,EditMeasurementComponent],
 //   providers: [{ provide: MAT_DATE_LOCALE, useValue: 'fr-FR' }
 // ,{
 //   provide:DateAdapter,

@@ -14,9 +14,7 @@ namespace TrainWell___BACKEND.Database.EntityConfiguration
 
             builder.Property(e => e.Grams).IsRequired(true);
 
-            builder.HasOne(e => e.Product)
-                .WithOne(d => d.ProductInMeal)
-                .IsRequired(true);
+            builder.HasOne(e => e.Product).WithOne(d => d.ProductInMeal);
         }
     }
 }

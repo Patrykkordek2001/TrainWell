@@ -1,0 +1,36 @@
+.container{
+    margin-left: 2%;
+    margin-top: 2%;
+
+}
+
+.inputs{
+    display: flex;
+    flex-direction: row;
+    margin-top: 2%;
+    
+}
+
+.input-date{
+margin-left: 2%;
+}
+
+.left-side-inputs {
+    width: 20vw;
+    display: flex;
+    flex-direction: column;
+}
+.right-side-inputs{
+    width: 20vw;
+    display: flex;
+    flex-direction: column;
+    margin-left: 5%;
+}
+
+.buttons{
+    display: flex;
+    margin-left: 60%;
+}
+button{
+    margin-right: 10%;
+}

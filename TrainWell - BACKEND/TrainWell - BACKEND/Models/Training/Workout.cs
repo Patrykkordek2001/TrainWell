@@ -19,6 +19,6 @@ namespace TrainWell___BACKEND.Models.Training
         public int Id { get; set; }
         public string Title { get; set; }
         public DateTime Date { get; set; }
-        public ICollection<Exercise> Exercises { get; set; }
+        public ICollection<ExerciseWorkout>? ExerciseWorkouts { get; set; }
     }
 }

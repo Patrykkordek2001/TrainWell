@@ -54,7 +54,7 @@ namespace TrainWell___BACKEND.Services
         public async Task<IEnumerable<Workout>> GetWorkoutByDateAsync(DateTime date)
         {
             var workouts = _context.Workouts
-                    .Include(w => w.Exercises) 
+                    .Include(w => w.ExerciseWorkouts) 
                         .ThenInclude(e => e.ExerciseSets)
                     .Where(w => w.Date.Date == date.Date);
 
