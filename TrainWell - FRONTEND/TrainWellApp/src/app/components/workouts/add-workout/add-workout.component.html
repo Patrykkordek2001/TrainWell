@@ -1,42 +1,60 @@
 <div class="container">
   <form [formGroup]="trainingForm" (ngSubmit)="submit()">
-    <h3>Dodawanie treningu:</h3>
-  <div class="headers">
-    <mat-form-field>
-      <mat-label>Tytuł</mat-label>
-      <input matInput type="text" placeholder="Tytuł">
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Wybierz datę:</mat-label>
-      <input matInput [matDatepicker]="picker" class="input-date">
-      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-    <button mat-raised-button color="primary" (click)="addExerciseToList()"*ngIf="!addingExerciseToList">Dodaj ćwiczenie do listy</button>
-    <button mat-raised-button color="warn" (click)="cancelAddingExerciseToList()" *ngIf="addingExerciseToList">Anuluj</button>
-    <button mat-raised-button (click)="addExercise()" *ngIf="!addingExercise">Dodaj do treningu</button>
-    <button mat-raised-button color="warn" (click)="cancelAddingExercise()" *ngIf="addingExercise">Anuluj</button>
-  </div>
-  <div class="add-exercise-to-list" *ngIf="addingExerciseToList">
-    <mat-form-field>
-      <mat-label>Nazwa ćwiczenia</mat-label>
-      <input matInput type="text" placeholder="Ćwiczenie" formControlName = "nameOfExercise">
-    </mat-form-field>
-    <button mat-raised-button color="primary" (click)="addExerciseToListSubmit()">Dodaj</button>
-  </div>
-  <div class="addEvent" *ngIf="addingExercise">
-    <mat-form-field>
-      <mat-label>Ćwiczenie</mat-label>
-      <mat-select placeholder="Ćwiczenie" id="expeditionID">
-        <mat-option *ngFor="let exercise of exercises" [value]="exercise.id">{{ exercise.name}}</mat-option>
-                    </mat-select>
-    </mat-form-field>
-  </div>
-  <!-- <div class="exercises-table">
-    <table mat-table [dataSource]="myDataArray">
-      ...
-    </table>
-  </div> -->
+      <h3>Dodawanie treningu:</h3>
+      <div class="headers">
+          <mat-form-field>
+              <mat-label>Tytuł</mat-label>
+              <input matInput type="text" placeholder="Tytuł">
+          </mat-form-field>
+          <button mat-raised-button color="primary" (click)="addExerciseToList()"*ngIf="!addingExerciseToList">Dodaj ćwiczenie do listy</button>
+          <button mat-raised-button color="warn" (click)="cancelAddingExerciseToList()" *ngIf="addingExerciseToList">Anuluj</button>
+          <button mat-raised-button (click)="addExerciseBool()" *ngIf="!addingExercise">Dodaj do treningu</button>
+          <button mat-raised-button color="warn" (click)="cancelAddingExercise()" *ngIf="addingExercise">Anuluj</button>
+      </div>
+      <div class="add-exercise-to-list" *ngIf="addingExerciseToList">
+          <mat-form-field>
+              <mat-label>Nazwa ćwiczenia</mat-label>
+              <input matInput type="text" placeholder="Ćwiczenie" formControlName="nameOfExercise">
+          </mat-form-field>
+          <button mat-raised-button color="primary" (click)="addExerciseToListSubmit()">Dodaj</button>
+      </div>
+      <div class="addEvent"> <!-- dodac *ngIf="addingExercise"-->
+          <div formArrayName="excersises">
+              <div *ngFor="let exercise of exerciseControls; let i=index" [formGroupName]="i">
+                  <!-- <input formControlName="name" placeholder="Exercise Name"> -->
+                  <mat-form-field>
+                    <mat-label>Nazwa ćwiczenia</mat-label>
+                    <input matInput type="text" placeholder="Nazwa ćwiczenia" formControlName="name">
+                </mat-form-field>
+                <button mat-raised-button color="primary" (click)="addSet(i)">Dodaj Serie</button>
+                  <!-- <button (click)="addSet(i)">Add Set</button> -->
+                <button mat-raised-button color="warn" (click)="removeExercise(i)">Usuń</button>
 
-</form>
+                  <!-- <button (click)="removeExercise(i)">Remove Exercise</button> -->
+
+                  <div formArrayName="excersisesSet">
+                      <div *ngFor="let set of getExerciseSets(i); let j=index" [formGroupName]="j">
+                          <!-- <input formControlName="numberOfRepetition" placeholder="Number of Repetitions"> -->
+                          <mat-form-field>
+                            <mat-label>Liczba powtórzeń</mat-label>
+                            <input matInput type="number" placeholder="Liczba powtórzeń" formControlName="numberOfRepetition">
+                          </mat-form-field>
+                          <!-- <input formControlName="weight" placeholder="Weight"> -->
+                          <mat-form-field>
+                            <mat-label>Ciężar [kg]</mat-label>
+                            <input matInput type="number" placeholder="Ciężar [kg]" formControlName="weight">
+                          </mat-form-field>
+                          <!-- <button (click)="removeSet(i, j)">Remove Set</button> -->
+                          <button mat-raised-button color="warn" (click)="removeSet(i, j)">Usuń serie</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <!-- <button (click)="addExercise()">Dodaj ćwiczenie</button> -->
+          <button mat-raised-button color="primary" (click)="addExercise()">Dodaj ćwiczenie</button>
+
+      </div>
+
+  </form>
 </div>
