@@ -1,5 +1,6 @@
 <div class="container">
-  <h3>Dodawanie treningu:</h3>
+  <form [formGroup]="trainingForm" (ngSubmit)="submit()">
+    <h3>Dodawanie treningu:</h3>
   <div class="headers">
     <mat-form-field>
       <mat-label>Tytuł</mat-label>
@@ -11,13 +12,23 @@
       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
-    <button mat-raised-button color="primary"(click)="addExercise">Dodaj ćwiczenie</button>
+    <button mat-raised-button color="primary" (click)="addExerciseToList()"*ngIf="!addingExerciseToList">Dodaj ćwiczenie do listy</button>
+    <button mat-raised-button color="warn" (click)="cancelAddingExerciseToList()" *ngIf="addingExerciseToList">Anuluj</button>
+    <button mat-raised-button (click)="addExercise()" *ngIf="!addingExercise">Dodaj do treningu</button>
+    <button mat-raised-button color="warn" (click)="cancelAddingExercise()" *ngIf="addingExercise">Anuluj</button>
   </div>
-  <div class="addEvent">
+  <div class="add-exercise-to-list" *ngIf="addingExerciseToList">
     <mat-form-field>
-      <mat-label>Favorite food</mat-label>
-      <mat-select placeholder="Ekspedycja" id="expeditionID">
-        <mat-option *ngFor="let exercise of exercisesFromDatabase" [value]="exercise.id">{{ exercise.name}}</mat-option>
+      <mat-label>Nazwa ćwiczenia</mat-label>
+      <input matInput type="text" placeholder="Ćwiczenie" formControlName = "nameOfExercise">
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="addExerciseToListSubmit()">Dodaj</button>
+  </div>
+  <div class="addEvent" *ngIf="addingExercise">
+    <mat-form-field>
+      <mat-label>Ćwiczenie</mat-label>
+      <mat-select placeholder="Ćwiczenie" id="expeditionID">
+        <mat-option *ngFor="let exercise of exercises" [value]="exercise.id">{{ exercise.name}}</mat-option>
                     </mat-select>
     </mat-form-field>
   </div>
@@ -27,5 +38,5 @@
     </table>
   </div> -->
 
-
+</form>
 </div>

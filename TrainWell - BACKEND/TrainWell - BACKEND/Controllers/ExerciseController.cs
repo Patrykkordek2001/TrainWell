@@ -9,22 +9,22 @@ namespace TrainWell___BACKEND.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ExercisesController : ControllerBase
+    public class ExerciseController : ControllerBase
     {
         private readonly IExerciseService _exerciseService;
 
-        public ExercisesController(IExerciseService exerciseService)
+        public ExerciseController(IExerciseService exerciseService)
         {
             _exerciseService = exerciseService;
         }
 
         [HttpPost("AddExercise")]
-        public async Task<ActionResult> AddExercise(ExerciseDto productDto)
+        public async Task<ActionResult<Exercise>> AddExercise(ExerciseDto productDto)
         {
-            var newProduct = await _exerciseService.AddExerciseAsync(productDto);
+            var newExercise = await _exerciseService.AddExerciseAsync(productDto);
 
-            if (newProduct == null) return BadRequest("Błąd podczas dodawania produktu");
-            return Ok(new { message = "Ćwiczenie zostało dodane" });
+            
+            return newExercise;
         }
 
         [HttpDelete("{exerciseId}")]
@@ -43,5 +43,17 @@ namespace TrainWell___BACKEND.Controllers
 
             return Ok(product);
         }
+
+        [HttpGet("GetAllExercises")]
+        public async Task<ActionResult<List<Exercise>>> GetAllExercises(int productId)
+        {
+            var exercises = await _exerciseService.GetAllExercisesAsync();
+            if (exercises.Count() <= 0 )
+                return Ok("Lista ćwiczeń jest pusta");
+
+            return exercises.ToList();
+        }
+
+
     }
 }

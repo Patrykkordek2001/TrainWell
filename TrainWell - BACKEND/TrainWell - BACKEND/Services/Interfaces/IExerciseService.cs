@@ -5,7 +5,7 @@ namespace TrainWell___BACKEND.Services.Interfaces
 {
     public interface IExerciseService
     {
-        Task<int> AddExerciseAsync(ExerciseDto productDto);
+        Task<Exercise> AddExerciseAsync(ExerciseDto productDto);
         Task DeleteExerciseAsync(int id);
         Task<IEnumerable<Exercise>> GetAllExercisesAsync();
         Task<Exercise> GetExerciseByIdAsync(int id);

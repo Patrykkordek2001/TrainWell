@@ -19,12 +19,12 @@ namespace TrainWell___BACKEND.Services
             _mapper = mapper;
         }
 
-        public async Task<int> AddExerciseAsync(ExerciseDto productDto)
+        public async Task<Exercise> AddExerciseAsync(ExerciseDto productDto)
         {
             var exerciseModel = _mapper.Map<Exercise>(productDto);
             await _exerciseRepository.AddAsync(exerciseModel);
 
-            return exerciseModel.Id;
+            return exerciseModel;
         }
 
         public async Task DeleteExerciseAsync(int id)
