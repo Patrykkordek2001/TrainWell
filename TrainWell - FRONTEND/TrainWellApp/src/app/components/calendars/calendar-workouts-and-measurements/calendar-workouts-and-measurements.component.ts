@@ -17,6 +17,7 @@ import { DateClickComponentComponent } from '../../date-click-component/date-cli
 import { MatDialog } from '@angular/material/dialog';
 import { MeasurementsService } from 'src/app/services/measurements.service';
 import { ToastrService } from 'ngx-toastr';
+import { DateSharingService } from 'src/app/services/date-sharing.service';
 
 @Component({
   selector: 'app-menu',
@@ -35,7 +36,8 @@ export class CalendarWorkoutsAndMeasurementsComponent implements OnInit {
     private dialog: MatDialog,
     private measurementsService: MeasurementsService,
     private router: Router,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private dateSharingService: DateSharingService
   ) {}
   ngOnInit() {
     this.getAllWorkouts();
@@ -92,6 +94,8 @@ export class CalendarWorkoutsAndMeasurementsComponent implements OnInit {
   }
 
   handleDateClick(date: DateClickArg) {
+    console.log(date.date);
+    this.dateSharingService.setSelectedDate(date.date);
     this.dialog.open(DateClickComponentComponent, {
       width: '30%',
       height: '30%',

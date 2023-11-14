@@ -7,11 +7,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { MatDialogModule } from '@angular/material/dialog';
 
-
-
 @NgModule({
   declarations: [CalendarWorkoutsAndMeasurementsComponent],
-  imports: [CommonModule, ReactiveFormsModule,ToastrModule.forRoot(),BrowserAnimationsModule,FullCalendarModule,MatDialogModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule,
+    FullCalendarModule,
+    MatDialogModule,
+  ],
   exports: [CalendarWorkoutsAndMeasurementsComponent],
 })
-export class CalendarWorkoutsAndMeasurementsModule { }
+export class CalendarWorkoutsAndMeasurementsModule {}

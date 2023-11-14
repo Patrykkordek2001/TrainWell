@@ -1,10 +1,16 @@
 <div class="container">
-  <form [formGroup]="trainingForm" (ngSubmit)="submit()">
+  <form [formGroup]="trainingForm">
       <h3>Dodawanie treningu:</h3>
       <div class="headers">
           <mat-form-field>
               <mat-label>Tytuł</mat-label>
-              <input matInput type="text" placeholder="Tytuł">
+              <input matInput type="text" placeholder="Tytuł" formControlName="title">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Wybierz datę:</mat-label>
+            <input matInput [matDatepicker]="picker" class="input-date" formControlName="date">
+            <mat-datepicker-toggle matIconSuffix [for]="picker" style="cursor: none;"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
           <button mat-raised-button color="primary" (click)="addExerciseToList()"*ngIf="!addingExerciseToList">Dodaj ćwiczenie do listy</button>
           <button mat-raised-button color="warn" (click)="cancelAddingExerciseToList()" *ngIf="addingExerciseToList">Anuluj</button>
@@ -18,26 +24,28 @@
           </mat-form-field>
           <button mat-raised-button color="primary" (click)="addExerciseToListSubmit()">Dodaj</button>
       </div>
-      <div class="addEvent"> <!-- dodac *ngIf="addingExercise"-->
-          <div formArrayName="excersises">
+      <div class="addEvent" *ngIf="addingExercise"> <!-- dodac *ngIf="addingExercise"-->
+          <div formArrayName="exercisesWorkout">
               <div *ngFor="let exercise of exerciseControls; let i=index" [formGroupName]="i">
                   <!-- <input formControlName="name" placeholder="Exercise Name"> -->
                   <mat-form-field>
-                    <mat-label>Nazwa ćwiczenia</mat-label>
-                    <input matInput type="text" placeholder="Nazwa ćwiczenia" formControlName="name">
-                </mat-form-field>
+                    <mat-label>Ćwiczenie</mat-label>
+                    <mat-select placeholder="Ćwiczenie" id="exerciseId" formControlName="exerciseId">
+                      <mat-option *ngFor="let exercise of exercises" [value]="exercise.id">{{ exercise.name }}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
                 <button mat-raised-button color="primary" (click)="addSet(i)">Dodaj Serie</button>
                   <!-- <button (click)="addSet(i)">Add Set</button> -->
                 <button mat-raised-button color="warn" (click)="removeExercise(i)">Usuń</button>
 
                   <!-- <button (click)="removeExercise(i)">Remove Exercise</button> -->
 
-                  <div formArrayName="excersisesSet">
+                  <div formArrayName="exerciseSets">
                       <div *ngFor="let set of getExerciseSets(i); let j=index" [formGroupName]="j">
                           <!-- <input formControlName="numberOfRepetition" placeholder="Number of Repetitions"> -->
                           <mat-form-field>
                             <mat-label>Liczba powtórzeń</mat-label>
-                            <input matInput type="number" placeholder="Liczba powtórzeń" formControlName="numberOfRepetition">
+                            <input matInput type="number" placeholder="Liczba powtórzeń" formControlName="repetitions">
                           </mat-form-field>
                           <!-- <input formControlName="weight" placeholder="Weight"> -->
                           <mat-form-field>
@@ -55,6 +63,8 @@
           <button mat-raised-button color="primary" (click)="addExercise()">Dodaj ćwiczenie</button>
 
       </div>
+      <button mat-raised-button color="primary" (click)="submit()">Zapisz</button>
+
 
   </form>
 </div>

@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import {
   FormArray,
@@ -9,6 +10,8 @@ import {
 import { ToastrService } from 'ngx-toastr';
 import { ExerciseDto } from 'src/app/Models/exercises/ExerciseDto';
 import { ExercisePreview } from 'src/app/Models/exercises/ExercisePreview';
+import { WorkoutDto } from 'src/app/Models/workouts/WorkoutDto';
+import { DateSharingService } from 'src/app/services/date-sharing.service';
 import { ExercisesService } from 'src/app/services/exercises.service';
 import { WorkoutsService } from 'src/app/services/workouts.service';
 
@@ -18,132 +21,169 @@ import { WorkoutsService } from 'src/app/services/workouts.service';
   styleUrls: ['./add-workout.component.css'],
 })
 export class AddWorkoutComponent implements OnInit {
-
   addingExercise: boolean = false;
   addingExerciseToList: boolean = false;
   exercises: ExercisePreview[] = [];
 
-    trainingForm = this.formBuilder.group({
-        title: ['', Validators.required],
-        date: ['', Validators.required],
-        nameOfExercise: ['', Validators.required],
-        excersises: this.formBuilder.array([
-            this.formBuilder.group({
-                name: ['', Validators.required],
-                excersisesSet: this.formBuilder.array([
-                    this.formBuilder.group({
-                        numberOfRepetition: ['', Validators.required],
-                        weight: ['', Validators.required]
-                    })
-                ])
-            })
-        ])
-    });
+  trainingForm = this.formBuilder.group({
+    title: ['', Validators.required],
+    date: [new Date(), Validators.required],
+    nameOfExercise: [''],
+    exercisesWorkout: this.formBuilder.array([
+      this.formBuilder.group({
+        exerciseId: ['', Validators.required],
+        exerciseSets: this.formBuilder.array([
+          this.formBuilder.group({
+            repetitions: ['', Validators.required],
+            weight: ['', Validators.required],
+          }),
+        ]),
+      }),
+    ]),
+  });
 
-    constructor(private formBuilder: FormBuilder, private exerciseService: ExercisesService, private toastrService: ToastrService) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private exerciseService: ExercisesService,
+    private toastrService: ToastrService,
+    private dateSharingService: DateSharingService,
+    private workoutsService: WorkoutsService,
+  ) {}
 
-    // ngOnInit(): void {
-    //     this.trainingForm.valueChanges.subscribe(x => console.log(x));
-    // }
+  // ngOnInit(): void {
+  //     this.trainingForm.valueChanges.subscribe(x => console.log(x));
+  // }
 
-    get excersises() {
-        return this.trainingForm.get('excersises') as FormArray;
-    }
+  get exercisesWorkout() {
+    return this.trainingForm.get('exercisesWorkout') as FormArray;
+  }
 
-    get exerciseControls() {
-        return (this.trainingForm.get('excersises') as FormArray).controls;
-    }
+  get exerciseControls() {
+    return (this.trainingForm.get('exercisesWorkout') as FormArray).controls;
+  }
 
-    getExerciseSets(exerciseIndex: number) {
-        return (this.exerciseControls[exerciseIndex].get('excersisesSet') as FormArray).controls;
-    }
+  get date() {
+    return this.trainingForm.get('date')?.value;
+  }
 
-    addSet(exerciseIndex: number): void {
-        const exerciseSet = this.excersises.at(exerciseIndex).get('excersisesSet') as FormArray;
-        exerciseSet.push(this.formBuilder.group({
-            numberOfRepetition: ['', Validators.required],
-            weight: ['', Validators.required]
-        }));
-    }
+  getExerciseSets(exerciseIndex: number) {
+    return (
+      this.exerciseControls[exerciseIndex].get('exerciseSets') as FormArray
+    ).controls;
+  }
 
-    removeSet(exerciseIndex: number, setIndex: number): void {
-        const exerciseSet = this.excersises.at(exerciseIndex).get('excersisesSet') as FormArray;
-        exerciseSet.removeAt(setIndex);
-    }
+  addSet(exerciseIndex: number): void {
+    const exerciseSet = this.exercisesWorkout
+      .at(exerciseIndex)
+      .get('exerciseSets') as FormArray;
+    exerciseSet.push(
+      this.formBuilder.group({
+        repetitions: ['', Validators.required],
+        weight: ['', Validators.required],
+      })
+    );
+  }
 
-    removeExercise(exerciseIndex: number): void {
-        this.excersises.removeAt(exerciseIndex);
-    }
+  removeSet(exerciseIndex: number, setIndex: number): void {
+    const exerciseSet = this.exercisesWorkout
+      .at(exerciseIndex)
+      .get('exerciseSets') as FormArray;
+    exerciseSet.removeAt(setIndex);
+  }
 
-    addExercise(): void {
-        this.excersises.push(this.formBuilder.group({
-            name: ['', Validators.required],
-            excersisesSet: this.formBuilder.array([])
-        }));
-    }
+  removeExercise(exerciseIndex: number): void {
+    this.exercisesWorkout.removeAt(exerciseIndex);
+  }
 
-
-    submit() {
-
-    }
-
-    onSubmit() {
-
-    }
-
-    ngOnInit(): void {
-      this.fetchExercises();
-      this.trainingForm.valueChanges.subscribe(x => console.log(x));
-      console.log(this.addingExercise);
-    }
+  addExercise(): void {
+    this.exercisesWorkout.push(
+      this.formBuilder.group({
+        exerciseId: ['', Validators.required],
+        exerciseSets: this.formBuilder.array([]),
+      })
+    );
+  }
   
-    addExerciseBool() {
-      this.addingExercise = true;
+
+  submit() {
+    if (this.trainingForm.valid) {
+      const workoutData = this.trainingForm.value as unknown as WorkoutDto;
+      console.log(workoutData);
+      this.workoutsService.addWorkout(workoutData).subscribe(
+        response => {
+          console.log('Success:', response);
+          // Dodaj kod obsługi sukcesu, jeśli to konieczne
+        },
+        error => {
+          console.error('Error:', error);
+          // Dodaj kod obsługi błędu, jeśli to konieczne
+        }
+      );
     }
-    cancelAddingExercise() {
-      this.addingExercise = false;
-    }
-  
-    addExerciseToList() {
-      this.addingExerciseToList = true;
-    }
-    get nameOfExercise() {
-      return this.trainingForm.get('nameOfExercise')?.value;
-    }
-  
+    
+  }
+
+  onSubmit() {}
+
+  ngOnInit(): void {
+    this.fetchExercises();
+    this.setDateFromService();
+    this.trainingForm.valueChanges.subscribe((x) => console.log(x));
+    console.log(this.addingExercise);
+  }
+
+  private setDateFromService() {
+    const selectedDate = this.dateSharingService.getSelectedDate();
+
+    this.date?.setDate(selectedDate.getDate());
+  }
+
+  addExerciseBool() {
+    this.addingExercise = true;
+  }
+  cancelAddingExercise() {
+    this.addingExercise = false;
+  }
+
+  addExerciseToList() {
+    this.addingExerciseToList = true;
+  }
+  get nameOfExercise() {
+    return this.trainingForm.get('nameOfExercise')?.value;
+  }
+
   addExerciseToListSubmit() {
-      let exercise: ExerciseDto = {
-        name: this.nameOfExercise as string,
-      };
-      this.exerciseService.addExercise(exercise).subscribe(
-        (response) => {
-          this.exercises.push(response);
-          this.toastrService.success('Ćwiczenie zostało dodane do listy');
-          this.cancelAddingExerciseToList();
-        },
-        (error) => {
-          console.error('Błąd podczas dodawania ćwiczenia:', error);
-          this.toastrService.error('Wystąpił błąd podczas dodawania ćwiczenia.');
-        }
-      );
-    }
-  
-  cancelAddingExerciseToList() {
-      this.addingExerciseToList = false;
-    }
-  
-    fetchExercises() {
-      this.exerciseService.getAllExercises().subscribe(
-        (exercisesFromDatabase) => {
-          this.exercises = exercisesFromDatabase;
-        },
-        (error) => {
-          console.log(error);
-          console.log(error.text);
-          console.log(error.error.text);
-          this.toastrService.warning(error.error.text);
-        }
-      );
-    }
+    let exercise: ExerciseDto = {
+      name: this.nameOfExercise as string,
+    };
+    this.exerciseService.addExercise(exercise).subscribe(
+      (response) => {
+        this.exercises.push(response);
+        this.toastrService.success('Ćwiczenie zostało dodane do listy');
+        this.cancelAddingExerciseToList();
+      },
+      (error) => {
+        console.error('Błąd podczas dodawania ćwiczenia:', error);
+        this.toastrService.error('Wystąpił błąd podczas dodawania ćwiczenia.');
+      }
+    );
+  }
 
+  cancelAddingExerciseToList() {
+    this.addingExerciseToList = false;
+  }
+
+  fetchExercises() {
+    this.exerciseService.getAllExercises().subscribe(
+      (exercisesFromDatabase) => {
+        this.exercises = exercisesFromDatabase;
+      },
+      (error) => {
+        console.log(error);
+        console.log(error.text);
+        console.log(error.error.text);
+        this.toastrService.warning(error.error.text);
+      }
+    );
+  }
 }

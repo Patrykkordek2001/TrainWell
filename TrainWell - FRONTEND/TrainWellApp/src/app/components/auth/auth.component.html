@@ -19,7 +19,7 @@
             <img src="../../../assets//TrainWell LOGO.png" class="logo" alt="">
             <ng-template [ngIf]="!loginMode">
               <header>Rejestracja</header>
-              <form [formGroup]="registrationForm" (ngSubmit)="register()">
+              <form [formGroup]="registrationForm">
                 <div class="input-field">
                   <input type="email" class="input" id="email" formControlName="email" required autocomplete="off">
                   <label for="email">Email</label>

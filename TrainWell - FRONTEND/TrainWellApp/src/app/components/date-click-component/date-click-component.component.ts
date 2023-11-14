@@ -21,6 +21,7 @@ goToMeasurement(){
 
 goToWorkout(){
   this.router.navigate(['/dodaj-trening']);
+  this.dialog.closeAll();
 }
 
 

@@ -5,7 +5,7 @@ namespace TrainWell___BACKEND.Models.Training
 {
     public class Exercise
     {
-        public Exercise()
+            public Exercise()
         {
         }
 
@@ -18,7 +18,7 @@ namespace TrainWell___BACKEND.Models.Training
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string? Name { get; set; }
-        public virtual ExerciseWorkout? ExerciseWorkout { get; set; }
+        public ICollection<ExerciseWorkout>? ExerciseWorkouts { get; set; }
 
 
     }

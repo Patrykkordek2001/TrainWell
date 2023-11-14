@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AppComponent } from 'src/app/app.component';
 import { AuthService } from 'src/app/services/auth.service';
@@ -19,7 +20,8 @@ export class AuthComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private toastrService: ToastrService,
-    private appComponent: AppComponent
+    private appComponent: AppComponent,
+    private router: Router
   ) {
     this.appComponent.showHeader = false;
   }
@@ -57,20 +59,28 @@ export class AuthComponent implements OnInit {
     }
   }
 
-  login(){
+  login() {
     if (this.loginForm.valid) {
       const userData = this.loginForm.value;
-        this.authService
-          .login(userData)
-          .subscribe((response) => {
+      this.authService
+        .login(userData)
+        .subscribe(
+          (response) => {
             localStorage.setItem('tokenJWT', response.token);
             this.authService.updateLoggedIn(true);
             console.log(response.user.username);
-            this.toastrService.success("Witaj "+ response.user.username);
-          });
-      
+            this.toastrService.success("Witaj " + response.user.username);
+
+            this.router.navigate(['/kalendarz-treningi-pomiary']);
+          },
+          (error) => {
+            console.error("Login failed:", error);
+            this.toastrService.error("Niepoprawna nazwa użytkownika lub hasło");
+          }
+        );
     }
   }
+  
   changeMode() {
     this.loginMode = !this.loginMode;
     if(this.loginMode){

@@ -11,7 +11,7 @@ namespace TrainWell___BACKEND.Dtos
 
 
         //serie
-        public List<ExerciseSet> ExerciseSets { get; set; }
+        public List<ExerciseSet> ExcerciseSets { get; set; }
 
         //trening (tytul, data)
         //public Workout? Workout { get; set; }

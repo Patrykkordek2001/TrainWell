@@ -11,8 +11,9 @@ namespace TrainWell___BACKEND.Database.EntityConfiguration
             builder.ToTable("Exercises");
             builder.HasKey(e => e.Id);
 
-            builder.HasOne(e => e.ExerciseWorkout)
-                .WithOne(w => w.Exercise);
+            builder.HasMany(ew => ew.ExerciseWorkouts)
+                .WithOne(w => w.Exercise)
+                .HasForeignKey(e => e.ExerciseId);
         }
     }
 }
