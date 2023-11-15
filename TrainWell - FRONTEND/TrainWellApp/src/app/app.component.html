@@ -1,28 +1,28 @@
 <div  *ngIf="showHeader" class="px-3 py-2 text-bg-dark border-bottom">
     <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-        <a href="/menu" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
-            <img src="../../../assets/TrainWell LOGO BIAŁE.png" alt="Your Logo" width="100" height="32">
+        <a href="kalendarz-treningi-pomiary" class="logo">
+            <img src="../../../assets/TrainWell LOGO BIAŁE.png" alt="Your Logo" width="140" height="45">
         </a>
 
         <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
           <li>
-            <a href="#" class="nav-link text-secondary">
-              <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="menu"></use></svg>
+            <div class="buttons-with-icons">              
+              <mat-icon (click)="navigateTo('kalendarz-treningi-pomiary')" class="material-icons-outlined">fitness_center</mat-icon>
               Treningi
-            </a>
+            </div>
           </li>
           <li>
-            <a href="#" class="nav-link text-white">
-              <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="menu"></use></svg>
+            <div class="buttons-with-icons">
+              <mat-icon (click)="navigateTo('')" class="material-icons-outlined">restaurant</mat-icon>
               Dieta
-            </a>
+            </div>
           </li>
           <li>
-            <a href="#" class="nav-link text-white">
-              <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#people-circle"></use></svg>
-              Użytkownik
-            </a>
+            <div class="buttons-with-icons">
+              <mat-icon (click)="navigateTo('')" class="material-icons-outlined">manage_accounts</mat-icon>
+              Konto
+            </div>
           </li>
         </ul>
       </div>

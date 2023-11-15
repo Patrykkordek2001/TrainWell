@@ -1,3 +1,10 @@
+.container{
+    display: flex;
+    width: 100%;
+    height: 85vh;
+
+}
+
 h3{
     margin: 2%;
     margin-left: 0;
@@ -8,7 +15,7 @@ h3{
 }
 .headers{
     display: flex;
-    flex-direction: row;
+    flex-direction:space-between;
 
 }
 .mat-mdc-form-field{
@@ -23,3 +30,26 @@ margin-left: 2%;
     font-weight: 700;
     margin-right: 5%;
 }
+
+.custom-remove-icon {
+    color: red;
+    font-size: 24px;
+    cursor: pointer;
+  }
+::ng-deep .add-set-btn{
+    margin-bottom: 2%;
+}
+::ng-deep .add-exercise-to-list-btn {
+    width: 30%;
+}
+
+::ng-deep .add-exercise-to-workout-btn {
+    width: 30%;
+}
+
+.save-button-container {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+  }
+  
