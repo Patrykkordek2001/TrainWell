@@ -47,7 +47,7 @@
             </ng-template>
             <ng-template [ngIf]="loginMode">
               <header>Logowanie</header>
-              <form [formGroup]="loginForm" (ngSubmit)="login()">
+              <form [formGroup]="loginForm">
                 <div class="input-field">
                   <input type="text" class="input" id="username" formControlName="username" required autocomplete="off">
                   <label for="username">Email</label>

@@ -18,6 +18,10 @@ namespace TrainWell___BACKEND.SqlRepository
         {
             return await _dbSet.ToListAsync();
         }
+        public async Task<IEnumerable<T>> GetAllAsyncForUser(int id)
+        {
+            return await _dbSet.ToListAsync();
+        }
 
         public async Task<T> GetByIdAsync(int id)
         {

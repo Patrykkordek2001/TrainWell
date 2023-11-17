@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TrainWell___BACKEND.Dtos;
-using TrainWell___BACKEND.Models;
+using TrainWell___BACKEND.Models.User;
 using TrainWell___BACKEND.Services.Interfaces;
 
 namespace TrainWell___BACKEND.Controllers
@@ -38,7 +38,7 @@ namespace TrainWell___BACKEND.Controllers
 
             var user = await _authService.AuthenticateUser(userDTO);
             if (user == null) return Unauthorized("Błędna nazwa użytkownika lub login");
-            var jwtToken = _authService.GenerateToken();
+            var jwtToken = _authService.GenerateToken(user);
 
             return Ok(new { token = jwtToken, user = user });
                             

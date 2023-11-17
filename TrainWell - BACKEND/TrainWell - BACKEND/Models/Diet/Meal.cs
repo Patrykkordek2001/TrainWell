@@ -20,7 +20,7 @@ namespace TrainWell___BACKEND.Models.Diet
         public DateTime Date { get; set; }
         public MealNameEnum MealName { get; set; }
         public ICollection<ProductInMeal>? ProductsInMeal { get; set; }
-
+        public int UserId { get; set; }
 
         [NotMapped]
         public double TotalCalories

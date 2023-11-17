@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TrainWell___BACKEND.Models;
 using TrainWell___BACKEND.Models.Diet;
 using TrainWell___BACKEND.Models.Training;
+using TrainWell___BACKEND.Models.User;
 
 namespace TrainWell___BACKEND.Database
 {

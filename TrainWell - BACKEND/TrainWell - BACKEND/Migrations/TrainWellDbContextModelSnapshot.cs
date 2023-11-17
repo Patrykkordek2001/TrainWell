@@ -36,6 +36,9 @@ namespace TrainWell___BACKEND.Migrations
                     b.Property<int>("MealName")
                         .HasColumnType("int");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("Meals");
@@ -135,6 +138,9 @@ namespace TrainWell___BACKEND.Migrations
                     b.Property<double>("Thigh")
                         .HasColumnType("float");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.Property<double>("Waist")
                         .HasColumnType("float");
 
@@ -224,12 +230,15 @@ namespace TrainWell___BACKEND.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("Workouts");
                 });
 
-            modelBuilder.Entity("TrainWell___BACKEND.Models.User", b =>
+            modelBuilder.Entity("TrainWell___BACKEND.Models.User.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

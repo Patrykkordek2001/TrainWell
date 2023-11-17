@@ -12,11 +12,13 @@ import { DateClickComponentComponent } from './components/date-click-component/d
 import { MeasurementsModule } from './modules/measurements.module';
 import { WorkoutsModule } from './modules/workouts.module';
 import { MatIconModule } from '@angular/material/icon';
+import { UserPanelComponent } from './components/user/user-panel/user-panel.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DateClickComponentComponent,
+    UserPanelComponent,
 
   ],
   imports: [

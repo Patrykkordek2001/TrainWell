@@ -32,5 +32,6 @@ namespace TrainWell___BACKEND.Models
         public double Thigh { get; set; }
         public double Hips { get; set; }
         public double Weight { get; set; }
+        public int UserId { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿using TrainWell___BACKEND.Models;
+﻿using TrainWell___BACKEND.Models.User;
 
 namespace TrainWell___BACKEND.Services.Interfaces
 {

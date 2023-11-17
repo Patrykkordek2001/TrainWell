@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { CurrentUser } from 'src/app/Models/CurrentUser';
 import { AppComponent } from 'src/app/app.component';
 import { AuthService } from 'src/app/services/auth.service';
+import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-auth',
@@ -67,11 +69,18 @@ export class AuthComponent implements OnInit {
         .subscribe(
           (response) => {
             localStorage.setItem('tokenJWT', response.token);
+            localStorage.setItem('currentUserId:', response.user.id);
             this.authService.updateLoggedIn(true);
-            console.log(response.user.username);
             this.toastrService.success("Witaj " + response.user.username);
-
+            let tokenJWT = localStorage.getItem('tokenJWT');
+            if (tokenJWT) {
+              var decodedToken = jwtDecode(tokenJWT);
+              console.log(decodedToken)
+            } else {
+              console.error('Token is null');
+            }
             this.router.navigate(['/kalendarz-treningi-pomiary']);
+            this.showHeader = true;
           },
           (error) => {
             console.error("Login failed:", error);
@@ -80,6 +89,8 @@ export class AuthComponent implements OnInit {
         );
     }
   }
+
+
   
   changeMode() {
     this.loginMode = !this.loginMode;

@@ -16,6 +16,7 @@ namespace TrainWell___BACKEND.Services
         private readonly ISqlRepository<ExerciseSet> _exerciseSetRepository;
         private readonly IMapper _mapper;
         private readonly TrainWellDbContext _context;
+        private readonly ICurrentUserProvider _currentUserProvider;
 
         public WorkoutService(ISqlRepository<Workout> workoutRepository, ISqlRepository<Exercise> exerciseRepository, ISqlRepository<ExerciseSet> exerciseSetRepository, IMapper mapper, TrainWellDbContext context)
         {
@@ -43,7 +44,11 @@ namespace TrainWell___BACKEND.Services
 
         public async Task<IEnumerable<Workout>> GetAllWorkoutsAsync()
         {
-                return await _workoutRepository.GetAllAsync();
+            
+                var allWorkouts =  await _workoutRepository.GetAllAsync();
+            //var userId = _currentUserProvider.GetUserIdAsync();
+            //var userWorkouts = allWorkouts.Where()
+            return allWorkouts;
         }
 
         public async Task<Workout> GetWorkoutByIdAsync(int id)

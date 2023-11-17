@@ -5,6 +5,7 @@ import { CalendarWorkoutsAndMeasurementsComponent } from './components/calendars
 import { AddMeasurementComponent } from './components/measurements/add-measurement/add-measurement.component';
 import { EditMeasurementComponent } from './components/measurements/edit-measurement/edit-measurement.component';
 import { AddWorkoutComponent } from './components/workouts/add-workout/add-workout.component';
+import { UserPanelComponent } from './components/user/user-panel/user-panel.component';
 
 const routes: Routes = [
   { path: 'autoryzjacja', component: AuthComponent },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'pomiar', component: AddMeasurementComponent },
   { path: 'edytuj-pomiar/:id', component: EditMeasurementComponent},
   { path: 'dodaj-trening', component: AddWorkoutComponent },
+  { path: 'panel-uzytkownika', component: UserPanelComponent }
   
 ];
 

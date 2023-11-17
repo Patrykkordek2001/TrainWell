@@ -20,5 +20,7 @@ namespace TrainWell___BACKEND.Models.Training
         public string Title { get; set; }
         public DateTime Date { get; set; }
         public ICollection<ExerciseWorkout>? ExerciseWorkouts { get; set; }
+        public int UserId { get; set; }
+
     }
 }
