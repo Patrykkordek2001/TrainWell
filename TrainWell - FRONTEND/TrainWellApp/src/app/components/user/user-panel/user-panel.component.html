@@ -1,11 +1,54 @@
-<h2>Witaj {{"Nazwa uzytkownika"}}</h2>
+<div class="info-panel">
+    <div class="left-side">
+        <form [formGroup]="userInfoForm">
+            <p><b>Nazwa użytkownika: </b>{{username}} </p>
+            <p><b>E-mail: </b>{{email}}</p>
+            <div class="phone-number">
+                <mat-form-field *ngIf="addingPhoneNumber">
+                    <mat-label>Numer telefonu</mat-label>
+                    <input matInput type="number" placeholder="Klatka piersiowa" formControlName="phoneNumber">
+                </mat-form-field>
+                <p *ngIf="!addingPhoneNumber"><b>Numer telefonu: </b>{{ phoneNumber ? phoneNumber : 'Brak' }}</p>
+                <button mat-raised-button (click)="chandeAddPhoneBool()"
+                    class="phone-number-btn small-font custom-dimensions"
+                    *ngIf="!phoneNumber && !addingPhoneNumber">Dodaj numer telefonu</button>
+                <button mat-raised-button color="primary" (click)="addPhoneNumber()" class="submit-phone-number"
+                    *ngIf="!phoneNumber && addingPhoneNumber">Zapisz</button>
+                <button mat-raised-button color="warn" (click)="chandeAddPhoneBool()" class="cancel-phone-number-btn "
+                    *ngIf="!phoneNumber && addingPhoneNumber">Anuluj</button>
 
-<div class="container">
-    <div class = "account-information">
-        <p>Dane użytkownika</p>
+            </div>
+        </form>
     </div>
-    <div class="calculate-kcal">
-        <p>Wyliczanie kcal</p>
+    <div class="right-side">
+        <div>
+            <p><b>Wprowadź dane potrzebne do obliczenia zapotrzebowania kalorycznego:</b></p>
+        </div>
+        <div class="inputs">
+            <mat-form-field>
+                <mat-label>Waga:</mat-label>
+                <input matInput type="number" placeholder="Klatka piersiowa" formControlName="phoneNumber" class="inputs-to-calculate">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Wzrost:</mat-label>
+                <input matInput type="number" placeholder="Klatka piersiowa" formControlName="phoneNumber" class="inputs-to-calculate">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Wiek:</mat-label>
+                <input matInput type="number" placeholder="Klatka piersiowa" formControlName="phoneNumber" class="inputs-to-calculate">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Wybierz Płeć:</mat-label>
+                <mat-select placeholder="Ćwiczenie" id="gender" formControlName="gender">
+                  <mat-option *ngFor="let gender of genders" [value]="gender">{{ getGenderLabel(gender) }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Współczynnik aktywności:</mat-label>
+                <mat-select placeholder="Współczynnik aktywności" id="activity" formControlName="activity">
+                  <mat-option *ngFor="let activity of activities" [value]="activity">{{ getActivityLabel(activity) }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+        </div>
     </div>
-
 </div>

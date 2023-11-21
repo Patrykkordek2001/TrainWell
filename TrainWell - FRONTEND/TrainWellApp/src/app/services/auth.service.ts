@@ -10,12 +10,17 @@ import { LoginDto } from '../Models/LoginDto';
 })
 export class AuthService {
   isLoggedIn: boolean = false;
+  showHeader : boolean = false;
 
 
   constructor(private httpClient: HttpClient) { }
 
   updateLoggedIn(value: boolean): void {
     this.isLoggedIn = value;
+  }
+
+  updateShowHeader(value: boolean): void {
+    this.showHeader = value;
   }
 
   register(registerData: RegistrationDto): Observable<any> {

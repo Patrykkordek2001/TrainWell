@@ -5,18 +5,19 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  
 })
 
 
 export class AppComponent implements OnInit {
 
   title = 'TrainWellApp';
-  showHeader = true;
 
   ngOnInit(): void {
     this.checkToken();
   }
+  
 
   constructor(private authService: AuthService, private router:Router) {}
 
@@ -30,6 +31,9 @@ export class AppComponent implements OnInit {
     return this.authService.isLoggedIn;
   }
 
+  isAuthPage(): boolean {
+    return this.router.url.includes('/autoryzacja');
+  }
   logout(): void {
     this.authService.updateLoggedIn(false);
     localStorage.removeItem('tokenJWT');

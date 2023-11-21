@@ -9,10 +9,9 @@ using TrainWell___BACKEND.Services.Interfaces;
 using TrainWell___BACKEND.SqlRepository;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddScoped(typeof(ISqlRepository<>), typeof(SqlRepository<>));
-
-builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddScoped<IUserService, UserService>();
 
@@ -27,6 +26,8 @@ builder.Services.AddScoped<IMealService, MealService>();
 builder.Services.AddScoped<IExerciseService, ExerciseService>();
 
 builder.Services.AddScoped<IProductService, ProductService>();
+
+builder.Services.AddScoped<ICurrentUserProvider, CurrentUserProvider>();
 
 
 

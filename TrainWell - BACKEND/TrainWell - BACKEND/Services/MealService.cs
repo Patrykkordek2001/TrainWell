@@ -17,12 +17,14 @@ namespace TrainWell___BACKEND.Services
         private readonly ISqlRepository<Meal> _mealRepository;
         private readonly IMapper _mapper;
         private readonly TrainWellDbContext _context;
+        private ICurrentUserProvider _currentUserProvider;
 
-        public MealService(ISqlRepository<Meal> mealRepository, IMapper mapper, TrainWellDbContext context)
+        public MealService(ISqlRepository<Meal> mealRepository, IMapper mapper, TrainWellDbContext context, ICurrentUserProvider currentUserProvider)
         {
             _mealRepository = mealRepository;
             _mapper = mapper;
             _context = context;
+            _currentUserProvider = currentUserProvider; 
         }
 
         public async Task<int> AddMealAsync(MealDto mealDto)
@@ -40,7 +42,10 @@ namespace TrainWell___BACKEND.Services
 
         public async Task<IEnumerable<Meal>> GetAllMealsAsync()
         {
-            return await _mealRepository.GetAllAsync();
+            var allMeals = await _mealRepository.GetAllAsync();
+            var userId = await _currentUserProvider.GetUserIdAsync();
+            var userMeals = allMeals.Where(x => x.UserId == userId);
+            return userMeals;
         }
 
         public async Task<Meal> GetMealByIdAsync(int id)

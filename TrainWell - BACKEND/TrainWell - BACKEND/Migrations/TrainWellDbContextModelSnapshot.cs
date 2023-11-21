@@ -266,6 +266,52 @@ namespace TrainWell___BACKEND.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("TrainWell___BACKEND.Models.User.UserInfo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Activity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CaloriesPerDay")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CarbohydratesPerDay")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FatPerDay")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Growth")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProteinsPerDay")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Weight")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("UserInfo");
+                });
+
             modelBuilder.Entity("TrainWell___BACKEND.Models.Diet.ProductInMeal", b =>
                 {
                     b.HasOne("TrainWell___BACKEND.Models.Diet.Meal", "Meal")
@@ -309,6 +355,17 @@ namespace TrainWell___BACKEND.Migrations
                     b.Navigation("Workout");
                 });
 
+            modelBuilder.Entity("TrainWell___BACKEND.Models.User.UserInfo", b =>
+                {
+                    b.HasOne("TrainWell___BACKEND.Models.User.User", "User")
+                        .WithOne("UserInfo")
+                        .HasForeignKey("TrainWell___BACKEND.Models.User.UserInfo", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("TrainWell___BACKEND.Models.Diet.Meal", b =>
                 {
                     b.Navigation("ProductsInMeal");
@@ -332,6 +389,12 @@ namespace TrainWell___BACKEND.Migrations
             modelBuilder.Entity("TrainWell___BACKEND.Models.Training.Workout", b =>
                 {
                     b.Navigation("ExerciseWorkouts");
+                });
+
+            modelBuilder.Entity("TrainWell___BACKEND.Models.User.User", b =>
+                {
+                    b.Navigation("UserInfo")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

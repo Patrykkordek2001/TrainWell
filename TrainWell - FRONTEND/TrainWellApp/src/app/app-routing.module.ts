@@ -8,7 +8,7 @@ import { AddWorkoutComponent } from './components/workouts/add-workout/add-worko
 import { UserPanelComponent } from './components/user/user-panel/user-panel.component';
 
 const routes: Routes = [
-  { path: 'autoryzjacja', component: AuthComponent },
+  { path: 'autoryzacja', component: AuthComponent },
   { path: 'kalendarz-treningi-pomiary', component: CalendarWorkoutsAndMeasurementsComponent },
   { path: 'dieta', component: CalendarWorkoutsAndMeasurementsComponent },
   { path: 'pomiar', component: AddMeasurementComponent },
@@ -26,7 +26,7 @@ export class AppRoutingModule {
   constructor(private router: Router) {
     this.router.events.subscribe((event) => {
       if (event instanceof RoutesRecognized && event.url === '/') {
-        this.router.navigate(['/autoryzjacja']);
+        this.router.navigate(['/autoryzacja']);
       }
     });
   }

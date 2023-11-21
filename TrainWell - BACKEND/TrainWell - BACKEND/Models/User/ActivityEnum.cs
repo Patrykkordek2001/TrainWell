@@ -2,12 +2,11 @@
 {
     public enum ActivityEnum
     {
-        VeryLow,
+        Resting,
         Low,
-        Moderate,
-        Active,
-        ActiveLifestyleAnd
-
-
+        Average,
+        ActiveLifestyle,
+        VeryActiveLifestyle,
+        ProfessionallyPracticingSports
     }
 }

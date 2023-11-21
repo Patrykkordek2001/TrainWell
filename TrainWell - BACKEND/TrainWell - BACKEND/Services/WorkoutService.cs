@@ -18,13 +18,14 @@ namespace TrainWell___BACKEND.Services
         private readonly TrainWellDbContext _context;
         private readonly ICurrentUserProvider _currentUserProvider;
 
-        public WorkoutService(ISqlRepository<Workout> workoutRepository, ISqlRepository<Exercise> exerciseRepository, ISqlRepository<ExerciseSet> exerciseSetRepository, IMapper mapper, TrainWellDbContext context)
+        public WorkoutService(ISqlRepository<Workout> workoutRepository, ISqlRepository<Exercise> exerciseRepository, ISqlRepository<ExerciseSet> exerciseSetRepository, IMapper mapper, TrainWellDbContext context, ICurrentUserProvider currentUserProvider)
         {
             _context = context;
             _workoutRepository = workoutRepository;
             _exerciseRepository = exerciseRepository;
             _exerciseSetRepository = exerciseSetRepository;
             _mapper = mapper;
+            _currentUserProvider = currentUserProvider;
         }
 
         public async Task<int> AddWorkoutAsync(WorkoutDto workout)
@@ -44,11 +45,11 @@ namespace TrainWell___BACKEND.Services
 
         public async Task<IEnumerable<Workout>> GetAllWorkoutsAsync()
         {
-            
-                var allWorkouts =  await _workoutRepository.GetAllAsync();
-            //var userId = _currentUserProvider.GetUserIdAsync();
-            //var userWorkouts = allWorkouts.Where()
-            return allWorkouts;
+
+            var allWorkouts =  await _workoutRepository.GetAllAsync();
+            var userId = await _currentUserProvider.GetUserIdAsync();
+            var userWorkouts = allWorkouts.Where(x => x.UserId == userId);
+            return userWorkouts;
         }
 
         public async Task<Workout> GetWorkoutByIdAsync(int id)

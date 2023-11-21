@@ -7,10 +7,11 @@ namespace TrainWell___BACKEND.Services
     public class UserService : IUserService
     {
         private readonly ISqlRepository<User> _userRepository;
-
-        public UserService(ISqlRepository<User> userRepository)
+        private readonly ICurrentUserProvider _currentUserProvider;
+        public UserService(ISqlRepository<User> userRepository, ICurrentUserProvider currentUserProvider)
         {
             _userRepository = userRepository;
+            _currentUserProvider = currentUserProvider;
         }
 
         public async Task DeleteUserAsync(int id)
@@ -26,6 +27,13 @@ namespace TrainWell___BACKEND.Services
         public async Task<User> GetUserByIdAsync(int  id)
         {
             return await _userRepository.GetByIdAsync(id);
+        }
+
+        public async Task<User> GetCurrentUser()
+        {
+            var userId = await _currentUserProvider.GetUserIdAsync();
+
+            return await _userRepository.GetByIdAsync(userId);
         }
 
         public async Task UpdateUserAsync(User user)

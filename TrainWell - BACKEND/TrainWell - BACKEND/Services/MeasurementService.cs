@@ -14,13 +14,15 @@ namespace TrainWell___BACKEND.Services
         private readonly ISqlRepository<Measurement> _measurementRepository;
         private readonly IMapper _mapper;
         private readonly TrainWellDbContext _context;
+        private readonly ICurrentUserProvider _currentUserProvider;
 
 
-        public MeasurementService(ISqlRepository<Measurement> measurementRepository, IMapper mapper, TrainWellDbContext context)
+        public MeasurementService(ISqlRepository<Measurement> measurementRepository, IMapper mapper, TrainWellDbContext context, ICurrentUserProvider currentUserProvider)
         {
             _measurementRepository = measurementRepository;
             _mapper = mapper;
             _context = context;
+            _currentUserProvider = currentUserProvider;
         }
 
         public async Task<int> AddMeasurementAsync(MeasurementsDto measurementDto)
@@ -40,7 +42,10 @@ namespace TrainWell___BACKEND.Services
 
         public async Task<IEnumerable<Measurement>> GetAllMeasurementsAsync()
         {
-            return await _measurementRepository.GetAllAsync();
+            var allMeasurements = await _measurementRepository.GetAllAsync();
+            var userId = await _currentUserProvider.GetUserIdAsync();
+            var userMeasurements = allMeasurements.Where(x => x.UserId == userId);
+            return userMeasurements;
         }
 
         public async Task<Measurement> GetMeasurementByIdAsync(int id)

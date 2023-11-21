@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { CurrentUser } from 'src/app/Models/CurrentUser';
 import { AppComponent } from 'src/app/app.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { jwtDecode } from 'jwt-decode';
@@ -22,10 +21,8 @@ export class AuthComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private toastrService: ToastrService,
-    private appComponent: AppComponent,
     private router: Router
   ) {
-    this.appComponent.showHeader = false;
   }
 
   ngOnInit(): void {
@@ -35,6 +32,7 @@ export class AuthComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
       phoneNumber: ['', [Validators.required]],
+      //this.showHeader == this.authService.
     });
   }
 

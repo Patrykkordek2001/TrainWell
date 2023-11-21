@@ -13,12 +13,14 @@ import { MeasurementsModule } from './modules/measurements.module';
 import { WorkoutsModule } from './modules/workouts.module';
 import { MatIconModule } from '@angular/material/icon';
 import { UserPanelComponent } from './components/user/user-panel/user-panel.component';
+import { UserPanelModule } from './modules/user-panel.module';
+import {MatToolbarModule} from '@angular/material/toolbar';
+;
 
 @NgModule({
   declarations: [
     AppComponent,
     DateClickComponentComponent,
-    UserPanelComponent,
 
   ],
   imports: [
@@ -31,7 +33,10 @@ import { UserPanelComponent } from './components/user/user-panel/user-panel.comp
     BrowserAnimationsModule,
     MeasurementsModule,
     WorkoutsModule,
-    MatIconModule
+    MatIconModule,
+    UserPanelModule,
+    MatToolbarModule,
+    
     
   ],
   providers: [{

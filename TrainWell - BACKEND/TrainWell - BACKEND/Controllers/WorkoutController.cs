@@ -25,7 +25,7 @@ namespace TrainWell___BACKEND.Controllers
         public async Task<ActionResult> AddWorkout(WorkoutDto workoutDto)
         {
             var newWorkout = await _workoutService.AddWorkoutAsync(workoutDto);
-
+           
             if (newWorkout == null) return BadRequest("Błąd podczas dodawania treningu");
             return Ok(new { message = "Trening został dodany" });
         }

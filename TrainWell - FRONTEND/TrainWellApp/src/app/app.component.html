@@ -1,11 +1,11 @@
-<div  *ngIf="showHeader" class="px-3 py-2 text-bg-dark border-bottom">
+<div  *ngIf="!isAuthPage() " class="px-3 py-2 text-bg-dark border-bottom">
     <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
         <a href="kalendarz-treningi-pomiary" class="logo">
             <img src="../../../assets/TrainWell LOGO BIAŁE.png" alt="Your Logo" width="140" height="45">
         </a>
 
-        <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+        <ul class="nav col-12 col-lg-auto my-2  my-md-0 text-small">
           <li>
             <div class="buttons-with-icons">              
               <mat-icon (click)="navigateTo('kalendarz-treningi-pomiary')" class="material-icons-outlined">fitness_center</mat-icon>
@@ -20,7 +20,7 @@
           </li>
           <li>
             <div class="buttons-with-icons">
-              <mat-icon (click)="navigateTo('user-panel')" class="material-icons-outlined">manage_accounts</mat-icon>
+              <mat-icon (click)="navigateTo('panel-uzytkownika')" class="material-icons-outlined">manage_accounts</mat-icon>
               Konto
             </div>
           </li>
@@ -28,5 +28,6 @@
       </div>
     </div>
   </div>
+
 
 <router-outlet></router-outlet>

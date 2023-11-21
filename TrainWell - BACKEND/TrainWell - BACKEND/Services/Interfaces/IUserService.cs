@@ -6,6 +6,7 @@ namespace TrainWell___BACKEND.Services.Interfaces
     {
         Task DeleteUserAsync(int id);
         Task<IEnumerable<User>> GetAllUsersAsync();
+        Task<User> GetCurrentUser();
         Task<User> GetUserByIdAsync(int id);
         Task UpdateUserAsync(User user);
     }
