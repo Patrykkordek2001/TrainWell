@@ -23,11 +23,18 @@ namespace TrainWell___BACKEND.Controllers
         public async Task<ActionResult<User>> GetCurrentUser()
         {
             var currentUser = await _userService.GetCurrentUser();
+            
+            return currentUser;
+        }
 
+        [HttpPost("UpdateOrAddUserInfoAsync")]
+        public async Task<ActionResult<UserInfo>> UpdateOrAddUserInfoAsync(UserInfoDto )
+        {
+            var currentUser = await _userService.UpdateOrAddUserInfoAsync();
 
             return currentUser;
         }
 
-        
+
     }
 }

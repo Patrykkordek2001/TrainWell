@@ -5,12 +5,11 @@ namespace TrainWell___BACKEND.Models.User
 {
     public class User
     {
-        public User(string username, string password, string email, string? phone)
+        public User(string username, string password, string email)
         {
             Username = username;
             Password = password;
             Email = email;
-            Phone = phone;
         }
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -18,7 +17,6 @@ namespace TrainWell___BACKEND.Models.User
         public string Username { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
-        public string? Phone { get; set; }
         public virtual UserInfo UserInfo { get; set; }
 
 

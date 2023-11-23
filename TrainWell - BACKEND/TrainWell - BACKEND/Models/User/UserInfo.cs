@@ -5,12 +5,13 @@ namespace TrainWell___BACKEND.Models.User
 {
     public class UserInfo
     {
-        public UserInfo(double weight, int growth, ActivityEnum activity, GenderEnum gender, int caloriesPerDay, int fatPerDay, int carbohydratesPerDay, int proteinsPerDay)
+        public UserInfo(double weight, int growth, ActivityEnum activity, GenderEnum gender, GoalEnum goal)
         {
             Weight = weight;
             Growth = growth;
             Activity = activity;
             Gender = gender;
+            Goal = goal;
 
             CalculateDailyCalories();
 
@@ -24,7 +25,7 @@ namespace TrainWell___BACKEND.Models.User
         public int Age { get; set; }
         public ActivityEnum Activity { get; set; }
         public GenderEnum Gender { get; set; }
-
+         public GoalEnum Goal { get; set; }
         public int CaloriesPerDay { get; set; }
         public int FatPerDay { get; set; }
         public int CarbohydratesPerDay { get; set; }
@@ -49,8 +50,24 @@ namespace TrainWell___BACKEND.Models.User
             double activityMultiplier = GetActivityMultiplier();
             double caloriesPerDay = bmr * activityMultiplier;
 
+            switch (Goal)
+            {
+                case GoalEnum.Maintenance:
+                    break;
+                case GoalEnum.Reduction:
+                    caloriesPerDay *= 0.8; 
+                    break;
+                case GoalEnum.Gaining:
+                    caloriesPerDay *= 1.2; 
+                    break;
+
+                default:
+                    break;
+            }
+
             CaloriesPerDay = (int)caloriesPerDay;
         }
+
 
 
         private double GetActivityMultiplier()

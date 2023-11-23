@@ -1,6 +1,7 @@
 
 .left-side{
-    margin-left: 10%;
+  width: 15%;
+    margin-left: 5%;
     margin-top: 5%;
 }
 .info-panel{
@@ -41,11 +42,25 @@
     margin-top: 20px;
   }
   .right-side{
+    width: 40%;
     margin-top: 5%;
     margin-left: 5%;
 }
 .inputs{
   width: 35%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  margin-top: 5vh;
+}
+.body-information{
+  margin-left:5vw;
+}
+.calculate-kcal-btn{
+  width: 50%;
+    display: flex;
+    justify-content: end;
+    margin-right: 300px;
+}
+.macronutrients-information{
+  margin-top: 5%;
 }

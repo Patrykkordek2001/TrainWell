@@ -19,6 +19,8 @@ namespace TrainWell___BACKEND.Dtos
             CreateMap<MeasurementsDto, Measurement>();
             CreateMap<ProductDto, Product>();
             CreateMap<ProductInMealDto, ProductInMeal>();
+            CreateMap<UserInfoDto, UserInfo>();
+
 
         }
     }

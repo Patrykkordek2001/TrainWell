@@ -8,6 +8,7 @@ namespace TrainWell___BACKEND.Services.Interfaces
         Task<IEnumerable<User>> GetAllUsersAsync();
         Task<User> GetCurrentUser();
         Task<User> GetUserByIdAsync(int id);
+        Task<UserInfo> UpdateOrAddUserInfoAsync(UserInfo userInfo);
         Task UpdateUserAsync(User user);
     }
 }
