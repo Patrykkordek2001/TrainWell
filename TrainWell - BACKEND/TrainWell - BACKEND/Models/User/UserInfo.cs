@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace TrainWell___BACKEND.Models.User
 {
@@ -32,7 +33,9 @@ namespace TrainWell___BACKEND.Models.User
         public int ProteinsPerDay { get; set; }
 
         public int UserId { get; set; }
-        public User User { get; set; }
+
+        [JsonIgnore]
+        public virtual User User { get; set; }
 
         public void CalculateDailyCalories()
         {
@@ -53,17 +56,28 @@ namespace TrainWell___BACKEND.Models.User
             switch (Goal)
             {
                 case GoalEnum.Maintenance:
+                    FatPerDay = (int)(caloriesPerDay * 0.25) / 9;
+                    ProteinsPerDay = (int)(1.9 * Weight);
+                    CarbohydratesPerDay = ((int)caloriesPerDay - (FatPerDay + ProteinsPerDay)) / 4;
                     break;
                 case GoalEnum.Reduction:
-                    caloriesPerDay *= 0.8; 
+                    caloriesPerDay *= 0.8;
+                    FatPerDay = (int)(caloriesPerDay * 0.20) / 9;
+                    ProteinsPerDay = (int)(2.0 * Weight);
+                    CarbohydratesPerDay = ((int)caloriesPerDay - (FatPerDay + ProteinsPerDay)) / 4;
                     break;
                 case GoalEnum.Gaining:
-                    caloriesPerDay *= 1.2; 
+                    caloriesPerDay *= 1.2;
+                    FatPerDay = (int)(caloriesPerDay * 0.25) / 9;
+                    ProteinsPerDay = (int)(2.0 * Weight);
+                    CarbohydratesPerDay = ((int)caloriesPerDay - (FatPerDay + ProteinsPerDay)) / 4;
                     break;
 
                 default:
                     break;
             }
+
+            
 
             CaloriesPerDay = (int)caloriesPerDay;
         }

@@ -15,6 +15,6 @@ export class UserService {
     return this.httpClient.get<UserPreview>(`https://localhost:7004/api/User/GetCurrentUser`);
   }
   calculateCalories(userInfoData: UserInfoDto): Observable<any> {
-    return this.httpClient.post<UserInfoDto>('https://localhost:7004/api/Exercise/AddExercise',userInfoData);
+    return this.httpClient.post<UserInfoDto>('https://localhost:7004/api/User/UpdateOrAddUserInfo',userInfoData);
   }
 }

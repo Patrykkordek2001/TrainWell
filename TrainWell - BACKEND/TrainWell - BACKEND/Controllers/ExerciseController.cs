@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using TrainWell___BACKEND.Dtos;
+using TrainWell___BACKEND.Dtos.Workouts;
 using TrainWell___BACKEND.Models.Diet;
 using TrainWell___BACKEND.Models.Training;
 using TrainWell___BACKEND.Services.Interfaces;

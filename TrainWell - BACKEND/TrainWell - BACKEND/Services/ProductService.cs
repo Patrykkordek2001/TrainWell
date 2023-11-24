@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using TrainWell___BACKEND.Database;
-using TrainWell___BACKEND.Dtos;
+using TrainWell___BACKEND.Dtos.Diet;
 using TrainWell___BACKEND.Models.Diet;
 using TrainWell___BACKEND.Services.Interfaces;
 using TrainWell___BACKEND.SqlRepository;

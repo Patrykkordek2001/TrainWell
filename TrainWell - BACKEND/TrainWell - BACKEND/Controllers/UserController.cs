@@ -14,7 +14,6 @@ namespace TrainWell___BACKEND.Controllers
     {
         private readonly IUserService _userService;
 
-
         public UserController(IUserService userService)
         {
             _userService = userService;
@@ -27,12 +26,20 @@ namespace TrainWell___BACKEND.Controllers
             return currentUser;
         }
 
-        [HttpPost("UpdateOrAddUserInfoAsync")]
-        public async Task<ActionResult<UserInfo>> UpdateOrAddUserInfoAsync(UserInfoDto )
+        [HttpPost("updateOrAddUserInfo")]
+        public async Task<ActionResult> UpdateOrAddUserInfo(UserInfoDto userInfoDto)
         {
-            var currentUser = await _userService.UpdateOrAddUserInfoAsync();
+            try
+            {
+                var updatedUserInfo = await _userService.UpdateOrAddUserInfoAsync(userInfoDto);
+                //var updatedUserInfoDto = _mapper.Map<UserInfoDto>(updatedUserInfo);
 
-            return currentUser;
+                return Ok(updatedUserInfo);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error");
+            }
         }
 
 

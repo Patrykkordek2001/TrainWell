@@ -1,4 +1,4 @@
-﻿using TrainWell___BACKEND.Dtos;
+﻿using TrainWell___BACKEND.Dtos.Diet;
 using TrainWell___BACKEND.Models.Diet;
 
 namespace TrainWell___BACKEND.Services.Interfaces

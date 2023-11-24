@@ -69,7 +69,7 @@ namespace TrainWell___BACKEND.Services
                 };
 
             var token = new JwtSecurityToken(_configuration["Jwt:Issuer"], _configuration["Jwt:Audience"], claims,
-                 expires: DateTime.Now.AddMinutes(15),
+                 expires: DateTime.Now.AddMinutes(50),
                  signingCredentials: credentials);
 
 

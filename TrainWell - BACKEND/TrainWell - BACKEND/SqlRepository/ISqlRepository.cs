@@ -1,4 +1,6 @@
-﻿namespace TrainWell___BACKEND.SqlRepository
+﻿using System.Linq.Expressions;
+
+namespace TrainWell___BACKEND.SqlRepository
 {
     public interface ISqlRepository<T>
     {
@@ -7,5 +9,7 @@
         Task<IEnumerable<T>> GetAllAsync();
         Task<T> GetByIdAsync(int id);
         Task UpdateAsync(T entity);
+        IQueryable<T> Include(params Expression<Func<T, object>>[] includes);
+
     }
 }

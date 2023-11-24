@@ -9,9 +9,9 @@ export interface UserInfoDto{
     activity: ActivityEnum;
     gender: GenderEnum;
     goal: GoalEnum;
-    caloriesPerDay: number;
-    fatPerDay: number;
-    carbohydratesPerDay: number;
-    proteinsPerDay: number;
+    //caloriesPerDay: number;
+    //fatPerDay: number;
+    //carbohydratesPerDay: number;
+    //proteinsPerDay: number;
     userId:number;
 }

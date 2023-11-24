@@ -289,6 +289,9 @@ namespace TrainWell___BACKEND.Migrations
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
+                    b.Property<int>("Goal")
+                        .HasColumnType("int");
+
                     b.Property<int>("Growth")
                         .HasColumnType("int");
 

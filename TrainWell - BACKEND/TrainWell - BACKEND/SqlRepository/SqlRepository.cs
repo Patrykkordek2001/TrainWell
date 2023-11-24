@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 using TrainWell___BACKEND.Database;
 
 namespace TrainWell___BACKEND.SqlRepository
@@ -47,7 +48,13 @@ namespace TrainWell___BACKEND.SqlRepository
             await _context.SaveChangesAsync();
         }
 
-        
+        public IQueryable<T> Include(params Expression<Func<T, object>>[] includes)
+        {
+            IQueryable<T> query = _dbSet;
+            return includes.Aggregate(query, (current, include) => current.Include(include));
+        }
+
+
 
     }
 }

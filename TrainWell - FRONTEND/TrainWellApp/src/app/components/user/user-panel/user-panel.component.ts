@@ -17,6 +17,10 @@ export class UserPanelComponent implements OnInit {
   email!: string;
   username!: string;
 
+  caloriesPerDay:number = 0;
+  fatPerDay:number = 0;
+  carbohydratesPerDay:number = 0;
+  proteinsPerDay:number = 0;
   // proteins!:number;
   // fat!:number;
   // carbo!:number;
@@ -49,26 +53,26 @@ export class UserPanelComponent implements OnInit {
       activity: ['', [Validators.required]],
       gender: ['', [Validators.required]],
       goal: ['', [Validators.required]],
-      caloriesPerDay: ['', [Validators.required]],
-      fatPerDay: ['', [Validators.required]],
-      carbohydratesPerDay: ['', [Validators.required]],
-      proteinsPerDay: ['', [Validators.required]],
+      // caloriesPerDay: ['', [Validators.required]],
+      // fatPerDay: ['', [Validators.required]],
+      // carbohydratesPerDay: ['', [Validators.required]],
+      // proteinsPerDay: ['', [Validators.required]],
       
     });
   }
 
-  get caloriesPerDay() {
-    return this.userInfoForm.get('caloriesPerDay')?.value;
-  }
-  get fatPerDay() {
-    return this.userInfoForm.get('fatPerDay')?.value;
-  }
-  get carbohydratesPerDay() {
-    return this.userInfoForm.get('carbohydratesPerDay')?.value;
-  }
-  get proteinsPerDay() {
-    return this.userInfoForm.get('proteinsPerDay')?.value;
-  }
+  // get caloriesPerDay() {
+  //   return this.userInfoForm.get('caloriesPerDay')?.value;
+  // }
+  // get fatPerDay() {
+  //   return this.userInfoForm.get('fatPerDay')?.value;
+  // }
+  // get carbohydratesPerDay() {
+  //   return this.userInfoForm.get('carbohydratesPerDay')?.value;
+  // }
+  // get proteinsPerDay() {
+  //   return this.userInfoForm.get('proteinsPerDay')?.value;
+  // }
 
 
   fetchUser() {
@@ -100,12 +104,14 @@ export class UserPanelComponent implements OnInit {
         age: user.userInfo.age,
         activity: user.userInfo.activity,
         gender: user.userInfo.gender,
-        caloriesPerDay: user.userInfo.caloriesPerDay,
-        fatPerDay: user.userInfo.fatPerDay,
-        carbohydratesPerDay: user.userInfo.carbohydratesPerDay,
-        proteinsPerDay: user.userInfo.proteinsPerDay,
+        goal: user.userInfo.goal,
         userId: user.id,
       });
+
+      this.caloriesPerDay = user.userInfo.caloriesPerDay;
+      this.fatPerDay = user.userInfo.fatPerDay;
+      this.carbohydratesPerDay = user.userInfo.carbohydratesPerDay;
+      this.proteinsPerDay = user.userInfo.proteinsPerDay;
     });
   }
 
@@ -159,8 +165,14 @@ export class UserPanelComponent implements OnInit {
     console.log(this.userInfoForm.value);
     if (this.userInfoForm.valid) {
       const userData = this.userInfoForm.value;
+      userData.userId = this.userId;
       this.userService.calculateCalories(userData).subscribe({
-        next: () => {},
+        next: (calculatedMacronutrients) => {
+          this.caloriesPerDay = calculatedMacronutrients.caloriesPerDay;
+          this.fatPerDay = calculatedMacronutrients.fatPerDay;
+          this.carbohydratesPerDay = calculatedMacronutrients.carbohydratesPerDay;
+          this.proteinsPerDay = calculatedMacronutrients.proteinsPerDay;
+        },
         error: (error) => {
           this.toastrService.error(
             'Wystąpił błąd podczas dodawnia informacji.'

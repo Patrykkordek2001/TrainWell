@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using TrainWell___BACKEND.Database;
-using TrainWell___BACKEND.Dtos;
+using TrainWell___BACKEND.Dtos.Workouts;
 using TrainWell___BACKEND.Models.Training;
 using TrainWell___BACKEND.Services.Interfaces;
 using TrainWell___BACKEND.SqlRepository;

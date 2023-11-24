@@ -17,8 +17,10 @@ namespace TrainWell___BACKEND.Services
         private readonly IMapper _mapper;
 
         private readonly ICurrentUserProvider _currentUserProvider;
-        public UserService(ISqlRepository<User> userRepository, ICurrentUserProvider currentUserProvider, ISqlRepository<UserInfo> userInfoRepository)
+        public UserService(IMapper mapper,ISqlRepository<User> userRepository, ICurrentUserProvider currentUserProvider, ISqlRepository<UserInfo> userInfoRepository, TrainWellDbContext context)
         {
+            _context= context;
+            _mapper = mapper;
             _userRepository = userRepository;
             _currentUserProvider = currentUserProvider;
             _userInfoRepository = userInfoRepository;
@@ -43,6 +45,10 @@ namespace TrainWell___BACKEND.Services
         {
             var userId = await _currentUserProvider.GetUserIdAsync();
 
+            var user = await _userRepository
+                    .Include(u => u.UserInfo)
+                    .FirstOrDefaultAsync(u => u.Id == userId);
+            var x = _context.Users.Include(u => u.UserInfo).FirstOrDefault(x=>x.Id==userId);
             return await _userRepository.GetByIdAsync(userId);
         }
 

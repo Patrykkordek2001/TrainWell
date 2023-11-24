@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using TrainWell___BACKEND.Dtos.Diet;
+using TrainWell___BACKEND.Dtos.Workouts;
 using TrainWell___BACKEND.Models;
 using TrainWell___BACKEND.Models.Diet;
 using TrainWell___BACKEND.Models.Training;

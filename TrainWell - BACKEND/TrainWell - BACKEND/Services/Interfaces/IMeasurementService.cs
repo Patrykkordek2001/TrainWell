@@ -1,4 +1,4 @@
-﻿using TrainWell___BACKEND.Dtos;
+﻿using TrainWell___BACKEND.Dtos.Workouts;
 using TrainWell___BACKEND.Models;
 
 namespace TrainWell___BACKEND.Services.Interfaces

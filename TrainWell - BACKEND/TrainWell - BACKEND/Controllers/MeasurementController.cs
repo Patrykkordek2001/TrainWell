@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using TrainWell___BACKEND.Dtos;
+using TrainWell___BACKEND.Dtos.Workouts;
 using TrainWell___BACKEND.Models;
 using TrainWell___BACKEND.Services.Interfaces;
 
