@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TrainWell___BACKEND.Dtos.Diet;
 using TrainWell___BACKEND.Models.Diet;
+using TrainWell___BACKEND.Models.Training;
 using TrainWell___BACKEND.Services.Interfaces;
 
 namespace TrainWell___BACKEND.Controllers
@@ -18,12 +19,12 @@ namespace TrainWell___BACKEND.Controllers
         }
 
         [HttpPost("AddProduct")]
-        public async Task<ActionResult> AddProduct(ProductDto productDto)
+        public async Task<ActionResult<Product>> AddProduct(ProductDto productDto)
         {
             var newProduct = await _productService.AddProductAsync(productDto);
 
             if (newProduct == null) return BadRequest("Błąd podczas dodawania produktu");
-            return Ok(new { message = "Produkt został dodany" });
+            return Ok(newProduct);
         }
 
         [HttpDelete("{productId}")]
@@ -41,6 +42,13 @@ namespace TrainWell___BACKEND.Controllers
                 return NotFound("Produkt o podanym ID nie istnieje");
 
             return Ok(product);
+        }
+
+        [HttpGet("GetAllProducts")]
+        public async Task<ActionResult<List<Product>>> GetAllProducts()
+        {
+            var products = await _productService.GetAllProductsAsync();
+            return Ok(products.ToList());
         }
     }
 }

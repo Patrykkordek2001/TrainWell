@@ -18,12 +18,12 @@ namespace TrainWell___BACKEND.Services
             _mapper = mapper;
         }
 
-        public async Task<int> AddProductAsync(ProductDto productDto)
+        public async Task<Product> AddProductAsync(ProductDto productDto)
         {
             var productModel = _mapper.Map<Product>(productDto);
             await _productRepository.AddAsync(productModel);
 
-            return productModel.Id;
+            return productModel;
         }
 
         public async Task DeleteProductAsync(int id)

@@ -1,11 +1,9 @@
-﻿namespace TrainWell___BACKEND.Models.Diet
+﻿public enum MealNameEnum
 {
-    public enum MealNameEnum
-    {
-        Sniadanie,
-        DrugieSniadanie,
-        Obiad,
-        Przekaska,
-        Kolacja
-    }
+    Default,
+    Breakfast,
+    SecondBreakfast,
+    Lunch,
+    Snack,
+    Dinner
 }

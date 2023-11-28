@@ -6,6 +6,8 @@ import { AddMeasurementComponent } from './components/measurements/add-measureme
 import { EditMeasurementComponent } from './components/measurements/edit-measurement/edit-measurement.component';
 import { AddWorkoutComponent } from './components/workouts/add-workout/add-workout.component';
 import { UserPanelComponent } from './components/user/user-panel/user-panel.component';
+import { MealsComponent } from './components/diet/meals/meals.component';
+import { CalendarDietComponent } from './components/calendars/calendar-diet/calendar-diet.component';
 
 const routes: Routes = [
   { path: 'autoryzacja', component: AuthComponent },
@@ -14,8 +16,9 @@ const routes: Routes = [
   { path: 'pomiar', component: AddMeasurementComponent },
   { path: 'edytuj-pomiar/:id', component: EditMeasurementComponent},
   { path: 'dodaj-trening', component: AddWorkoutComponent },
-  { path: 'panel-uzytkownika', component: UserPanelComponent }
-  
+  { path: 'panel-uzytkownika', component: UserPanelComponent },
+  { path: 'dodaj-posiłki', component: MealsComponent },
+  { path: 'kalendarz-dieta', component: CalendarDietComponent }
 ];
 
 @NgModule({

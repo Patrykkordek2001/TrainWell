@@ -8,6 +8,7 @@ namespace TrainWell___BACKEND.Services.Interfaces
         Task<User?> AuthenticateUser(UserDto userDTO);
         string GenerateToken(User user);
         string HashPassword(string password);
+        string RefreshToken(User user);
         Task<User?> RegisterUser(User user);
     }
 }

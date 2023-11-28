@@ -3,19 +3,38 @@
     width: 100%;
 }
 h5{
-margin-left: 20%;
-margin-bottom: 15%;
+display: flex;
 margin-top: 10%;
+justify-content: center;
 }
 
 
-.training-btn{
-    margin-left: 5%;
-    margin-right: 25%;
-}
+
 .buttons{
-    margin-top: 15%;
+    margin-top: 10%;
     width: 100%;
     display: flex;
+    flex-direction: column;
+}
+.add-btn{
+    display: flex;
     flex-direction: row;
+    width: 100%;
+    justify-content: center;
+}
+.meals-btn{
+    display: flex;
+    justify-content: center;
+    margin-top: 10%;
+    
+}
+#meal-btn{
+    margin-right: 10%;
+}
+.cancel-btn{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-right: 10%;
+    margin-top: 3%;
 }

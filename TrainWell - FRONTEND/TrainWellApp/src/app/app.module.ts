@@ -12,10 +12,13 @@ import { DateClickComponentComponent } from './components/date-click-component/d
 import { MeasurementsModule } from './modules/measurements.module';
 import { WorkoutsModule } from './modules/workouts.module';
 import { MatIconModule } from '@angular/material/icon';
-import { UserPanelComponent } from './components/user/user-panel/user-panel.component';
 import { UserPanelModule } from './modules/user-panel.module';
 import {MatToolbarModule} from '@angular/material/toolbar';
-;
+import { MealsComponent } from './components/diet/meals/meals.component';
+import { CalendarDietModule } from './modules/calendar-diet.module';
+import { MatButtonModule } from '@angular/material/button';
+import { DietModule } from './modules/diet.module';
+
 
 @NgModule({
   declarations: [
@@ -36,7 +39,9 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatIconModule,
     UserPanelModule,
     MatToolbarModule,
-    
+    CalendarDietModule,
+    MatButtonModule,
+    DietModule
     
   ],
   providers: [{

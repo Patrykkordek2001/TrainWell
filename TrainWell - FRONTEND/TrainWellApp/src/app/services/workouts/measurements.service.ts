@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { MeasurementDto } from '../Models/measurements/MeasurementDto';
-import { MeasurementPreview } from '../Models/measurements/MeasurementsPreview';
+import { MeasurementDto } from '../../Models/measurements/MeasurementDto';
+import { MeasurementPreview } from '../../Models/measurements/MeasurementsPreview';
 
 @Injectable({
   providedIn: 'root'

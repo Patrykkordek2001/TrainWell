@@ -32,7 +32,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatButtonModule,
     MatSelectModule,
     MatOptionModule,
-    MatIconModule
+    MatIconModule,
 
   ],
   exports: [AddWorkoutComponent,EditWorkoutComponent],

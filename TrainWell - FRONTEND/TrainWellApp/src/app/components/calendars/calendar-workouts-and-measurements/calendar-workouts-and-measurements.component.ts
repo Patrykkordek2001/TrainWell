@@ -12,10 +12,10 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin, { DateClickArg } from '@fullcalendar/interaction';
 import bootstrap5Plugin from '@fullcalendar/bootstrap5';
 import { WorkoutPreview } from 'src/app/Models/workouts/WorkoutPreview';
-import { CalendarWorkoutsAndMeasurementsService } from 'src/app/services/calendar-workouts-and-measurements.service';
+import { CalendarWorkoutsAndMeasurementsService } from 'src/app/services/workouts/calendar-workouts-and-measurements.service';
 import { DateClickComponentComponent } from '../../date-click-component/date-click-component.component';
 import { MatDialog } from '@angular/material/dialog';
-import { MeasurementsService } from 'src/app/services/measurements.service';
+import { MeasurementsService } from 'src/app/services/workouts/measurements.service';
 import { ToastrService } from 'ngx-toastr';
 import { DateSharingService } from 'src/app/services/date-sharing.service';
 
@@ -105,7 +105,7 @@ export class CalendarWorkoutsAndMeasurementsComponent implements OnInit {
         left: '35%',
         right: '',
       },
-      data: { date: date },
+      data: { date: date , workoutMode: true},
     });
   }
 

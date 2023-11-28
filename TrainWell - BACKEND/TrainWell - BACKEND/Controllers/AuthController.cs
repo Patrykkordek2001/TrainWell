@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.IdentityModel.Tokens.Jwt;
 using TrainWell___BACKEND.Dtos;
 using TrainWell___BACKEND.Models.User;
 using TrainWell___BACKEND.Services.Interfaces;
@@ -11,16 +12,18 @@ namespace TrainWell___BACKEND.Controllers
     [AllowAnonymous]
     public class AuthController : ControllerBase
     {
-        private readonly IUserService _usersService;
+        private readonly IUserService _userService;
         private readonly IAuthService _authService;
         private readonly IConfiguration _configuration;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public AuthController(IAuthService authService, IConfiguration configuration, IUserService userService)
+
+        public AuthController(IAuthService authService, IConfiguration configuration, IUserService userService, IHttpContextAccessor httpContextAccessor)
         {
-            _usersService = userService;
+            _userService = userService;
             _configuration = configuration;
             _authService = authService;
-
+            _httpContextAccessor = httpContextAccessor;
         }
 
 
@@ -40,10 +43,29 @@ namespace TrainWell___BACKEND.Controllers
             if (user == null) return Unauthorized("Błędna nazwa użytkownika lub login");
             var jwtToken = _authService.GenerateToken(user);
 
-            return Ok(new { token = jwtToken, user = user });
+            HttpContext.Response.Headers.Add("Authorization", "Bearer " + jwtToken);
+            return Ok(new { token = jwtToken});
                             
         }
-        
+
+        [HttpPost("RefreshToken")]
+        public async Task<ActionResult> RefreshToken()
+        {
+            var y = _httpContextAccessor.HttpContext.Items;
+
+            var user = await _userService.GetCurrentUser(); 
+
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+
+            var newToken = _authService.RefreshToken(user);
+
+            HttpContext.Response.Headers.Add("Authorization", "Bearer " + newToken);
+
+            return Ok(new { token = newToken});
+        }
 
     }
 }

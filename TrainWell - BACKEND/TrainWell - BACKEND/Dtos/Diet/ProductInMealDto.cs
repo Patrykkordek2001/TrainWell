@@ -11,9 +11,9 @@ namespace TrainWell___BACKEND.Dtos.Diet
 
         public double Grams { get; set; }
         public int ProductId { get; set; }
-        public virtual Product Product { get; set; }
+        //public virtual Product Product { get; set; }
         public int MealId { get; set; }
-        public virtual Meal Meal { get; set; }
+        //public virtual Meal Meal { get; set; }
 
     }
 }

@@ -15,7 +15,7 @@ namespace TrainWell___BACKEND.Dtos.Diet
         public double? Fiber { get; set; }
         public double? Proteins { get; set; }
         public double? Salt { get; set; }
-        public virtual ProductInMeal? ProductInMeal { get; set; }
+        //public virtual ProductInMeal? ProductInMeal { get; set; }
 
     }
 }

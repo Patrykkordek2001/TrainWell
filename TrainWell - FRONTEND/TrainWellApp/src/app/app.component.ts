@@ -37,6 +37,8 @@ export class AppComponent implements OnInit {
   logout(): void {
     this.authService.updateLoggedIn(false);
     localStorage.removeItem('tokenJWT');
+    this.router.navigate(['/autoryzacja']);
+    
   }
 
   navigateTo(url :string){

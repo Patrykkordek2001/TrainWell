@@ -63,18 +63,52 @@ namespace TrainWell___BACKEND.Services
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
             var claims = new List<Claim>
-                {
-                    new Claim(ClaimTypes.Name, user.Username), 
-                    new Claim(ClaimTypes.NameIdentifier,user.Id.ToString()), 
-                };
+            {
+                new Claim(ClaimTypes.Name, user.Username), 
+                new Claim(ClaimTypes.NameIdentifier,user.Id.ToString()), 
+            };
 
             var token = new JwtSecurityToken(_configuration["Jwt:Issuer"], _configuration["Jwt:Audience"], claims,
-                 expires: DateTime.Now.AddMinutes(50),
+                 expires: DateTime.Now.AddMinutes(30),
                  signingCredentials: credentials);
-
-
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+
+        public string RefreshToken(User user)
+        {
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
+            var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, user.Username),
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+            };
+
+            var authorizationHeader = _httpContextAccessor.HttpContext.Request.Headers["Authorization"].FirstOrDefault();
+
+            if (!string.IsNullOrEmpty(authorizationHeader) && authorizationHeader.StartsWith("Bearer "))
+            {
+                var token = authorizationHeader.Substring("Bearer ".Length).Trim();
+
+                var handler = new JwtSecurityTokenHandler();
+                var originalToken = handler.ReadToken(token) as JwtSecurityToken;
+
+                if (originalToken != null)
+                {
+                    var newToken = new JwtSecurityToken(
+                        _configuration["Jwt:Issuer"],
+                        _configuration["Jwt:Audience"],
+                        claims,
+                        expires: originalToken.ValidTo,
+                        signingCredentials: credentials
+                    );
+
+                    return new JwtSecurityTokenHandler().WriteToken(newToken);
+                }
+            }
+            return null;
+        }
+
     }
 }

@@ -10,7 +10,7 @@ namespace TrainWell___BACKEND.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class MealController : ControllerBase
     {
         private readonly IMealService _mealService;
@@ -44,6 +44,16 @@ namespace TrainWell___BACKEND.Controllers
                 return NotFound("Posiłek o podanym ID nie istnieje");
 
             return Ok(meal);
+        }
+
+        [HttpGet("GetAllMeals")]
+        public async Task<ActionResult<Meal>> GetAllMeals()
+        {
+            var meals = await _mealService.GetAllMealsAsync();
+            if (meals == null)
+                return NotFound("Brak posiłków w systemie");
+
+            return Ok(meals.ToList());
         }
 
         [HttpGet("GetMealsByDate/{date}")]

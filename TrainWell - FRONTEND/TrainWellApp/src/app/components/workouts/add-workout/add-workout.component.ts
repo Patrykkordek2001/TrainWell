@@ -12,8 +12,8 @@ import { ExerciseDto } from 'src/app/Models/exercises/ExerciseDto';
 import { ExercisePreview } from 'src/app/Models/exercises/ExercisePreview';
 import { WorkoutDto } from 'src/app/Models/workouts/WorkoutDto';
 import { DateSharingService } from 'src/app/services/date-sharing.service';
-import { ExercisesService } from 'src/app/services/exercises.service';
-import { WorkoutsService } from 'src/app/services/workouts.service';
+import { ExercisesService } from 'src/app/services/workouts/exercises.service';
+import { WorkoutsService } from 'src/app/services/workouts/workouts.service';
 
 @Component({
   selector: 'app-add-workout',

@@ -10,7 +10,7 @@ namespace TrainWell___BACKEND.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class MeasurementController : ControllerBase
     {
         private readonly IMeasurementService _measurementService;

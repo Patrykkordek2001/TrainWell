@@ -5,7 +5,7 @@ namespace TrainWell___BACKEND.Dtos.Diet
 {
     public class MealDto
     {
-        public MealDto(DateTime date, MealNameEnum mealName, ICollection<ProductInMeal>? productsInMeal)
+        public MealDto(DateTime date, MealNameEnum mealName, ICollection<ProductInMealDto>? productsInMeal)
         {
             Date = date;
             MealName = mealName;
@@ -14,7 +14,7 @@ namespace TrainWell___BACKEND.Dtos.Diet
 
         public DateTime Date { get; set; }
         public MealNameEnum MealName { get; set; }
-        public ICollection<ProductInMeal>? ProductsInMeal { get; set; }
+        public ICollection<ProductInMealDto>? ProductsInMeal { get; set; }
         //[NotMapped]
         //public double TotalCalories
         //{

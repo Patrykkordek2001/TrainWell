@@ -65,19 +65,10 @@ export class AuthComponent implements OnInit {
         .login(userData)
         .subscribe(
           (response) => {
-            localStorage.setItem('tokenJWT', response.token);
-            localStorage.setItem('currentUserId:', response.user.id);
+
+            this.authService.updateLocalStorage(response.token);
             this.authService.updateLoggedIn(true);
-            this.toastrService.success("Witaj " + response.user.username);
-            let tokenJWT = localStorage.getItem('tokenJWT');
-            if (tokenJWT) {
-              var decodedToken = jwtDecode(tokenJWT);
-              console.log(decodedToken)
-            } else {
-              console.error('Token is null');
-            }
             this.router.navigate(['/kalendarz-treningi-pomiary']);
-            this.showHeader = true;
           },
           (error) => {
             console.error("Login failed:", error);

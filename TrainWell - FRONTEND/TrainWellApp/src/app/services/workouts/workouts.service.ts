@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { WorkoutDto } from '../Models/workouts/WorkoutDto';
+import { WorkoutDto } from '../../Models/workouts/WorkoutDto';
 
 @Injectable({
   providedIn: 'root'

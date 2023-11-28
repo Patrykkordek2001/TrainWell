@@ -6,6 +6,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [CalendarWorkoutsAndMeasurementsComponent],
@@ -16,6 +17,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     BrowserAnimationsModule,
     FullCalendarModule,
     MatDialogModule,
+    MatButtonModule
   ],
   exports: [CalendarWorkoutsAndMeasurementsComponent],
 })
