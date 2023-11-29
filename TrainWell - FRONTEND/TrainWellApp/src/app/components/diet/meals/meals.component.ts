@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { MealEnum } from 'src/app/Models/diet/MealEnum';
 import { ProductPreview } from 'src/app/Models/diet/ProductPreview';
 import { DateSharingService } from 'src/app/services/date-sharing.service';
+import { MealService } from 'src/app/services/diet/meal.service';
 import { ProductService } from 'src/app/services/diet/product.service';
 
 @Component({
@@ -17,6 +18,11 @@ export class MealsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatTable) table!: MatTable<any>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   products: ProductPreview[] = [];
+
+  mealFat:number = 0;
+  mealProteins:number = 0;
+  mealCarbohydrates:number = 0;
+  mealCalories:number = 0;
 
   displayedColumns: string[] = [
     'Lp',
@@ -44,7 +50,8 @@ export class MealsComponent implements OnInit, AfterViewInit {
     private productService: ProductService,
     private formBuilder: FormBuilder,
     private toastrService: ToastrService,
-    private dateSharingService: DateSharingService
+    private dateSharingService: DateSharingService,
+    private mealService: MealService
   ) {}
 
   ngAfterViewInit() {
@@ -110,6 +117,26 @@ export class MealsComponent implements OnInit, AfterViewInit {
   //   this.productsInMeal.removeAt(index);
   // }
 
+
+
+  submitForm(): void {
+    if (this.addMealForm.valid) {
+      const formData = this.addMealForm.value;
+      // Wywołaj API, aby przesłać dane do backendu
+      this.mealService.addMeal(formData).subscribe(
+        // Obsłuż odpowiedź z backendu
+        (response) => {
+          console.log('Posiłek dodany pomyślnie', response);
+          // Możesz dodać dodatkowe akcje po dodaniu posiłku
+        },
+        // Obsłuż błędy z backendu
+        (error) => {
+          console.error('Błąd podczas dodawania posiłku', error);
+        }
+      );
+    }
+  }
+
   changeMode() {
     this.addMode = true;
 
@@ -124,6 +151,9 @@ export class MealsComponent implements OnInit, AfterViewInit {
   cancel() {
     this.addMode = false;
   }
+
+
+  
 
   addProduct() {
     console.log(this.addProductForm.value);
@@ -147,6 +177,36 @@ export class MealsComponent implements OnInit, AfterViewInit {
     } else {
       this.toastrService.error('Wystąpił błąd podczas dodawnia produktu.');
     }
+  }
+
+  calculateNutritionalValues(grams: number, prodId:number): string {
+    const multiplier = grams / 100;
+    console.log(grams);
+
+    const product = this.products.find(x=> x.id == prodId); 
+
+    if (!product) {
+      return ''; 
+    }
+    const proteins = (product.proteins * multiplier);
+    const fat = (product.fat * multiplier);
+    const carbohydrates = (product.carbohydrates * multiplier);
+    const calories = (product.calories * multiplier);
+
+    this.mealFat += fat;
+    this.mealProteins += proteins;
+    this.mealCarbohydrates += carbohydrates;
+    this.mealCalories += calories;
+    console.log(product);
+    return `B: ${proteins.toFixed(0)}g, T: ${fat.toFixed(0)}g, W: ${carbohydrates.toFixed(0)}g, Kcal: ${calories.toFixed(0)}`;
+  }
+
+
+  findTheProduct(index: number){
+    const productId = this.productsInMeal.at(index).get('productId')?.value;
+    const result = this.products.find(x=> x.id == productId);
+    console.log(result);
+    return result;
   }
 
   getMealNameLabel(meal: MealEnum): string {

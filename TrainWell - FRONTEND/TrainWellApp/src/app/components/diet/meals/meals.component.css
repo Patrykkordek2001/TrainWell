@@ -28,9 +28,11 @@ input{
 .add-meal{
     margin-top: 2%;
     margin-left: 5%;
-    width: 50%;
+    width: 80%;
 }
 .add-product-to-meal{
+    display: flex;
+    flex-direction: column;
     margin-top: 2%;
 }
 .buttons{
