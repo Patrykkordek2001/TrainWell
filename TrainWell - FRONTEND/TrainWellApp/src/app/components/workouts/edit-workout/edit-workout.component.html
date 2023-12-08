@@ -1,1 +1,46 @@
-<p>edit-workout works!</p>
+<div class="container">
+    <form [formGroup]="trainingForm">
+      <h3>Edycja treningu:</h3>
+      <div class="headers">
+        <!-- ... (existing code remains unchanged) -->
+      </div>
+      <div class="add-exercise-to-list" *ngIf="editingExercise">
+        <!-- ... (existing code remains unchanged) -->
+      </div>
+      <div class="addEvent" *ngIf="editingExercise">
+        <div formArrayName="exercisesWorkout">
+          <div *ngFor="let exercise of exerciseControls; let i=index" [formGroupName]="i">
+            <mat-form-field>
+              <mat-label>Ćwiczenie</mat-label>
+              <mat-select placeholder="Ćwiczenie" id="exerciseId" formControlName="exerciseId">
+                <mat-option *ngFor="let exercise of exercises" [value]="exercise.id">{{ exercise.name }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-icon (click)="removeExercise(i)" class="custom-remove-icon">cancel</mat-icon>
+  
+            <button mat-raised-button color="basic" (click)="addSet(i)" class="add-set-btn">Dodaj Serie</button>
+  
+            <div formArrayName="exerciseSets">
+              <div *ngFor="let set of getExerciseSets(i); let j=index" [formGroupName]="j">
+                <mat-form-field>
+                  <mat-label>Liczba powtórzeń</mat-label>
+                  <input matInput type="number" placeholder="Liczba powtórzeń" formControlName="repetitions">
+                </mat-form-field>
+                <mat-form-field>
+                  <mat-label>Ciężar [kg]</mat-label>
+                  <input matInput type="number" placeholder="Ciężar [kg]" formControlName="weight">
+                </mat-form-field>
+                <mat-icon (click)="removeSet(i, j)" class="custom-remove-icon">cancel</mat-icon>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <button mat-raised-button color="primary" (click)="addExercise()">Dodaj ćwiczenie</button>
+      </div>
+      <div class="save-button-container">
+        <button mat-raised-button color="primary" class="save-btn" (click)="submit()">Zapisz</button>
+      </div>
+    </form>
+  </div>
+  

@@ -18,6 +18,7 @@ import { MeasurementsService } from 'src/app/services/workouts/measurements.serv
 import { ToastrService } from 'ngx-toastr';
 import { DateSharingService } from 'src/app/services/date-sharing.service';
 import { MealService } from 'src/app/services/diet/meal.service';
+import { MealEnum } from 'src/app/Models/diet/MealEnum';
 
 
 @Component({
@@ -28,7 +29,7 @@ import { MealService } from 'src/app/services/diet/meal.service';
 export class CalendarDietComponent implements OnInit {
   calendarOptions?: CalendarOptions;
   @ViewChild('fullcalendar') fullcalendar?: FullCalendarComponent;
-  events: EventInput[] = [];
+  meals: EventInput[] = [];
   constructor(
     private mealsService: MealService,
     private dialog: MatDialog,
@@ -38,7 +39,28 @@ export class CalendarDietComponent implements OnInit {
     private dateSharingService: DateSharingService
   ) {}
   ngOnInit() {
-    this.getAllMeasurements();
+    this.getAllMeals();
+
+    
+  }
+
+  
+
+  getAllMeals() {
+    this.mealsService.getAllMeals().subscribe((response) => {    
+      this.meals = response.map((meal) => ({
+        id: meal.id.toString(),
+        title: this.getMealNameLabel(meal.mealName),
+        start: meal.date,
+        allDay: true,
+        color: 'blue',
+        textColor: 'white',
+      }));
+      if (this.fullcalendar) {
+        this.fullcalendar.getApi().addEventSource(this.meals);
+      }
+
+    });
 
     this.calendarOptions = {
       initialView: 'dayGridWeek',
@@ -46,35 +68,13 @@ export class CalendarDietComponent implements OnInit {
       editable: true,
       timeZone: 'local',
       locale: 'pl',
-      events: this.events,
       eventBackgroundColor: '#ff0000',
       dateClick: this.handleDateClick.bind(this),
       eventClick: this.eventClick.bind(this),
     };
   }
 
-  
-
-  getAllMeasurements() {
-    this.mealsService.getAllMeals().subscribe((response) => {
-      console.log(response);
-      this.events = response.map((meal) => ({
-        id: meal.id.toString(),
-        title: meal.mealName.toString(),
-        allDay: true,
-        start: meal.date,
-        color: 'blue',
-        textColor: 'white',
-      }));
-      console.log(this.events);
-      // if (this.fullcalendar) {
-      //   this.fullcalendar.getApi().addEventSource(this.measurements);
-      // }
-    });
-  }
-
   handleDateClick(date: DateClickArg) {
-    console.log(date.date);
     this.dateSharingService.setSelectedDate(date.date);
     this.dialog.open(DateClickComponentComponent, {
       width: '30%',
@@ -88,6 +88,8 @@ export class CalendarDietComponent implements OnInit {
       data: { date: date, dietMode: true},
     });
   }
+
+
 
   eventClick(event: EventClickArg) {
     // console.log(event.event.groupId);
@@ -106,5 +108,24 @@ export class CalendarDietComponent implements OnInit {
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
     const day = date.getDate().toString().padStart(2, '0');
     return `${year}-${month}-${day}`;
+  }
+
+  getMealNameLabel(meal: MealEnum): string {
+    switch (meal) {
+      case MealEnum.Default:
+        return 'Brak';
+      case MealEnum.Breakfast:
+        return 'Śniadanie';
+      case MealEnum.SecondBreakfast:
+        return 'Drugie śniadanie';
+      case MealEnum.Lunch:
+        return 'Obiad';
+      case MealEnum.Snack:
+        return 'Przekąska';
+      case MealEnum.Dinner:
+        return 'Kolacja';
+      default:
+        return 'Brak';
+    }
   }
 }

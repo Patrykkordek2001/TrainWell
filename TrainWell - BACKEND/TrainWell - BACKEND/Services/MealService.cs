@@ -30,6 +30,11 @@ namespace TrainWell___BACKEND.Services
         public async Task<int> AddMealAsync(MealDto mealDto)
         {
             var mealModel = _mapper.Map<Meal>(mealDto);
+            var userId = await _currentUserProvider.GetUserIdAsync();
+            mealModel.UserId= userId;
+            var mealsFromDb = await _mealRepository.GetAllAsync();
+            var mealExists = mealsFromDb.Any(x => x.MealName == mealModel.MealName && x.Date.Day == mealModel.Date.Day &&  x.UserId == userId);
+            if (mealExists) return 0;
             await _mealRepository.AddAsync(mealModel);
 
             return mealModel.Id;
@@ -50,8 +55,10 @@ namespace TrainWell___BACKEND.Services
 
         public async Task<Meal> GetMealByIdAsync(int id)
         {
-            return await _mealRepository.GetByIdAsync(id);
+            var meal = await _mealRepository.GetByIdAsync(id);
+            return meal;
         }
+
 
         public async Task<IEnumerable<Meal>> GetMealsByDateAsync(DateTime date)
         {

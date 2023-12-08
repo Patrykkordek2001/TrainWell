@@ -44,6 +44,32 @@ namespace TrainWell___BACKEND.Migrations
                     b.ToTable("Meals");
                 });
 
+            modelBuilder.Entity("TrainWell___BACKEND.Models.Diet.MealProduct", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<double>("Grams")
+                        .HasColumnType("float");
+
+                    b.Property<int>("MealId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MealId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductsInMeal");
+                });
+
             modelBuilder.Entity("TrainWell___BACKEND.Models.Diet.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -83,33 +109,6 @@ namespace TrainWell___BACKEND.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Products");
-                });
-
-            modelBuilder.Entity("TrainWell___BACKEND.Models.Diet.ProductInMeal", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<double>("Grams")
-                        .HasColumnType("float");
-
-                    b.Property<int>("MealId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MealId");
-
-                    b.HasIndex("ProductId")
-                        .IsUnique();
-
-                    b.ToTable("ProductsInMeal");
                 });
 
             modelBuilder.Entity("TrainWell___BACKEND.Models.Measurement", b =>
@@ -312,7 +311,7 @@ namespace TrainWell___BACKEND.Migrations
                     b.ToTable("UserInfos");
                 });
 
-            modelBuilder.Entity("TrainWell___BACKEND.Models.Diet.ProductInMeal", b =>
+            modelBuilder.Entity("TrainWell___BACKEND.Models.Diet.MealProduct", b =>
                 {
                     b.HasOne("TrainWell___BACKEND.Models.Diet.Meal", "Meal")
                         .WithMany("ProductsInMeal")
@@ -321,8 +320,8 @@ namespace TrainWell___BACKEND.Migrations
                         .IsRequired();
 
                     b.HasOne("TrainWell___BACKEND.Models.Diet.Product", "Product")
-                        .WithOne("ProductInMeal")
-                        .HasForeignKey("TrainWell___BACKEND.Models.Diet.ProductInMeal", "ProductId")
+                        .WithMany("ProductsInMeal")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -373,7 +372,7 @@ namespace TrainWell___BACKEND.Migrations
 
             modelBuilder.Entity("TrainWell___BACKEND.Models.Diet.Product", b =>
                 {
-                    b.Navigation("ProductInMeal");
+                    b.Navigation("ProductsInMeal");
                 });
 
             modelBuilder.Entity("TrainWell___BACKEND.Models.Training.Exercise", b =>

@@ -3,7 +3,7 @@
     height: 82%;
 }
 
-.my-custom-event{
+.my-custom-calendar{
     height: 75%;
     width: 95%;
     margin: 50px;
@@ -28,3 +28,7 @@
     align-items: center;
     height: 100%;
 } */
+
+.fc-event-title {
+    height: 100px; /* Dostosuj wysokość zdarzenia według własnych preferencji */
+  }

@@ -19,7 +19,7 @@ namespace TrainWell___BACKEND.Database
         public DbSet<Measurement> Measurements { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Meal> Meals { get; set; }
-        public DbSet<ProductInMeal> ProductsInMeal { get; set; }
+        public DbSet<MealProduct> ProductsInMeal { get; set; }
         public DbSet<UserInfo> UserInfos { get; set; }
 
     }

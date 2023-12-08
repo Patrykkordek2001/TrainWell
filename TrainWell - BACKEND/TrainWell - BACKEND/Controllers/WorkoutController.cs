@@ -48,18 +48,9 @@ namespace TrainWell___BACKEND.Controllers
             return Ok(workout);
         }
 
-        [HttpGet("GetWorkoutByDate/{date}")]
-        public async Task<ActionResult<List<Workout>>> GetWorkoutByDate(DateTime date)
-        {
-            var workouts = await _workoutService.GetWorkoutByDateAsync(date);
-            if (workouts.IsNullOrEmpty() ) return NotFound("Brak treningów w podanej dacie");
-
-            return Ok(workouts.ToList());
-        }
-
 
         [HttpGet("GetAllWorkouts")]
-        public async Task<ActionResult<List<Workout>>> GetAllWorkouts()
+         public async Task<ActionResult<List<Workout>>> GetAllWorkouts()
         {
             var workouts = await _workoutService.GetAllWorkoutsAsync();
            

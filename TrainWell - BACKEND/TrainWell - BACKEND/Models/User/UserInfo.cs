@@ -52,32 +52,50 @@ namespace TrainWell___BACKEND.Models.User
 
             double activityMultiplier = GetActivityMultiplier();
             double caloriesPerDay = bmr * activityMultiplier;
+            int fatKcal;
+            int proteinsKcal;
 
             switch (Goal)
             {
                 case GoalEnum.Maintenance:
-                    FatPerDay = (int)(caloriesPerDay * 0.25) / 9;
-                    ProteinsPerDay = (int)(1.9 * Weight);
-                    CarbohydratesPerDay = ((int)caloriesPerDay - (FatPerDay + ProteinsPerDay)) / 4;
+                    fatKcal = (int)(caloriesPerDay * 0.25);
+                    FatPerDay = fatKcal / 9;
+
+                    proteinsKcal = (int)(1.9 * Weight * 4);
+                    ProteinsPerDay = proteinsKcal / 4;
+
+                    CarbohydratesPerDay = ((int)caloriesPerDay - (fatKcal + proteinsKcal)) / 4;
                     break;
+
                 case GoalEnum.Reduction:
                     caloriesPerDay *= 0.8;
-                    FatPerDay = (int)(caloriesPerDay * 0.20) / 9;
-                    ProteinsPerDay = (int)(2.0 * Weight);
-                    CarbohydratesPerDay = ((int)caloriesPerDay - (FatPerDay + ProteinsPerDay)) / 4;
+
+                    fatKcal = (int)(caloriesPerDay * 0.20);
+                    FatPerDay = fatKcal / 9;
+
+                    proteinsKcal = (int)(2.0 * Weight * 4);
+                    ProteinsPerDay = proteinsKcal / 4;
+
+                    CarbohydratesPerDay = ((int)caloriesPerDay - (fatKcal + proteinsKcal)) / 4;
                     break;
+
                 case GoalEnum.Gaining:
                     caloriesPerDay *= 1.2;
-                    FatPerDay = (int)(caloriesPerDay * 0.25) / 9;
-                    ProteinsPerDay = (int)(2.0 * Weight);
-                    CarbohydratesPerDay = ((int)caloriesPerDay - (FatPerDay + ProteinsPerDay)) / 4;
+
+                    fatKcal = (int)(caloriesPerDay * 0.25);
+                    FatPerDay = fatKcal / 9;
+
+                    proteinsKcal = (int)(2.0 * Weight * 4);
+                    ProteinsPerDay = proteinsKcal / 4;
+
+                    CarbohydratesPerDay = ((int)caloriesPerDay - (fatKcal + proteinsKcal)) / 4;
                     break;
 
                 default:
                     break;
             }
 
-            
+
 
             CaloriesPerDay = (int)caloriesPerDay;
         }

@@ -75,8 +75,6 @@ export class CalendarWorkoutsAndMeasurementsComponent implements OnInit {
 
   getAllMeasurements() {
     this.measurementsService.getAllMeasurements().subscribe((response) => {
-      console.log(this.measurements);
-      console.log(response);
       this.measurements = response.map((measurement) => ({
         id: measurement.id.toString(),
         groupId: 'pomiar',
@@ -86,9 +84,9 @@ export class CalendarWorkoutsAndMeasurementsComponent implements OnInit {
         color: 'blue',
         textColor: 'white',
       }));
-      console.log(this.measurements);
       if (this.fullcalendar) {
         this.fullcalendar.getApi().addEventSource(this.measurements);
+        console.log(this.events);
       }
     });
   }

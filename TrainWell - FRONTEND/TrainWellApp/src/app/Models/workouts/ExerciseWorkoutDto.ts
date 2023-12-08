@@ -1,7 +1,6 @@
-import { ExerciseSetDto } from "./ExerciseSetDto";
-import { WorkoutDto } from "./WorkoutDto";
+import { ExerciseSetPreview } from "./ExerciseSetPreview";
 
 export interface ExerciseWorkoutDto {
-    exerciseSets: ExerciseSetDto[];
+    exerciseSets: ExerciseSetPreview[];
     exerciseId: number;
   }

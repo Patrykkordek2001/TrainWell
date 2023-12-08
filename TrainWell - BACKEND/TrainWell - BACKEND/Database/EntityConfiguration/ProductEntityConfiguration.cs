@@ -20,7 +20,6 @@ namespace TrainWell___BACKEND.Database.EntityConfiguration
             builder.Property(e => e.Fiber);
             builder.Property(e => e.Proteins);
             builder.Property(e => e.Salt);
-            builder.HasOne(e => e.ProductInMeal).WithOne(d => d.Product);
 
         }
     }

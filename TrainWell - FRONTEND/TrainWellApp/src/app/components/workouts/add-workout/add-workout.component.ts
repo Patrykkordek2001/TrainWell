@@ -7,6 +7,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ExerciseDto } from 'src/app/Models/exercises/ExerciseDto';
 import { ExercisePreview } from 'src/app/Models/exercises/ExercisePreview';
@@ -48,6 +49,7 @@ export class AddWorkoutComponent implements OnInit {
     private toastrService: ToastrService,
     private dateSharingService: DateSharingService,
     private workoutsService: WorkoutsService,
+    private router: Router
   ) {}
 
   // ngOnInit(): void {
@@ -112,11 +114,12 @@ export class AddWorkoutComponent implements OnInit {
       this.workoutsService.addWorkout(workoutData).subscribe(
         response => {
           console.log('Success:', response);
-          // Dodaj kod obsługi sukcesu, jeśli to konieczne
+          this.router.navigate(['/kalendarz-treningi-pomiary']);
+          this.toastrService.success("Dodano poprawnie trening.");
         },
         error => {
           console.error('Error:', error);
-          // Dodaj kod obsługi błędu, jeśli to konieczne
+          this.toastrService.error("Wystąpił błąd podczas dodawnia pomairu.");
         }
       );
     }

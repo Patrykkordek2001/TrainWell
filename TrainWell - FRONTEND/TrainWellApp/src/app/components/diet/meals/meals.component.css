@@ -26,9 +26,9 @@ input{
     width: 90%;
 }
 .add-meal{
-    margin-top: 2%;
+    display: flex;
+    /* width: 95%; */
     margin-left: 5%;
-    width: 80%;
 }
 .add-product-to-meal{
     display: flex;
@@ -45,3 +45,47 @@ input{
 #submit-btn{
     margin-left: 2%;
 }
+.inputs{
+    display: flex;
+    flex-direction: row;
+}
+.macro{
+    margin-top: 1.5%;
+}
+.total-macro-in-meal{
+    display: flex;
+    width: 100%;
+}
+#main-header{
+    margin-top: 2%;
+    margin-left: 5%;
+    width: 60%;
+}
+form{
+
+    width: 60%;
+}
+.total-macro-with-header{
+    display: flex;
+    flex-direction: column;
+}
+
+#circle-add-btn{
+    width: 30px;
+    height: 30px;
+    font-size: 30px;
+    color: green;
+    margin-left: 22%;
+    cursor: pointer;
+}
+#cancel-btn{
+    margin-left: 58%;
+}
+#custom-remove-icon {
+    margin-top:15px;
+    width: 30px;
+    height: 30px;
+    color: red;
+    font-size: 30px;
+    cursor: pointer;
+  }

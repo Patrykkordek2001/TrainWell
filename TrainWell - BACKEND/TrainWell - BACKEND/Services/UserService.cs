@@ -48,7 +48,6 @@ namespace TrainWell___BACKEND.Services
             var user = await _userRepository
                     .Include(u => u.UserInfo)
                     .FirstOrDefaultAsync(u => u.Id == userId);
-            var x = _context.Users.Include(u => u.UserInfo).FirstOrDefault(x=>x.Id==userId);
             return await _userRepository.GetByIdAsync(userId);
         }
 

@@ -26,6 +26,9 @@ namespace TrainWell___BACKEND.Controllers
             var newMeal = await _mealService.AddMealAsync(mealDto);
 
             if (newMeal == null) return BadRequest("Błąd podczas dodawania posiłku");
+
+            if(newMeal == 0) return BadRequest("Dodałeś już taki posiłek w tym dniu");
+
             return Ok(new { message = "Posiłek został dodany" });
         }
 

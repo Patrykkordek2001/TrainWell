@@ -5,79 +5,25 @@ namespace TrainWell___BACKEND.Dtos.Diet
 {
     public class MealDto
     {
-        public MealDto(DateTime date, MealNameEnum mealName, ICollection<ProductInMealDto>? productsInMeal)
+        public MealDto(DateTime date, MealNameEnum mealName, ICollection<MealProductDto>? productsInMeal)
         {
-            Date = date;
+            Date = date.ToLocalTime();
             MealName = mealName;
             ProductsInMeal = productsInMeal;
+            SetTimeOfMeal();
         }
 
         public DateTime Date { get; set; }
         public MealNameEnum MealName { get; set; }
-        public ICollection<ProductInMealDto>? ProductsInMeal { get; set; }
-        //[NotMapped]
-        //public double TotalCalories
-        //{
-        //    get
-        //    {
-        //        return ProductsInMeal?.Sum(p => p.GramsCalories) ?? 0;
-        //    }
-        //}
-        //       //[NotMapped]
-        //public double TotalFat
-        //{
-        //    get
-        //    {
-        //        return ProductsInMeal?.Sum(p => p.GramsFat) ?? 0;
-        //    }
-        //}
-        //       //[NotMapped]
-        //public double TotalSaturatedFat
-        //{
-        //    get
-        //    {
-        //        return ProductsInMeal?.Sum(p => p.GramsSaturatedFat) ?? 0;
-        //    }
-        //}
-        //       //[NotMapped]
-        //public double TotalCarbohydrates
-        //{
-        //    get
-        //    {
-        //        return ProductsInMeal?.Sum(p => p.GramsCarbohydrates) ?? 0;
-        //    }
-        //}
-        //       //[NotMapped]
-        //public double TotalSugars
-        //{
-        //    get
-        //    {
-        //        return ProductsInMeal?.Sum(p => p.GramsSugars) ?? 0;
-        //    }
-        //}
-        //       //[NotMapped]
-        //public double TotalFiber
-        //{
-        //    get
-        //    {
-        //        return ProductsInMeal?.Sum(p => p.GramsFiber) ?? 0;
-        //    }
-        //}
-        //       //[NotMapped]
-        //public double TotalProteins
-        //{
-        //    get
-        //    {
-        //        return ProductsInMeal?.Sum(p => p.GramsProteins) ?? 0;
-        //    }
-        //}
-        //       //[NotMapped]
-        //public double TotalSalt
-        //{
-        //    get
-        //    {
-        //        return ProductsInMeal?.Sum(p => p.GramsSalt) ?? 0;
-        //    }
-        //}
+        public ICollection<MealProductDto>? ProductsInMeal { get; set; }
+        
+        public void SetTimeOfMeal()
+        {
+            if (MealName == MealNameEnum.Breakfast) Date = Date.Date.AddHours(8);
+            else if (MealName == MealNameEnum.SecondBreakfast) Date = Date.Date.AddHours(10);
+            else if (MealName == MealNameEnum.Lunch) Date = Date.Date.AddHours(12);
+            else if (MealName == MealNameEnum.Snack) Date = Date.Date.AddHours(15);
+            else if (MealName == MealNameEnum.Dinner) Date = Date.Date.AddHours(18);
+        }
     }
 }

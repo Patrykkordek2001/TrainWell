@@ -12,8 +12,8 @@
         <mat-datepicker-toggle matIconSuffix [for]="picker" style="cursor: none;"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
-      <button mat-raised-button color="primary" class="add-exercise-to-list-btn" (click)="addExerciseToList()" *ngIf="!addingExerciseToList">Dodaj
-        ćwiczenie do listy</button>
+      <button mat-raised-button color="primary" class="add-exercise-to-list-btn" id="add-ex-to-list-btn" (click)="addExerciseToList()" *ngIf="!addingExerciseToList">Dodaj
+        ćwiczenie</button>
       <button mat-raised-button color="warn" (click)="cancelAddingExerciseToList()" 
         *ngIf="addingExerciseToList">Anuluj</button>
       <button mat-raised-button (click)="addExerciseBool()" *ngIf="!addingExercise" class="add-exercise-to-workout-btn">Dodaj do treningu</button>

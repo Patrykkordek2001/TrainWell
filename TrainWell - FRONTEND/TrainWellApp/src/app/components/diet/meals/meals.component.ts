@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { ToastrService } from 'ngx-toastr';
@@ -8,6 +8,7 @@ import { ProductPreview } from 'src/app/Models/diet/ProductPreview';
 import { DateSharingService } from 'src/app/services/date-sharing.service';
 import { MealService } from 'src/app/services/diet/meal.service';
 import { ProductService } from 'src/app/services/diet/product.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-meals',
@@ -23,6 +24,11 @@ export class MealsComponent implements OnInit, AfterViewInit {
   mealProteins:number = 0;
   mealCarbohydrates:number = 0;
   mealCalories:number = 0;
+
+  userMealFat:number = 0;
+  userMealProteins:number = 0;
+  userMealCarbohydrates:number = 0;
+  userMealCalories:number = 0;
 
   displayedColumns: string[] = [
     'Lp',
@@ -51,7 +57,8 @@ export class MealsComponent implements OnInit, AfterViewInit {
     private formBuilder: FormBuilder,
     private toastrService: ToastrService,
     private dateSharingService: DateSharingService,
-    private mealService: MealService
+    private mealService: MealService,
+    private userService: UserService
   ) {}
 
   ngAfterViewInit() {
@@ -105,6 +112,7 @@ export class MealsComponent implements OnInit, AfterViewInit {
     this.addProductMode = true;
   }
   cancelAddProductMode(){
+
     this.addProductMode = false;
   }
 
@@ -123,6 +131,7 @@ export class MealsComponent implements OnInit, AfterViewInit {
     if (this.addMealForm.valid) {
       const formData = this.addMealForm.value;
       // Wywołaj API, aby przesłać dane do backendu
+      console.log(formData);
       this.mealService.addMeal(formData).subscribe(
         // Obsłuż odpowiedź z backendu
         (response) => {
@@ -193,13 +202,36 @@ export class MealsComponent implements OnInit, AfterViewInit {
     const carbohydrates = (product.carbohydrates * multiplier);
     const calories = (product.calories * multiplier);
 
-    this.mealFat += fat;
-    this.mealProteins += proteins;
-    this.mealCarbohydrates += carbohydrates;
-    this.mealCalories += calories;
-    console.log(product);
-    return `B: ${proteins.toFixed(0)}g, T: ${fat.toFixed(0)}g, W: ${carbohydrates.toFixed(0)}g, Kcal: ${calories.toFixed(0)}`;
+    return `${product.name}: B: ${proteins.toFixed(0)}g, T: ${fat.toFixed(0)}g, W: ${carbohydrates.toFixed(0)}g, Kcal: ${calories.toFixed(0)}`;
   }
+
+  calculateTotalNutritionalValues(): void {
+    this.mealFat = 0;
+    this.mealProteins = 0;
+    this.mealCarbohydrates = 0;
+    this.mealCalories = 0;
+  
+    this.productsInMeal.controls.forEach((control: AbstractControl, index: number, array: AbstractControl[]) => {
+      const grams = (control as FormGroup).get('grams')?.value;
+      const productId = (control as FormGroup).get('productId')?.value;
+  
+      const product = this.products.find((x) => x.id === productId);
+  
+      if (product) {
+        const multiplier = grams / 100;
+        const proteins = product.proteins * multiplier;
+        const fat = product.fat * multiplier;
+        const carbohydrates = product.carbohydrates * multiplier;
+        const calories = product.calories * multiplier;
+  
+        this.mealFat += fat;
+        this.mealProteins += proteins;
+        this.mealCarbohydrates += carbohydrates;
+        this.mealCalories += calories;
+      }
+    });
+  }
+  
 
 
   findTheProduct(index: number){
@@ -208,6 +240,8 @@ export class MealsComponent implements OnInit, AfterViewInit {
     console.log(result);
     return result;
   }
+
+
 
   getMealNameLabel(meal: MealEnum): string {
     switch (meal) {

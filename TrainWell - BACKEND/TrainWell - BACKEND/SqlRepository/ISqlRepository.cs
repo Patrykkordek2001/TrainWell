@@ -10,6 +10,5 @@ namespace TrainWell___BACKEND.SqlRepository
         Task<T> GetByIdAsync(int id);
         Task UpdateAsync(T entity);
         IQueryable<T> Include(params Expression<Func<T, object>>[] includes);
-
     }
 }

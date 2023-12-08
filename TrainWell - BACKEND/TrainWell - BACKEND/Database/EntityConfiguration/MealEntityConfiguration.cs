@@ -13,10 +13,6 @@ namespace TrainWell___BACKEND.Database.EntityConfiguration
             builder.HasKey(e => e.Id);
             builder.Property(m => m.Date).IsRequired(true);
             builder.Property(m => m.MealName).IsRequired(true);
-
-            builder.HasMany(e => e.ProductsInMeal)
-                .WithOne(es => es.Meal)
-                .HasForeignKey(e => e.MealId);
         }
     }
 }

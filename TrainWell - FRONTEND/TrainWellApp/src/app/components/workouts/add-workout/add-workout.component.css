@@ -16,6 +16,7 @@ h3{
 .headers{
     display: flex;
     flex-direction:space-between;
+    width: 100%;
 
 }
 .mat-mdc-form-field{
@@ -36,7 +37,7 @@ margin-left: 2%;
     font-size: 24px;
     cursor: pointer;
   }
-::ng-deep .add-set-btn{
+ .add-set-btn{
     margin-bottom: 2%;
 }
 ::ng-deep .add-exercise-to-list-btn {
@@ -52,4 +53,5 @@ margin-left: 2%;
     display: flex;
     justify-content: end;
   }
+  
   

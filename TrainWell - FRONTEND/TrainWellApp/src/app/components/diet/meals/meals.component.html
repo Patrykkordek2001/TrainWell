@@ -1,51 +1,77 @@
 <mat-tab-group>
      <mat-tab label="Posiłek">
+          <h5 id="main-header">Dodawanie posiłku:</h5>
           <div class="add-meal">
-               <h5>Dodawanie posiłku:</h5>
                <form [formGroup]="addMealForm">
-                    <mat-form-field>
-                         <mat-label>Nazwa:</mat-label>
-                         <mat-select placeholder="Posiłek" id="activity" formControlName="mealName">
-                              <mat-option *ngFor="let meal of meals" [value]="meal">{{ getMealNameLabel(meal)
-                                   }}</mat-option>
-                         </mat-select>
-                    </mat-form-field>
-                    <mat-form-field>
-                         <mat-label>Wybierz datę:</mat-label>
-                         <input matInput [matDatepicker]="picker" class="input-date" formControlName="date">
-                         <mat-datepicker-toggle matIconSuffix [for]="picker"
-                              style="cursor: none;"></mat-datepicker-toggle>
-                         <mat-datepicker #picker></mat-datepicker>
-                    </mat-form-field>
-                    <button mat-raised-button  (click)="changeAddProductMode()" *ngIf="!addProductMode">Dodaj produkt do posiłku</button>
-                    <div class="add-product-to-meal" *ngIf="addProductMode" formArrayName="productsInMeal">
-                         <div *ngFor="let product of productsInMeal.controls; let i = index" [formGroupName]="i">
-                              <div class="inputs">
-                         <mat-form-field>
-                              <mat-label>Nazwa produktu:</mat-label>
-                              <mat-select placeholder="Nazwa produktu" id="activity" formControlName="productId">
-                                   <mat-option *ngFor="let product of products" [value]="product.id">{{product.name}}</mat-option>
-                              </mat-select>
-                         </mat-form-field>
-                         <mat-form-field>
-                              <mat-label>Waga[g]:</mat-label>
-                              <input matInput type="text" placeholder="Waga" formControlName="grams">
-                         </mat-form-field>   
-                    </div >
-                         <div class="macro">{{ calculateNutritionalValues(productsInMeal.at(i).get('grams')?.value, this.productsInMeal.at(i).get('productId')?.value) }}</div>
-                      
+
+                    <div class="">
+                         <div>
+                              <mat-form-field>
+                                   <mat-label>Nazwa:</mat-label>
+                                   <mat-select placeholder="Posiłek" id="activity" formControlName="mealName">
+                                        <mat-option *ngFor="let meal of meals" [value]="meal">{{ getMealNameLabel(meal)
+                                             }}</mat-option>
+                                   </mat-select>
+                              </mat-form-field>
+                              <mat-form-field>
+                                   <mat-label>Wybierz datę:</mat-label>
+                                   <input matInput [matDatepicker]="picker" class="input-date" formControlName="date">
+                                   <mat-datepicker-toggle matIconSuffix [for]="picker"
+                                        style="cursor: none;"></mat-datepicker-toggle>
+                                   <mat-datepicker #picker></mat-datepicker>
+                              </mat-form-field>
+                              <button mat-raised-button id="submit-btn" (click)="calculateTotalNutritionalValues()">Oblicz</button>
                          </div>
-                         
-                    </div>    
-                    <div class="buttons" *ngIf="addProductMode">
-                         <button mat-raised-button  color="primary" id="add-prod-btn" (click)="addProductInMeal()" >Dodaj produkt</button>
-                         <button mat-raised-button  color="warn" (click)="cancelAddProductMode()" >Anuluj</button>
-                         <button mat-raised-button   id="submit-btn" (click)="addProductInMeal()" >Zapisz</button>
+
+                         <mat-icon (click)="changeAddProductMode()" *ngIf="!addProductMode"
+                              id="circle-add-btn">add_circle_outline</mat-icon>
                     </div>
-                    
+
+                    <div class="add-poduct-to-meal" *ngIf="addProductMode" formArrayName="productsInMeal">
+                         <div *ngFor="let product of productsInMeal.controls; let i = index" [formGroupName]="i"
+                              class="add-product-to-meal">
+                              <div class="inputs">
+                                   <mat-form-field>
+                                        <mat-label>Nazwa produktu:</mat-label>
+                                        <mat-select placeholder="Nazwa produktu" id="activity"
+                                             formControlName="productId">
+                                             <mat-option *ngFor="let product of products"
+                                                  [value]="product.id">{{product.name}}</mat-option>
+                                        </mat-select>
+                                   </mat-form-field>
+                                   <mat-form-field>
+                                        <mat-label>Waga[g]:</mat-label>
+                                        <input matInput type="number" placeholder="Waga" formControlName="grams">
+                                   </mat-form-field>
+                                   <mat-icon (click)="removeProductInMeal(i)" id="custom-remove-icon">clear</mat-icon>
+                              </div>
+                              <div class="macro">{{ calculateNutritionalValues(productsInMeal.at(i).get('grams')?.value,
+                                   this.productsInMeal.at(i).get('productId')?.value) }}</div>
+
+                         </div>
+
+                    </div>
+                    <div class="buttons" *ngIf="addProductMode">
+                         <mat-icon (click)="addProductInMeal()" id="circle-add-btn">add_circle_outline</mat-icon>
+                         <button mat-raised-button color="warn" (click)="cancelAddProductMode()"
+                              id="cancel-btn">Anuluj</button>
+                         <button mat-raised-button id="submit-btn" (click)="submitForm()">Zapisz</button>
+                    </div>
+
 
                </form>
+               <div class="total-macro-with-header">
+                    <h5>Makroskładniki oraz kaloryka całego posiłku:</h5>
+                    <div class="total-macro-in-meal">
+
+                         <p>B: {{this.mealProteins.toFixed(0)}}g, T: {{this.mealFat.toFixed(0)}}g, W: {{this.mealCarbohydrates.toFixed(0)}}g, Kcal:
+                              {{this.mealCalories.toFixed(0)}}</p>
+
+                    </div>
+               </div>
+
           </div>
+
      </mat-tab>
      <mat-tab label="Produkty">
           <div class="adding-product">
@@ -77,7 +103,8 @@
                </form>
                <div class="buttons">
                     <button mat-raised-button color="warn" (click)="cancel()" *ngIf="addMode">Anuluj</button>
-                    <button mat-raised-button color="primary" (click)="addProduct()" *ngIf="addMode"id="add-btn">Dodaj</button>
+                    <button mat-raised-button color="primary" (click)="addProduct()" *ngIf="addMode"
+                         id="add-btn">Dodaj</button>
                </div>
 
 

@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using TrainWell___BACKEND.Database;
 using TrainWell___BACKEND.Dtos.Workouts;
 using TrainWell___BACKEND.Models.Training;
+using TrainWell___BACKEND.Models.User;
 using TrainWell___BACKEND.Services.Interfaces;
 using TrainWell___BACKEND.SqlRepository;
 
@@ -31,7 +32,8 @@ namespace TrainWell___BACKEND.Services
         public async Task<int> AddWorkoutAsync(WorkoutDto workout)
         {
             var workoutModel = _mapper.Map<Workout>(workout);
-
+            var userId = await _currentUserProvider.GetUserIdAsync();
+            workoutModel.UserId = userId;
             await _workoutRepository.AddAsync(workoutModel);
 
             return workoutModel.Id;
@@ -54,18 +56,10 @@ namespace TrainWell___BACKEND.Services
 
         public async Task<Workout> GetWorkoutByIdAsync(int id)
         {
-            return await _workoutRepository.GetByIdAsync(id);
+            var workout = await _context.Workouts.Include(w => w.ExerciseWorkouts)?.ThenInclude(e => e.ExerciseSets).FirstOrDefaultAsync(w => w.Id == id);
+            return  workout;
         }
 
-        public async Task<IEnumerable<Workout>> GetWorkoutByDateAsync(DateTime date)
-        {
-            var workouts = _context.Workouts
-                    .Include(w => w.ExerciseWorkouts) 
-                        .ThenInclude(e => e.ExerciseSets)
-                    .Where(w => w.Date.Date == date.Date);
-
-            return  workouts;
-        }
 
         public async Task UpdateWorkoutAsync(Workout workout)
         {
