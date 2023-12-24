@@ -17,6 +17,10 @@ export class WorkoutsService {
   }
 
 
+  updateWorkout(workoutData: WorkoutDto): Observable<any> {
+    return this.httpClient.put('https://localhost:7004/api/Workout/UpdateWorkout',workoutData);
+  }
+
 
   getWorkoutById(id: number): Observable<WorkoutPreviewWithDetails> {
     return this.httpClient.get<WorkoutPreviewWithDetails>(`https://localhost:7004/api/Workout/GetWorkoutByID/${id}`);

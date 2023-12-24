@@ -29,6 +29,13 @@ namespace TrainWell___BACKEND.Controllers
             return Ok(new { message = "Pomiar został dodany" });
         }
 
+        [HttpPut("UpdateMeasurement")]
+        public async Task<ActionResult> UpdateMeasurement(MeasurementsDto measurementDto)
+        {
+             await _measurementService.UpdateMeasurementAsync(measurementDto);
+            return Ok(new { message = "Pomiar został zaktualizowany" });
+        }
+
         [HttpDelete("{measurementId}")]
         public async Task<ActionResult> DeleteMeasurement(int measurementId)
         {

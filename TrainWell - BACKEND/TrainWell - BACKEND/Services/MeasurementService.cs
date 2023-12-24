@@ -28,7 +28,8 @@ namespace TrainWell___BACKEND.Services
         public async Task<int> AddMeasurementAsync(MeasurementsDto measurementDto)
         {
             var measurementModel = _mapper.Map<Measurement>(measurementDto);
-
+            var userId = await _currentUserProvider.GetUserIdAsync();
+            measurementModel.UserId = userId;
             await _measurementRepository.AddAsync(measurementModel);
 
             return measurementModel.Id;
@@ -62,9 +63,12 @@ namespace TrainWell___BACKEND.Services
         }
 
 
-        public async Task UpdateMeasurementAsync(Measurement measurement)
+        public async Task UpdateMeasurementAsync(MeasurementsDto measurement)
         {
-            await _measurementRepository.UpdateAsync(measurement);
+            var measurementModel = _mapper.Map<Measurement>(measurement);
+            var userId = await _currentUserProvider.GetUserIdAsync();
+            measurementModel.UserId = userId;
+            await _measurementRepository.UpdateAsync(measurementModel);
         }
 
     }

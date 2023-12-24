@@ -1,4 +1,5 @@
 export interface MeasurementDto{
+    id:number;
     date: Date;
     shoulders: number;
     chest: number;

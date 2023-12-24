@@ -17,6 +17,16 @@ export class ExercisesService {
 
   addExercise(exerciseData: ExerciseDto): Observable<any> {
     console.log(exerciseData);
-    return this.httpClient.post<ExercisePreview[]>('https://localhost:7004/api/Exercise/AddExercise',exerciseData);
+    return this.httpClient.post('https://localhost:7004/api/Exercise/AddExercise',exerciseData);
+  }
+
+  // deleteExercise(exerciseId: number): Observable<any> {
+  //   const url = `${this.apiUrl}/api/exercises/${exerciseId}`;
+
+  //   return this.http.delete(url);
+  // }
+
+  deleteExercise(exerciseId: number): Observable<any> {
+    return this.httpClient.delete(`https://localhost:7004/api/Exercise/DeleteExerciseById/${exerciseId}`);
   }
 }

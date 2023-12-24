@@ -13,7 +13,7 @@ namespace TrainWell___BACKEND.Dtos
         public MappingProfile()
         {
             CreateMap<WorkoutDto, Workout>()
-                .ForMember(dest => dest.ExerciseWorkouts, opt => opt.MapFrom(src => src.ExercisesWorkout));
+                .ForMember(dest => dest.ExercisesWorkout, opt => opt.MapFrom(src => src.ExercisesWorkout));
             CreateMap<ExerciseDto, Exercise>();
             CreateMap<ExerciseSetDto, ExerciseSet>();
             CreateMap<UserDto, User>();
@@ -22,6 +22,8 @@ namespace TrainWell___BACKEND.Dtos
             CreateMap<ProductDto, Product>();
             CreateMap<MealProductDto, MealProduct>();
             CreateMap<UserInfoDto, UserInfo>();
+            CreateMap<WorkoutUpdateDto, Workout>()
+                .ForMember(dest => dest.ExercisesWorkout, opt => opt.MapFrom(src => src.ExercisesWorkout));
 
 
         }

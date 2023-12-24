@@ -108,8 +108,9 @@ export class CalendarWorkoutsAndMeasurementsComponent implements OnInit {
   }
 
   eventClick(event: EventClickArg) {
-    console.log(event.event.groupId);
     
+    console.log(event.event.groupId);
+
     if (event.event.groupId == 'pomiar') {
       this.router.navigate(['/edytuj-pomiar/' + event.event.id]);
     } else if (event.event.groupId == 'trening') {

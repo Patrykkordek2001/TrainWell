@@ -21,6 +21,6 @@ namespace TrainWell___BACKEND.Models.Training
         public int Repetitions { get; set; }
         public double Weight { get; set; }
         public int? ExerciseWorkoutId { get; set; }
-        public virtual ExerciseWorkout? ExerciseWorkout { get; set; }
+        //public virtual ExerciseWorkout? ExerciseWorkout { get; set; }
     }
 }

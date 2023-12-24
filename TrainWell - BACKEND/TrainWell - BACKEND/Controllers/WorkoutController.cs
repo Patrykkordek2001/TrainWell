@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using TrainWell___BACKEND.Dtos.Workouts;
 using TrainWell___BACKEND.Models.Training;
+using TrainWell___BACKEND.Services;
 using TrainWell___BACKEND.Services.Interfaces;
 
 namespace TrainWell___BACKEND.Controllers
@@ -30,12 +31,21 @@ namespace TrainWell___BACKEND.Controllers
             return Ok(new { message = "Trening został dodany" });
         }
 
+        
+
         [HttpDelete("{workoutId}")]
         public async Task<ActionResult> DeleteWorkout(int workoutId)
         {
              await _workoutService.DeleteWorkoutAsync(workoutId);
              return Ok(new { message = "Trening został usunięty" });
               
+        }
+
+        [HttpPut("UpdateWorkout")]
+        public async Task<ActionResult> UpdateWorkout(WorkoutUpdateDto workoutDto)
+        {
+            await _workoutService.UpdateWorkoutAsync2(workoutDto);
+            return Ok(new { message = "Pomiar został zaktualizowany" });
         }
 
         [HttpGet("GetWorkoutByID/{workoutId}")]

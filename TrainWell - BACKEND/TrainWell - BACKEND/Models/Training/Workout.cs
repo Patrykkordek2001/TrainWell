@@ -19,7 +19,7 @@ namespace TrainWell___BACKEND.Models.Training
         public int Id { get; set; }
         public string Title { get; set; }
         public DateTime Date { get; set; }
-        public ICollection<ExerciseWorkout>? ExerciseWorkouts { get; set; }
+        public ICollection<ExerciseWorkout>? ExercisesWorkout { get; set; }
         public int UserId { get; set; }
 
     }

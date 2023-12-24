@@ -20,4 +20,7 @@ export class MeasurementsService {
   getMeasurementById(id: number): Observable<MeasurementPreview> {
     return this.httpClient.get<MeasurementPreview>(`https://localhost:7004/api/Measurement/GetMeasurementById/${id}`);
   }
+  updateMeasurement(updatedMeasurement: MeasurementDto): Observable<any> {
+    return this.httpClient.put<any>(`https://localhost:7004/api/Measurement/UpdateMeasurement/`, updatedMeasurement);
+  }
 }

@@ -29,7 +29,7 @@ namespace TrainWell___BACKEND.Controllers
             return newExercise;
         }
 
-        [HttpDelete("{exerciseId}")]
+        [HttpDelete("DeleteExerciseById/{exerciseId}")]
         public async Task<ActionResult> DeleteExercise(int exerciseId)
         {
             await _exerciseService.DeleteExerciseAsync(exerciseId);

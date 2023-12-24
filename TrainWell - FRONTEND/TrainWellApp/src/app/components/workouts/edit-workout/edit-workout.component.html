@@ -1,46 +1,120 @@
-<div class="container">
-    <form [formGroup]="trainingForm">
-      <h3>Edycja treningu:</h3>
-      <div class="headers">
-        <!-- ... (existing code remains unchanged) -->
-      </div>
-      <div class="add-exercise-to-list" *ngIf="editingExercise">
-        <!-- ... (existing code remains unchanged) -->
-      </div>
-      <div class="addEvent" *ngIf="editingExercise">
-        <div formArrayName="exercisesWorkout">
-          <div *ngFor="let exercise of exerciseControls; let i=index" [formGroupName]="i">
+<mat-tab-group>
+  <mat-tab label="Trening">
+    <div class="container">
+      <div class="left-side">
+        <form [formGroup]="trainingForm">
+          <h3>Edycja treningu:</h3>
+          <div class="headers">
             <mat-form-field>
-              <mat-label>Ćwiczenie</mat-label>
-              <mat-select placeholder="Ćwiczenie" id="exerciseId" formControlName="exerciseId">
-                <mat-option *ngFor="let exercise of exercises" [value]="exercise.id">{{ exercise.name }}</mat-option>
-              </mat-select>
+              <mat-label>Tytuł</mat-label>
+              <input matInput type="text" placeholder="Tytuł" formControlName="title">
             </mat-form-field>
-            <mat-icon (click)="removeExercise(i)" class="custom-remove-icon">cancel</mat-icon>
-  
-            <button mat-raised-button color="basic" (click)="addSet(i)" class="add-set-btn">Dodaj Serie</button>
-  
-            <div formArrayName="exerciseSets">
-              <div *ngFor="let set of getExerciseSets(i); let j=index" [formGroupName]="j">
+            <mat-form-field>
+              <mat-label>Wybierz datę:</mat-label>
+              <input matInput [matDatepicker]="picker" class="input-date" formControlName="date">
+              <mat-datepicker-toggle matIconSuffix [for]="picker" style="cursor: none;"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="addEvent" > 
+            <div formArrayName="exercisesWorkout">
+              <div *ngFor="let exercise of exerciseControls; let i=index" [formGroupName]="i">
                 <mat-form-field>
-                  <mat-label>Liczba powtórzeń</mat-label>
-                  <input matInput type="number" placeholder="Liczba powtórzeń" formControlName="repetitions">
+                  <mat-label>Ćwiczenie</mat-label>
+                  <mat-select placeholder="Ćwiczenie" id="exerciseId" formControlName="exerciseId">
+                    <mat-option *ngFor="let exercise of exercises" [value]="exercise.id">{{ exercise.name
+                      }}</mat-option>
+                  </mat-select>
                 </mat-form-field>
-                <mat-form-field>
-                  <mat-label>Ciężar [kg]</mat-label>
-                  <input matInput type="number" placeholder="Ciężar [kg]" formControlName="weight">
-                </mat-form-field>
-                <mat-icon (click)="removeSet(i, j)" class="custom-remove-icon">cancel</mat-icon>
+                <mat-icon (click)="removeExercise(i)" class="custom-remove-icon ">cancel</mat-icon>
+
+                <button mat-raised-button color="basic" (click)="addSet(i)" class="add-set-btn">Dodaj Serie</button>
+
+                <div formArrayName="exerciseSets">
+                  <div *ngFor="let set of getExerciseSets(i); let j=index" [formGroupName]="j">
+                    <mat-form-field>
+                      <mat-label>Liczba powtórzeń</mat-label>
+                      <input matInput type="number" placeholder="Liczba powtórzeń" formControlName="repetitions">
+                    </mat-form-field>
+                    <mat-form-field>
+                      <mat-label>Ciężar [kg]</mat-label>
+                      <input matInput type="number" placeholder="Ciężar [kg]" formControlName="weight">
+                    </mat-form-field>
+                    <mat-icon (click)="removeSet(i, j)" class="custom-remove-icon ">cancel</mat-icon>
+                  </div>
+                </div>
               </div>
             </div>
+
+            <button mat-raised-button color="primary" (click)="addExercise()">Dodaj ćwiczenie</button>
+
           </div>
+          <div class="save-button-container">
+            <button mat-raised-button color="warn" (click)="cancelAddingExercise()"
+              >Anuluj</button>
+
+            <button mat-raised-button color="primary" class="save-btn" (click)="submit()"
+              >Zapisz</button>
+          </div>
+
+
+        </form>
+      </div>
+
+
+    </div>
+  </mat-tab>
+  <mat-tab label="Ćwiczenia">
+    <div class="container-products">
+
+      <div class="add-exercise-to-list">
+        <h5>Dodawanie ćwiczenia:</h5>
+        <form [formGroup]="addExerciseForm">
+        <mat-form-field>
+          <mat-label>Nazwa ćwiczenia</mat-label>
+          <input matInput type="text" placeholder="Ćwiczenie" formControlName="name">
+        </mat-form-field>
+      </form>
+      <div id="add-exercise-to-list">
+        <button mat-raised-button color="primary" id="btn" (click)="addExerciseToListSubmit()">Dodaj</button>
+      </div>
+        
+      </div>
+
+
+      <div class="table">
+        <div class="mat-elevation-z8">
+             <table mat-table [dataSource]="dataSource">
+  
+                  <ng-container matColumnDef="Lp">
+                       <th mat-header-cell *matHeaderCellDef> Lp. </th>
+                       <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="Nazwa">
+                       <th mat-header-cell *matHeaderCellDef> Nazwa </th>
+                       <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="Usuń">
+                    <th mat-header-cell *matHeaderCellDef> Usuń </th>
+                    <td mat-cell *matCellDef="let element">
+                      <button mat-icon-button color="warn" (click)="removeExerciseFromTable(element.id)">
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                    </td>
+               </ng-container>
+                  
+            
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+             </table>
+             <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+                  aria-label="Select page of periodic elements">
+             </mat-paginator>
         </div>
-  
-        <button mat-raised-button color="primary" (click)="addExercise()">Dodaj ćwiczenie</button>
-      </div>
-      <div class="save-button-container">
-        <button mat-raised-button color="primary" class="save-btn" (click)="submit()">Zapisz</button>
-      </div>
-    </form>
-  </div>
-  
+   </div>
+    </div>
+    
+    
+  </mat-tab>
+</mat-tab-group>

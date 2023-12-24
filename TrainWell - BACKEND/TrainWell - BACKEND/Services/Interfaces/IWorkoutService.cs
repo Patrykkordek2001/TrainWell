@@ -9,7 +9,7 @@ namespace TrainWell___BACKEND.Services.Interfaces
         Task DeleteWorkoutAsync(int id);
         Task<IEnumerable<Workout>> GetAllWorkoutsAsync();
         Task<Workout> GetWorkoutByIdAsync(int id);
-        Task UpdateWorkoutAsync(Workout workout);
-
+        Task UpdateWorkoutAsync(WorkoutUpdateDto workout);
+        Task UpdateWorkoutAsync2(WorkoutUpdateDto workout);
     }
 }

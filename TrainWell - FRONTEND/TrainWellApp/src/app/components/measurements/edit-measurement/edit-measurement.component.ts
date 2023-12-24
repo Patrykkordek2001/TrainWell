@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { MeasurementDto } from 'src/app/Models/measurements/MeasurementDto';
 import { MeasurementsService } from 'src/app/services/workouts/measurements.service';
 
 @Component({
@@ -60,9 +61,39 @@ export class EditMeasurementComponent implements OnInit {
     this.initForm();
     this.fetchForm();
   }
-  submit() {}
+  submit() {
+    if (this.measurementForm.valid) {
+      const updatedMeasurement: MeasurementDto = {
+        id: this.measurementId,
+        date: this.measurementForm.value.date,
+        shoulders: this.measurementForm.value.shoulders,
+        chest: this.measurementForm.value.chest,
+        waist: this.measurementForm.value.waist,
+        arm: this.measurementForm.value.arm,
+        hips: this.measurementForm.value.hips,
+        thigh: this.measurementForm.value.thigh,
+        weight: this.measurementForm.value.weight,
+      };
+  
+      this.measurementService
+        .updateMeasurement(updatedMeasurement)
+        .subscribe(
+          (response) => {
+            this.toastrService.success('Pomiary ciała zostały zaktualizowane pomyślnie.');
+            this.router.navigate(['/kalendarz-dieta']);
+          },
+          (error) => {
+            this.toastrService.error('Wystąpił błąd podczas aktualizacji pomiarów ciała.');
+            console.error(error);
+          }
+        );
+    } else {
+      this.toastrService.error('Formularz zawiera błędy. Sprawdź poprawność wprowadzonych danych.');
+    }
+  }
+  
 
   cancel() {
-    this.router.navigate(['/treningi']);
+    this.router.navigate(['/kalendarz-dieta']);
   }
 }

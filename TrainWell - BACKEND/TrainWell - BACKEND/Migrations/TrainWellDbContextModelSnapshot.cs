@@ -41,7 +41,7 @@ namespace TrainWell___BACKEND.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Meals");
+                    b.ToTable("Meals", (string)null);
                 });
 
             modelBuilder.Entity("TrainWell___BACKEND.Models.Diet.MealProduct", b =>
@@ -67,7 +67,7 @@ namespace TrainWell___BACKEND.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductsInMeal");
+                    b.ToTable("ProductsInMeal", (string)null);
                 });
 
             modelBuilder.Entity("TrainWell___BACKEND.Models.Diet.Product", b =>
@@ -108,7 +108,7 @@ namespace TrainWell___BACKEND.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("TrainWell___BACKEND.Models.Measurement", b =>
@@ -148,7 +148,7 @@ namespace TrainWell___BACKEND.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Measurements");
+                    b.ToTable("Measurements", (string)null);
                 });
 
             modelBuilder.Entity("TrainWell___BACKEND.Models.Training.Exercise", b =>
@@ -164,7 +164,7 @@ namespace TrainWell___BACKEND.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Exercises");
+                    b.ToTable("Exercises", (string)null);
                 });
 
             modelBuilder.Entity("TrainWell___BACKEND.Models.Training.ExerciseSet", b =>
@@ -188,7 +188,7 @@ namespace TrainWell___BACKEND.Migrations
 
                     b.HasIndex("ExerciseWorkoutId");
 
-                    b.ToTable("ExerciseSets");
+                    b.ToTable("ExerciseSets", (string)null);
                 });
 
             modelBuilder.Entity("TrainWell___BACKEND.Models.Training.ExerciseWorkout", b =>
@@ -211,7 +211,7 @@ namespace TrainWell___BACKEND.Migrations
 
                     b.HasIndex("WorkoutId");
 
-                    b.ToTable("ExerciseWorkouts");
+                    b.ToTable("ExerciseWorkouts", (string)null);
                 });
 
             modelBuilder.Entity("TrainWell___BACKEND.Models.Training.Workout", b =>
@@ -234,7 +234,7 @@ namespace TrainWell___BACKEND.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Workouts");
+                    b.ToTable("Workouts", (string)null);
                 });
 
             modelBuilder.Entity("TrainWell___BACKEND.Models.User.User", b =>
@@ -259,7 +259,7 @@ namespace TrainWell___BACKEND.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("TrainWell___BACKEND.Models.User.UserInfo", b =>
@@ -308,7 +308,7 @@ namespace TrainWell___BACKEND.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("UserInfos");
+                    b.ToTable("UserInfos", (string)null);
                 });
 
             modelBuilder.Entity("TrainWell___BACKEND.Models.Diet.MealProduct", b =>

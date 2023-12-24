@@ -15,6 +15,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { MY_DATE_FORMATS } from '../shared/date-format';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 
@@ -33,6 +36,9 @@ import { MatIconModule } from '@angular/material/icon';
     MatSelectModule,
     MatOptionModule,
     MatIconModule,
+    MatTabsModule,
+    MatTableModule,
+    MatPaginatorModule
 
   ],
   exports: [AddWorkoutComponent,EditWorkoutComponent],

@@ -16,14 +16,14 @@ namespace TrainWell___BACKEND.Models.Training
         public int Id { get; set; }
 
         //serie
-        public List<ExerciseSet>? ExerciseSets { get; set; }
+        public ICollection<ExerciseSet>? ExerciseSets { get; set; }
 
         //trening (tytul, data)
-        public Workout? Workout { get; set; }
+        //public virtual Workout? Workout { get; set; }
         public int? WorkoutId { get; set; }
 
         //zbiór ćwiczeń
-        public Exercise? Exercise{ get; set; }
+        public virtual Exercise? Exercise{ get; set; }
         public int? ExerciseId { get; set; }
     }
 }
