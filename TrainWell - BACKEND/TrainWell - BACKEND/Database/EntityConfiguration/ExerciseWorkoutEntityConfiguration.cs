@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using TrainWell___BACKEND.Models.Training;
 
 namespace TrainWell___BACKEND.Database.EntityConfiguration
@@ -10,7 +10,6 @@ namespace TrainWell___BACKEND.Database.EntityConfiguration
         {
             builder.ToTable("ExerciseWorkouts");
             builder.HasKey(e => e.Id);
-
 
             builder.HasOne(ew => ew.Exercise)
                 .WithMany(w => w.ExerciseWorkouts)

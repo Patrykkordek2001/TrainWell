@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using TrainWell___BACKEND.Dtos.Diet;
@@ -27,7 +26,7 @@ namespace TrainWell___BACKEND.Controllers
 
             if (newMeal == null) return BadRequest("Błąd podczas dodawania posiłku");
 
-            if(newMeal == 0) return BadRequest("Dodałeś już taki posiłek w tym dniu");
+            if (newMeal == 0) return BadRequest("Dodałeś już taki posiłek w tym dniu");
 
             return Ok(new { message = "Posiłek został dodany" });
         }

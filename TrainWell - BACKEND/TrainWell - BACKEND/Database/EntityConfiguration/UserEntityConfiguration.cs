@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using TrainWell___BACKEND.Models.User;
+using TrainWell___BACKEND.Models.Users;
 
 namespace TrainWell___BACKEND.Database.EntityConfiguration
 {

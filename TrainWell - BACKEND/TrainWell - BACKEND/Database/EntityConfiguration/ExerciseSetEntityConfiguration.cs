@@ -11,7 +11,6 @@ namespace TrainWell___BACKEND.Database.EntityConfiguration
             builder.ToTable("ExerciseSets");
             builder.HasKey(e => e.Id);
 
-
             builder.Property(c => c.Weight).IsRequired(false);
             builder.Property(c => c.Repetitions).IsRequired(true); ;
 

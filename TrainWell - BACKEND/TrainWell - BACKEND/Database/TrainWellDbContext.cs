@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using TrainWell___BACKEND.Models;
 using TrainWell___BACKEND.Models.Diet;
 using TrainWell___BACKEND.Models.Training;
-using TrainWell___BACKEND.Models.User;
+using TrainWell___BACKEND.Models.Users;
+using TrainWell___BACKEND.Models.Workouts;
 
 namespace TrainWell___BACKEND.Database
 {

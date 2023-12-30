@@ -12,6 +12,7 @@ namespace TrainWell___BACKEND.Dtos.Workouts
 
         //public int Id { get; set; }
         public int Repetitions { get; set; }
+
         public double Weight { get; set; }
         public int? ExerciseWorkoutId { get; set; }
         public ExerciseWorkout? ExerciseWorkout { get; set; }

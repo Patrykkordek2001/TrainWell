@@ -6,9 +6,7 @@ namespace TrainWell___BACKEND.Dtos.Workouts
     {
         public ExerciseWorkoutDto()
         {
-
         }
-
 
         //serie
         public List<ExerciseSet> ExcerciseSets { get; set; }

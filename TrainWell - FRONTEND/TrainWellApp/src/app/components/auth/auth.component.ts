@@ -37,7 +37,6 @@ export class AuthComponent implements OnInit {
 
   register() {
     const register = this.registrationForm.value;
-    console.log(register);
     if (this.registrationForm.valid) {
       const userData = this.registrationForm.value;
       if (userData.password.value == userData.confirmPassword.value) {
@@ -65,13 +64,11 @@ export class AuthComponent implements OnInit {
         .login(userData)
         .subscribe(
           (response) => {
-
             this.authService.updateLocalStorage(response.token);
             this.authService.updateLoggedIn(true);
             this.router.navigate(['/kalendarz-treningi-pomiary']);
           },
           (error) => {
-            console.error("Login failed:", error);
             this.toastrService.error("Niepoprawna nazwa użytkownika lub hasło");
           }
         );

@@ -187,6 +187,19 @@ export class EditWorkoutComponent implements OnInit {
   cancelAddingExercise() {
     this.addingExercise = false;
   }
+  removeWorkout(){
+    this.workoutsService.removeWorkout(this.workoutId).subscribe(
+      response => {
+        this.router.navigate(['/kalendarz-treningi-pomiary']);
+        this.toastrService.success("Trening został poprawnie usuniety.");
+      },
+      error => {
+        this.toastrService.error("Wystąpił błąd podczas usuwania treningu.");
+      }
+    );
+
+    }
+  
   
   
 

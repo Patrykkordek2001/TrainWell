@@ -1,8 +1,7 @@
 ﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
 using TrainWell___BACKEND.Database;
 using TrainWell___BACKEND.Dtos.Workouts;
-using TrainWell___BACKEND.Models;
+using TrainWell___BACKEND.Models.Workouts;
 using TrainWell___BACKEND.Services.Interfaces;
 using TrainWell___BACKEND.SqlRepository;
 
@@ -10,12 +9,10 @@ namespace TrainWell___BACKEND.Services
 {
     public class MeasurementService : IMeasurementService
     {
-
         private readonly ISqlRepository<Measurement> _measurementRepository;
         private readonly IMapper _mapper;
         private readonly TrainWellDbContext _context;
         private readonly ICurrentUserProvider _currentUserProvider;
-
 
         public MeasurementService(ISqlRepository<Measurement> measurementRepository, IMapper mapper, TrainWellDbContext context, ICurrentUserProvider currentUserProvider)
         {
@@ -33,7 +30,6 @@ namespace TrainWell___BACKEND.Services
             await _measurementRepository.AddAsync(measurementModel);
 
             return measurementModel.Id;
-
         }
 
         public async Task DeleteMeasurementAsync(int id)
@@ -62,7 +58,6 @@ namespace TrainWell___BACKEND.Services
             return measurements;
         }
 
-
         public async Task UpdateMeasurementAsync(MeasurementsDto measurement)
         {
             var measurementModel = _mapper.Map<Measurement>(measurement);
@@ -70,6 +65,5 @@ namespace TrainWell___BACKEND.Services
             measurementModel.UserId = userId;
             await _measurementRepository.UpdateAsync(measurementModel);
         }
-
     }
 }

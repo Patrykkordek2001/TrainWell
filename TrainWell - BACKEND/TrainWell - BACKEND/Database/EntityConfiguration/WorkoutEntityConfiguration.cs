@@ -11,7 +11,6 @@ namespace TrainWell___BACKEND.Database.EntityConfiguration
             builder.ToTable("Workouts");
             builder.HasKey(e => e.Id);
 
-
             builder.Property(c => c.Title)
                 .IsRequired(true);
 
@@ -23,10 +22,4 @@ namespace TrainWell___BACKEND.Database.EntityConfiguration
             //    .HasForeignKey(e => e.WorkoutId);
         }
     }
-
-
-
-
-
-
 }

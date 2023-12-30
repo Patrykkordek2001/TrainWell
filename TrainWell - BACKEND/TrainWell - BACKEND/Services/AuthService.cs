@@ -1,15 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-using TrainWell___BACKEND.Dtos;
+using TrainWell___BACKEND.Dtos.Users;
+using TrainWell___BACKEND.Models.Users;
 using TrainWell___BACKEND.Services.Interfaces;
 using TrainWell___BACKEND.SqlRepository;
-using System.Linq;
-using System.Threading.Tasks;
-using TrainWell___BACKEND.Models.User;
-using System.Security.Claims;
 
 namespace TrainWell___BACKEND.Services
 {
@@ -19,7 +16,6 @@ namespace TrainWell___BACKEND.Services
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IConfiguration _configuration;
         private readonly IUserService _usersService;
-
 
         public AuthService(ISqlRepository<User> authRepository, IHttpContextAccessor httpContextAccessor, IUserService userService, IConfiguration configuration)
         {
@@ -57,19 +53,18 @@ namespace TrainWell___BACKEND.Services
             return user;
         }
 
-
         public string GenerateToken(User user)
         {
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, user.Username), 
-                new Claim(ClaimTypes.NameIdentifier,user.Id.ToString()), 
+                new Claim(ClaimTypes.Name, user.Username),
+                new Claim(ClaimTypes.NameIdentifier,user.Id.ToString()),
             };
 
             var token = new JwtSecurityToken(_configuration["Jwt:Issuer"], _configuration["Jwt:Audience"], claims,
-                 expires: DateTime.Now.AddMinutes(30),
+                 expires: DateTime.Now.AddMinutes(6),
                  signingCredentials: credentials);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
@@ -109,6 +104,5 @@ namespace TrainWell___BACKEND.Services
             }
             return null;
         }
-
     }
 }

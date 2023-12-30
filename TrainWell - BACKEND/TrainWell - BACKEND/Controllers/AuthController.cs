@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.IdentityModel.Tokens.Jwt;
-using TrainWell___BACKEND.Dtos;
-using TrainWell___BACKEND.Models.User;
+using TrainWell___BACKEND.Dtos.Users;
+using TrainWell___BACKEND.Models.Users;
 using TrainWell___BACKEND.Services.Interfaces;
 
 namespace TrainWell___BACKEND.Controllers
@@ -14,18 +13,15 @@ namespace TrainWell___BACKEND.Controllers
     {
         private readonly IUserService _userService;
         private readonly IAuthService _authService;
-        private readonly IConfiguration _configuration;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-
-        public AuthController(IAuthService authService, IConfiguration configuration, IUserService userService, IHttpContextAccessor httpContextAccessor)
+        public AuthController(IAuthService authService,
+            IUserService userService, IHttpContextAccessor httpContextAccessor)
         {
             _userService = userService;
-            _configuration = configuration;
             _authService = authService;
             _httpContextAccessor = httpContextAccessor;
         }
-
 
         [HttpPost("Register")]
         public async Task<ActionResult> Register(User user)
@@ -38,14 +34,12 @@ namespace TrainWell___BACKEND.Controllers
         [HttpPost("Login")]
         public async Task<ActionResult> Login(UserDto userDTO)
         {
-
             var user = await _authService.AuthenticateUser(userDTO);
             if (user == null) return Unauthorized("Błędna nazwa użytkownika lub login");
             var jwtToken = _authService.GenerateToken(user);
 
             HttpContext.Response.Headers.Add("Authorization", "Bearer " + jwtToken);
-            return Ok(new { token = jwtToken});
-                            
+            return Ok(new { token = jwtToken });
         }
 
         [HttpPost("RefreshToken")]
@@ -53,7 +47,7 @@ namespace TrainWell___BACKEND.Controllers
         {
             var y = _httpContextAccessor.HttpContext.Items;
 
-            var user = await _userService.GetCurrentUser(); 
+            var user = await _userService.GetCurrentUser();
 
             if (user == null)
             {
@@ -64,8 +58,7 @@ namespace TrainWell___BACKEND.Controllers
 
             HttpContext.Response.Headers.Add("Authorization", "Bearer " + newToken);
 
-            return Ok(new { token = newToken});
+            return Ok(new { token = newToken });
         }
-
     }
 }

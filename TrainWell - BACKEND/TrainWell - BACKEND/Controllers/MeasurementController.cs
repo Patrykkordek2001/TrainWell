@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using TrainWell___BACKEND.Dtos.Workouts;
-using TrainWell___BACKEND.Models;
+using TrainWell___BACKEND.Models.Workouts;
 using TrainWell___BACKEND.Services.Interfaces;
 
 namespace TrainWell___BACKEND.Controllers
@@ -15,11 +14,11 @@ namespace TrainWell___BACKEND.Controllers
     {
         private readonly IMeasurementService _measurementService;
 
-
         public MeasurementController(IMeasurementService measurementService)
         {
             _measurementService = measurementService;
         }
+
         [HttpPost("AddMeasurement")]
         public async Task<ActionResult> AddMeasurement(MeasurementsDto measurementDto)
         {
@@ -32,7 +31,7 @@ namespace TrainWell___BACKEND.Controllers
         [HttpPut("UpdateMeasurement")]
         public async Task<ActionResult> UpdateMeasurement(MeasurementsDto measurementDto)
         {
-             await _measurementService.UpdateMeasurementAsync(measurementDto);
+            await _measurementService.UpdateMeasurementAsync(measurementDto);
             return Ok(new { message = "Pomiar został zaktualizowany" });
         }
 
@@ -41,7 +40,6 @@ namespace TrainWell___BACKEND.Controllers
         {
             await _measurementService.DeleteMeasurementAsync(measurementId);
             return Ok(new { message = "Pomiar został usunięty" });
-
         }
 
         [HttpGet("GetMeasurementById/{measurementId}")]

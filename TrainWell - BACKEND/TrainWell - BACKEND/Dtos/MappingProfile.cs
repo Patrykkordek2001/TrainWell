@@ -1,10 +1,11 @@
 ﻿using AutoMapper;
 using TrainWell___BACKEND.Dtos.Diet;
+using TrainWell___BACKEND.Dtos.Users;
 using TrainWell___BACKEND.Dtos.Workouts;
-using TrainWell___BACKEND.Models;
 using TrainWell___BACKEND.Models.Diet;
 using TrainWell___BACKEND.Models.Training;
-using TrainWell___BACKEND.Models.User;
+using TrainWell___BACKEND.Models.Users;
+using TrainWell___BACKEND.Models.Workouts;
 
 namespace TrainWell___BACKEND.Dtos
 {
@@ -24,8 +25,6 @@ namespace TrainWell___BACKEND.Dtos
             CreateMap<UserInfoDto, UserInfo>();
             CreateMap<WorkoutUpdateDto, Workout>()
                 .ForMember(dest => dest.ExercisesWorkout, opt => opt.MapFrom(src => src.ExercisesWorkout));
-
-
         }
     }
 }

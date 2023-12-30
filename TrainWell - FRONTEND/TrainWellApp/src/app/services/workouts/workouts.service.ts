@@ -25,4 +25,7 @@ export class WorkoutsService {
   getWorkoutById(id: number): Observable<WorkoutPreviewWithDetails> {
     return this.httpClient.get<WorkoutPreviewWithDetails>(`https://localhost:7004/api/Workout/GetWorkoutByID/${id}`);
   }
+  removeWorkout(id: number): Observable<any> {
+    return this.httpClient.delete(`https://localhost:7004/api/Workout/${id}`);
+  }
 }

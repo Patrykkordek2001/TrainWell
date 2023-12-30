@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TrainWell___BACKEND.Dtos.Workouts;
-using TrainWell___BACKEND.Models.Diet;
 using TrainWell___BACKEND.Models.Training;
 using TrainWell___BACKEND.Services.Interfaces;
 
@@ -25,7 +23,6 @@ namespace TrainWell___BACKEND.Controllers
         {
             var newExercise = await _exerciseService.AddExerciseAsync(productDto);
 
-            
             return newExercise;
         }
 
@@ -50,12 +47,10 @@ namespace TrainWell___BACKEND.Controllers
         public async Task<ActionResult<List<Exercise>>> GetAllExercises(int productId)
         {
             var exercises = await _exerciseService.GetAllExercisesAsync();
-            if (exercises.Count() <= 0 )
+            if (exercises.Count() <= 0)
                 return Ok("Lista ćwiczeń jest pusta");
 
             return exercises.ToList();
         }
-
-
     }
 }

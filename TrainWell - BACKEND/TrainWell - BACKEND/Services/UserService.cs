@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using TrainWell___BACKEND.Database;
-using TrainWell___BACKEND.Dtos;
+using TrainWell___BACKEND.Dtos.Users;
 using TrainWell___BACKEND.Models.Training;
-using TrainWell___BACKEND.Models.User;
+using TrainWell___BACKEND.Models.Users;
 using TrainWell___BACKEND.Services.Interfaces;
 using TrainWell___BACKEND.SqlRepository;
 
@@ -11,12 +11,11 @@ namespace TrainWell___BACKEND.Services
 {
     public class UserService : IUserService
     {
-        private readonly ISqlRepository<User> _userRepository;
-        private readonly ISqlRepository<UserInfo> _userInfoRepository;
         private readonly TrainWellDbContext _context;
-        private readonly IMapper _mapper;
-
         private readonly ICurrentUserProvider _currentUserProvider;
+        private readonly IMapper _mapper;
+        private readonly ISqlRepository<UserInfo> _userInfoRepository;
+        private readonly ISqlRepository<User> _userRepository;
         public UserService(IMapper mapper,ISqlRepository<User> userRepository, ICurrentUserProvider currentUserProvider, ISqlRepository<UserInfo> userInfoRepository, TrainWellDbContext context)
         {
             _context= context;
@@ -36,11 +35,6 @@ namespace TrainWell___BACKEND.Services
             return await _userRepository.GetAllAsync();
         }
 
-        public async Task<User> GetUserByIdAsync(int  id)
-        {
-            return await _userRepository.GetByIdAsync(id);
-        }
-
         public async Task<User> GetCurrentUser()
         {
             var userId = await _currentUserProvider.GetUserIdAsync();
@@ -51,11 +45,10 @@ namespace TrainWell___BACKEND.Services
             return await _userRepository.GetByIdAsync(userId);
         }
 
-        public async Task UpdateUserAsync(User user)
+        public async Task<User> GetUserByIdAsync(int id)
         {
-            await _userRepository.UpdateAsync(user);
+            return await _userRepository.GetByIdAsync(id);
         }
-
         public async Task<UserInfo> UpdateOrAddUserInfoAsync(UserInfoDto userInfoDto)
         {
             var userInfo = _mapper.Map<UserInfo>(userInfoDto);
@@ -85,9 +78,12 @@ namespace TrainWell___BACKEND.Services
 
             await _context.SaveChangesAsync();
 
-            return userInfo; 
+            return userInfo;
         }
 
-
+        public async Task UpdateUserAsync(User user)
+        {
+            await _userRepository.UpdateAsync(user);
+        }
     }
 }

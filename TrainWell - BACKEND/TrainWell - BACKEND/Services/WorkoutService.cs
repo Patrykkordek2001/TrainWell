@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using TrainWell___BACKEND.Database;
 using TrainWell___BACKEND.Dtos.Workouts;
 using TrainWell___BACKEND.Models.Training;
-using TrainWell___BACKEND.Models.User;
 using TrainWell___BACKEND.Services.Interfaces;
 using TrainWell___BACKEND.SqlRepository;
 
@@ -11,7 +10,6 @@ namespace TrainWell___BACKEND.Services
 {
     public class WorkoutService : IWorkoutService
     {
-
         private readonly ISqlRepository<Workout> _workoutRepository;
         private readonly ISqlRepository<ExerciseWorkout> _exerciseWorkoutRepository;
         private readonly ISqlRepository<Exercise> _exerciseRepository;
@@ -40,9 +38,7 @@ namespace TrainWell___BACKEND.Services
             await _workoutRepository.AddAsync(workoutModel);
 
             return workoutModel.Id;
-
         }
-        
 
         public async Task DeleteWorkoutAsync(int id)
         {
@@ -51,8 +47,7 @@ namespace TrainWell___BACKEND.Services
 
         public async Task<IEnumerable<Workout>> GetAllWorkoutsAsync()
         {
-
-            var allWorkouts =  await _workoutRepository.GetAllAsync();
+            var allWorkouts = await _workoutRepository.GetAllAsync();
             var userId = await _currentUserProvider.GetUserIdAsync();
             var userWorkouts = allWorkouts.Where(x => x.UserId == userId);
             return userWorkouts;
@@ -61,19 +56,10 @@ namespace TrainWell___BACKEND.Services
         public async Task<Workout> GetWorkoutByIdAsync(int id)
         {
             var workout = await _context.Workouts.Include(w => w.ExercisesWorkout)?.ThenInclude(e => e.ExerciseSets).FirstOrDefaultAsync(w => w.Id == id);
-            return  workout;
+            return workout;
         }
-
 
         public async Task UpdateWorkoutAsync(WorkoutUpdateDto workout)
-        {
-            var workoutModel = _mapper.Map<Workout>(workout);
-            var userId = await _currentUserProvider.GetUserIdAsync();
-            workoutModel.UserId = userId;
-            await _workoutRepository.UpdateAsync(workoutModel);
-        }
-
-        public async Task UpdateWorkoutAsync2(WorkoutUpdateDto workout)
         {
             var userId = await _currentUserProvider.GetUserIdAsync();
             var existingWorkout = await _context.Workouts.
@@ -82,7 +68,7 @@ namespace TrainWell___BACKEND.Services
                 FirstOrDefaultAsync(w => w.Id == workout.Id); ;
 
             if (existingWorkout == null)
-            {          
+            {
                 return;
             }
 
@@ -93,11 +79,8 @@ namespace TrainWell___BACKEND.Services
 
             existingWorkout.Title = workout.Title;
             existingWorkout.Date = workout.Date;
-            
 
             await UpdateExerciseWorkouts(existingWorkout, workout.ExercisesWorkout);
-
-            // Zapisz zmiany w bazie danych
             await _workoutRepository.UpdateAsync(existingWorkout);
         }
 
@@ -115,15 +98,7 @@ namespace TrainWell___BACKEND.Services
                 }
                 else
                 {
-                    //var newExWorkout = new ExerciseWorkout
-                    //{
-                    //    Id = exerciseWorkout.Id,
-                    //    WorkoutId = exerciseWorkout.WorkoutId,
-                    //    ExerciseId = exerciseWorkout.ExerciseId,
-                    //    ExerciseSets = exerciseWorkout.ExerciseSets
-                    //};
                     existingWorkout.ExercisesWorkout.Add(exerciseWorkout);
-
                 }
             }
 
@@ -152,48 +127,17 @@ namespace TrainWell___BACKEND.Services
                 }
                 else
                 {
-                    //var newExSet = new ExerciseSet()
-                    //{
-                    //    Id= exerciseSet.Id,
-                    //    Weight= exerciseSet.Weight,
-                    //    Repetitions = exerciseSet.Repetitions,
-                    //    ExerciseWorkoutId = exerciseSet.ExerciseWorkoutId
-                    //
-                    //};
                     existingExerciseWorkout.ExerciseSets.Add(exerciseSet);
-                    //existingExerciseSets.Add(exerciseSet); 
-                    // Add the new exercise set to the existing collection
                 }
             }
 
-            // Remove exercise sets that are not in the updated list
             foreach (var existingExerciseSet in existingExerciseSets.ToList())
             {
                 if (!exerciseSets.Any(e => e.Id == existingExerciseSet.Id))
                 {
                     existingExerciseWorkout.ExerciseSets.Remove(existingExerciseSet);
-                    // Remove from the context if needed: await _exerciseSetRepository.DeleteAsync(existingExerciseSet.Id);
                 }
             }
         }
-
-
-        //public async Task<ExerciseWorkout> AddExerciseWorkoutAsync(ExerciseWorkout exerciseWorkout)
-        //{
-        //
-        //    await _exerciseWorkoutRepository.AddAsync(exerciseWorkout);
-        //
-        //    return exerciseWorkout;
-        //
-        //}
-        //public async Task<ExerciseSet> AddExerciseSetAsync(ExerciseSet exerciseSet)
-        //{
-        //    await _exerciseSetRepository.AddAsync(exerciseSet);
-        //
-        //    return exerciseSet;
-        //
-        //}
-
-
     }
 }

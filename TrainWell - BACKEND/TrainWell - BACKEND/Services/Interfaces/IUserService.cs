@@ -1,5 +1,5 @@
-﻿using TrainWell___BACKEND.Dtos;
-using TrainWell___BACKEND.Models.User;
+﻿using TrainWell___BACKEND.Dtos.Users;
+using TrainWell___BACKEND.Models.Users;
 
 namespace TrainWell___BACKEND.Services.Interfaces
 {

@@ -1,6 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore;
-using TrainWell___BACKEND.Models.Training;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using TrainWell___BACKEND.Models.Diet;
 
 namespace TrainWell___BACKEND.Database.EntityConfiguration
