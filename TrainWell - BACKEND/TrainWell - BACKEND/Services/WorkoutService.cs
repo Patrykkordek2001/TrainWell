@@ -11,25 +11,19 @@ namespace TrainWell___BACKEND.Services
     public class WorkoutService : IWorkoutService
     {
         private readonly ISqlRepository<Workout> _workoutRepository;
-        private readonly ISqlRepository<ExerciseWorkout> _exerciseWorkoutRepository;
-        private readonly ISqlRepository<Exercise> _exerciseRepository;
-        private readonly ISqlRepository<ExerciseSet> _exerciseSetRepository;
         private readonly IMapper _mapper;
         private readonly TrainWellDbContext _context;
         private readonly ICurrentUserProvider _currentUserProvider;
 
-        public WorkoutService(ISqlRepository<Workout> workoutRepository, ISqlRepository<Exercise> exerciseRepository, ISqlRepository<ExerciseSet> exerciseSetRepository,
-            IMapper mapper, TrainWellDbContext context, ICurrentUserProvider currentUserProvider, ISqlRepository<ExerciseWorkout> exerciseWorkoutRepository)
+        public WorkoutService(ISqlRepository<Workout> workoutRepository,
+                 IMapper mapper, TrainWellDbContext context, ICurrentUserProvider currentUserProvider)
         {
             _context = context;
             _workoutRepository = workoutRepository;
-            _exerciseRepository = exerciseRepository;
-            _exerciseSetRepository = exerciseSetRepository;
+
             _mapper = mapper;
             _currentUserProvider = currentUserProvider;
-            _exerciseWorkoutRepository = exerciseWorkoutRepository;
         }
-
         public async Task<int> AddWorkoutAsync(WorkoutDto workout)
         {
             var workoutModel = _mapper.Map<Workout>(workout);
