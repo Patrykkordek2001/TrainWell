@@ -13,7 +13,7 @@ import interactionPlugin, { DateClickArg } from '@fullcalendar/interaction';
 import bootstrap5Plugin from '@fullcalendar/bootstrap5';
 import { WorkoutPreview } from 'src/app/Models/workouts/WorkoutPreview';
 import { CalendarWorkoutsAndMeasurementsService } from 'src/app/services/workouts/calendar-workouts-and-measurements.service';
-import { DateClickComponentComponent } from '../../date-click-component/date-click-component.component';
+import { DateClickComponentComponent } from '../date-click-component/date-click-component.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MeasurementsService } from 'src/app/services/workouts/measurements.service';
 import { ToastrService } from 'ngx-toastr';
@@ -52,6 +52,11 @@ export class CalendarWorkoutsAndMeasurementsComponent implements OnInit {
       eventBackgroundColor: '#ff0000',
       dateClick: this.handleDateClick.bind(this),
       eventClick: this.eventClick.bind(this),
+      headerToolbar: {
+        start:'',
+        center: 'title',
+        end: 'prev,next'
+      },
     };
   }
 

@@ -1,0 +1,40 @@
+.container{
+    border-radius: 5px;
+    width: 100%;
+}
+h5{
+display: flex;
+margin-top: 10%;
+justify-content: center;
+}
+
+
+
+.buttons{
+    margin-top: 10%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.add-btn{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+}
+.meals-btn{
+    display: flex;
+    justify-content: center;
+    margin-top: 10%;
+    
+}
+#meal-btn{
+    margin-right: 10%;
+}
+.cancel-btn{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-right: 10%;
+    margin-top: 3%;
+}

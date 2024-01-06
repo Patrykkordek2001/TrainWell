@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TrainWell___BACKEND.Database;
 using TrainWell___BACKEND.Dtos.Workouts;
@@ -20,7 +21,6 @@ namespace TrainWell___BACKEND.Services
         {
             _context = context;
             _workoutRepository = workoutRepository;
-
             _mapper = mapper;
             _currentUserProvider = currentUserProvider;
         }
@@ -49,7 +49,12 @@ namespace TrainWell___BACKEND.Services
 
         public async Task<Workout> GetWorkoutByIdAsync(int id)
         {
-            var workout = await _context.Workouts.Include(w => w.ExercisesWorkout)?.ThenInclude(e => e.ExerciseSets).FirstOrDefaultAsync(w => w.Id == id);
+            var workout = await _context.Workouts.
+                Include(w => w.ExercisesWorkout)?.
+                ThenInclude(e => e.ExerciseSets)?.
+                FirstOrDefaultAsync(w => w.Id == id);
+
+            if (workout == null) return null;
             return workout;
         }
 
@@ -58,8 +63,8 @@ namespace TrainWell___BACKEND.Services
             var userId = await _currentUserProvider.GetUserIdAsync();
             var existingWorkout = await _context.Workouts.
                 Include(w => w.ExercisesWorkout)?.
-                ThenInclude(e => e.ExerciseSets).
-                FirstOrDefaultAsync(w => w.Id == workout.Id); ;
+                ThenInclude(e => e.ExerciseSets)?.
+                FirstOrDefaultAsync(w => w.Id == workout.Id);
 
             if (existingWorkout == null)
             {

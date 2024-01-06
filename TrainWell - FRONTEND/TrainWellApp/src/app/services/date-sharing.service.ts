@@ -9,6 +9,7 @@ export class DateSharingService {
   constructor() { }
 
   setSelectedDate(date: Date) {
+    if(date == undefined) return;
     this.selectedDate = date;
     console.log(this.selectedDate);
   }

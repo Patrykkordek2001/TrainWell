@@ -21,7 +21,6 @@ export class EditMeasurementComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) {}
-
   initForm() {
     this.measurementForm = this.formBuilder.group({
       date: ['', [Validators.required]],
@@ -34,7 +33,6 @@ export class EditMeasurementComponent implements OnInit {
       weight: ['', [Validators.required]],
     });
   }
-
   fetchForm() {
     this.measurementService
       .getMeasurementById(this.measurementId)
@@ -61,6 +59,8 @@ export class EditMeasurementComponent implements OnInit {
     this.initForm();
     this.fetchForm();
   }
+  
+  
   submit() {
     if (this.measurementForm.valid) {
       const updatedMeasurement: MeasurementDto = {
@@ -74,7 +74,6 @@ export class EditMeasurementComponent implements OnInit {
         thigh: this.measurementForm.value.thigh,
         weight: this.measurementForm.value.weight,
       };
-  
       this.measurementService
         .updateMeasurement(updatedMeasurement)
         .subscribe(
@@ -91,8 +90,6 @@ export class EditMeasurementComponent implements OnInit {
       this.toastrService.error('Formularz zawiera błędy. Sprawdź poprawność wprowadzonych danych.');
     }
   }
-  
-
   cancel() {
     this.router.navigate(['/kalendarz-dieta']);
   }

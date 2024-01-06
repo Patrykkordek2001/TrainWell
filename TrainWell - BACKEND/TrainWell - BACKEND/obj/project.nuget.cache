@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "UJ+Wu5M6SQeftwqaMno4RsFc5h4kFdKls7e7l5id9DfBXuuQNs1MRmV4bVHvoCzNca23UjhPXkAVa8gMfONPDQ==",
+  "dgSpecHash": "ZmmvrdlitBbZQlaB0B+BQ+6q5AWbMCcuZ2Ea8/4m4v56cbeIJHV9JvaV2v+r/X6nueD4MwBr8EEI3F3xqKBXCA==",
   "success": true,
   "projectFilePath": "D:\\Praca inżynierska\\TrainWell\\TrainWell - BACKEND\\TrainWell - BACKEND\\TrainWell - BACKEND.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,7 @@
     "C:\\Users\\kodzo\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "C:\\Users\\kodzo\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\kodzo\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
+    "C:\\Users\\kodzo\\.nuget\\packages\\castle.core\\5.1.1\\castle.core.5.1.1.nupkg.sha512",
     "C:\\Users\\kodzo\\.nuget\\packages\\humanizer\\2.14.1\\humanizer.2.14.1.nupkg.sha512",
     "C:\\Users\\kodzo\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\kodzo\\.nuget\\packages\\humanizer.core.af\\2.14.1\\humanizer.core.af.2.14.1.nupkg.sha512",
@@ -123,6 +124,7 @@
     "C:\\Users\\kodzo\\.nuget\\packages\\microsoft.win32.primitives\\4.3.0\\microsoft.win32.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\kodzo\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
     "C:\\Users\\kodzo\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
+    "C:\\Users\\kodzo\\.nuget\\packages\\moq\\4.20.70\\moq.4.20.70.nupkg.sha512",
     "C:\\Users\\kodzo\\.nuget\\packages\\netstandard.library\\1.6.1\\netstandard.library.1.6.1.nupkg.sha512",
     "C:\\Users\\kodzo\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
     "C:\\Users\\kodzo\\.nuget\\packages\\nuget.common\\6.6.1\\nuget.common.6.6.1.nupkg.sha512",
@@ -170,6 +172,7 @@
     "C:\\Users\\kodzo\\.nuget\\packages\\system.console\\4.3.0\\system.console.4.3.0.nupkg.sha512",
     "C:\\Users\\kodzo\\.nuget\\packages\\system.diagnostics.debug\\4.3.0\\system.diagnostics.debug.4.3.0.nupkg.sha512",
     "C:\\Users\\kodzo\\.nuget\\packages\\system.diagnostics.diagnosticsource\\6.0.0\\system.diagnostics.diagnosticsource.6.0.0.nupkg.sha512",
+    "C:\\Users\\kodzo\\.nuget\\packages\\system.diagnostics.eventlog\\6.0.0\\system.diagnostics.eventlog.6.0.0.nupkg.sha512",
     "C:\\Users\\kodzo\\.nuget\\packages\\system.diagnostics.tools\\4.3.0\\system.diagnostics.tools.4.3.0.nupkg.sha512",
     "C:\\Users\\kodzo\\.nuget\\packages\\system.diagnostics.tracing\\4.3.0\\system.diagnostics.tracing.4.3.0.nupkg.sha512",
     "C:\\Users\\kodzo\\.nuget\\packages\\system.drawing.common\\6.0.0\\system.drawing.common.6.0.0.nupkg.sha512",
@@ -236,7 +239,14 @@
     "C:\\Users\\kodzo\\.nuget\\packages\\system.threading.timer\\4.3.0\\system.threading.timer.4.3.0.nupkg.sha512",
     "C:\\Users\\kodzo\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512",
     "C:\\Users\\kodzo\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
-    "C:\\Users\\kodzo\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512"
+    "C:\\Users\\kodzo\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
+    "C:\\Users\\kodzo\\.nuget\\packages\\xunit\\2.6.5\\xunit.2.6.5.nupkg.sha512",
+    "C:\\Users\\kodzo\\.nuget\\packages\\xunit.abstractions\\2.0.3\\xunit.abstractions.2.0.3.nupkg.sha512",
+    "C:\\Users\\kodzo\\.nuget\\packages\\xunit.analyzers\\1.9.0\\xunit.analyzers.1.9.0.nupkg.sha512",
+    "C:\\Users\\kodzo\\.nuget\\packages\\xunit.assert\\2.6.5\\xunit.assert.2.6.5.nupkg.sha512",
+    "C:\\Users\\kodzo\\.nuget\\packages\\xunit.core\\2.6.5\\xunit.core.2.6.5.nupkg.sha512",
+    "C:\\Users\\kodzo\\.nuget\\packages\\xunit.extensibility.core\\2.6.5\\xunit.extensibility.core.2.6.5.nupkg.sha512",
+    "C:\\Users\\kodzo\\.nuget\\packages\\xunit.extensibility.execution\\2.6.5\\xunit.extensibility.execution.2.6.5.nupkg.sha512"
   ],
   "logs": []
 }

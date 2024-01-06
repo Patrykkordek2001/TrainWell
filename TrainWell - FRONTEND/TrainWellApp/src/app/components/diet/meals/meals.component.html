@@ -3,7 +3,6 @@
           <h5 id="main-header">Dodawanie posiłku:</h5>
           <div class="add-meal">
                <form [formGroup]="addMealForm">
-
                     <div class="">
                          <div>
                               <mat-form-field>
@@ -21,6 +20,8 @@
                                    <mat-datepicker #picker></mat-datepicker>
                               </mat-form-field>
                               <button mat-raised-button id="submit-btn" (click)="calculateTotalNutritionalValues()">Oblicz</button>
+                              <!-- <button mat-raised-button color="warn" (click)="cancel()">Usuń posiłek</button> -->
+
                          </div>
 
                          <mat-icon (click)="changeAddProductMode()" *ngIf="!addProductMode"
@@ -64,10 +65,17 @@
                     <h5>Makroskładniki oraz kaloryka całego posiłku:</h5>
                     <div class="total-macro-in-meal">
 
-                         <p>B: {{this.mealProteins.toFixed(0)}}g, T: {{this.mealFat.toFixed(0)}}g, W: {{this.mealCarbohydrates.toFixed(0)}}g, Kcal:
+                         <p>Białko: {{this.mealProteins.toFixed(0)}}g, Tłuszcze: {{this.mealFat.toFixed(0)}}g, Węglowodany: {{this.mealCarbohydrates.toFixed(0)}}g, Kalorie:
                               {{this.mealCalories.toFixed(0)}}</p>
 
                     </div>
+                    <!-- <h5>Dzienne zapotrzebowanie kaloryczne użytkownika:</h5>
+                    <div class="total-macro-in-meal">
+
+                         <p>Białko: {{this.proteinsPerDay.toFixed(0)}}g, Tłuszcze: {{this.fatPerDay.toFixed(0)}}g, Węglowodany: {{this.carbohydratesPerDay.toFixed(0)}}g, Kalorie:
+                              {{this.caloriesPerDay.toFixed(0)}}</p>
+
+                    </div> -->
                </div>
 
           </div>
@@ -137,13 +145,20 @@
                               <th mat-header-cell *matHeaderCellDef> Kalorie (na 100g) </th>
                               <td mat-cell *matCellDef="let element"> {{element.calories}}kcal </td>
                          </ng-container>
+                         <ng-container matColumnDef="Usuń">
+                              <th mat-header-cell *matHeaderCellDef> Usuń </th>
+                              <td mat-cell *matCellDef="let element">
+                                <button mat-icon-button color="warn">
+                                  <mat-icon>delete</mat-icon>
+                                </button>
+                              </td>
+                         </ng-container>
 
                          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                     </table>
 
-                    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
-                         aria-label="Select page of periodic elements">
+                    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons [hidePageSize]="true">
                     </mat-paginator>
                </div>
           </div>

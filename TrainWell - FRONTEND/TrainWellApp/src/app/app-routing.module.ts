@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'autoryzacja', component: AuthComponent },
   { path: 'kalendarz-treningi-pomiary', component: CalendarWorkoutsAndMeasurementsComponent },
   { path: 'dieta', component: CalendarWorkoutsAndMeasurementsComponent },
-  { path: 'pomiar', component: AddMeasurementComponent },
+  { path: 'dodaj-pomiar', component: AddMeasurementComponent },
   { path: 'edytuj-pomiar/:id', component: EditMeasurementComponent},
   { path: 'dodaj-trening', component: AddWorkoutComponent },
   { path: 'edytuj-trening/:id', component: EditWorkoutComponent},

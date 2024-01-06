@@ -30,6 +30,11 @@ export class MealsComponent implements OnInit, AfterViewInit {
   userMealCarbohydrates:number = 0;
   userMealCalories:number = 0;
 
+  caloriesPerDay:number = 0;
+  fatPerDay:number = 0;
+  carbohydratesPerDay:number = 0;
+  proteinsPerDay:number = 0;
+
   displayedColumns: string[] = [
     'Lp',
     'Nazwa',
@@ -37,6 +42,7 @@ export class MealsComponent implements OnInit, AfterViewInit {
     'Tłuszcze',
     'Węglowodany',
     'Kalorie',
+    'Usuń'
   ];
   meals: MealEnum[] = [
     MealEnum.Default,
@@ -74,6 +80,7 @@ export class MealsComponent implements OnInit, AfterViewInit {
           productId: ['', Validators.required],
         }),
       ]),
+      
     });
 
     this.productService.getAllMeals().subscribe((response) => {
@@ -86,6 +93,7 @@ export class MealsComponent implements OnInit, AfterViewInit {
     });
 
     this.setDateFromService();
+    this.fetchUserCalories();
   }
 
   get productsInMeal() {
@@ -118,9 +126,11 @@ export class MealsComponent implements OnInit, AfterViewInit {
 
   private setDateFromService() {
     const selectedDate = this.dateSharingService.getSelectedDate();
-
-    this.date?.setDate(selectedDate.getDate());
-  }
+    if(selectedDate != undefined){
+      this.date?.setDate(selectedDate.getDate());
+    }
+    }
+    
   // removeProductInMeal(index: number): void {
   //   this.productsInMeal.removeAt(index);
   // }
@@ -202,7 +212,7 @@ export class MealsComponent implements OnInit, AfterViewInit {
     const carbohydrates = (product.carbohydrates * multiplier);
     const calories = (product.calories * multiplier);
 
-    return `${product.name}: B: ${proteins.toFixed(0)}g, T: ${fat.toFixed(0)}g, W: ${carbohydrates.toFixed(0)}g, Kcal: ${calories.toFixed(0)}`;
+    return `${product.name}: Białko: ${proteins.toFixed(0)}g, Tłuszcze: ${fat.toFixed(0)}g, Węglowodany: ${carbohydrates.toFixed(0)}g, Kalorie: ${calories.toFixed(0)}`;
   }
 
   calculateTotalNutritionalValues(): void {
@@ -242,6 +252,14 @@ export class MealsComponent implements OnInit, AfterViewInit {
   }
 
 
+  fetchUserCalories(){
+    this.userService.getCurrentUser().subscribe(user => {
+      this.caloriesPerDay = user.userInfo.caloriesPerDay;
+      this.fatPerDay = user.userInfo.fatPerDay;
+      this.carbohydratesPerDay = user.userInfo.carbohydratesPerDay;
+      this.proteinsPerDay = user.userInfo.proteinsPerDay;
+    })
+  }
 
   getMealNameLabel(meal: MealEnum): string {
     switch (meal) {

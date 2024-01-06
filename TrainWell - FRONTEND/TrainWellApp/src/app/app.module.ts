@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { CalendarWorkoutsAndMeasurementsModule } from './modules/calendar-workouts-and-measurements.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DateClickComponentComponent } from './components/date-click-component/date-click-component.component';
+import { DateClickComponentComponent } from './components/calendars/date-click-component/date-click-component.component';
 import { MeasurementsModule } from './modules/measurements.module';
 import { WorkoutsModule } from './modules/workouts.module';
 import { MatIconModule } from '@angular/material/icon';

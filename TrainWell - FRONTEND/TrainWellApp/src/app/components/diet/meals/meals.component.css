@@ -44,6 +44,7 @@ input{
 }
 #submit-btn{
     margin-left: 2%;
+    margin-right: 2%;
 }
 .inputs{
     display: flex;
